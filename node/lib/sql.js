@@ -122,13 +122,13 @@ exports.userFind = ( value ) => {
 }
 // // 后端账号修改
 exports.UserUpdate = ( value ) => {
-  let _sql = `UPDATE user_b SET avator="${value.avator}", pass="${value.password}", newtime="${value.newtime}", email="${value.email}" WHERE id="${value.id}" `;
+  let _sql = `UPDATE user_b SET name="${value.name}", pass="${value.password}", email="${value.email}" WHERE id="${value.id}" `;
   return query( _sql, value )
 }
 
 // 前端账号增加
 exports.usersAdd = ( value ) => {
-  let _sql = "INSERT INTO users SET name=?,password=?,time=?,newtime=?;"
+  let _sql = `INSERT INTO users_a SET user_id="${value.user_id}",user_type="${value.user_type}", user_name="${value.user_name}",password="${value.password}",phone="${value.phone}",studenid="${value.studenid}";`
   return query( _sql, value )
 }
 // 前端用户账号查询

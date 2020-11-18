@@ -5,20 +5,39 @@
     </div>
     <div class="classpage">
       <el-table :data="tableData" border stripe>
+        <el-table-column label="序号" type="index" width="50" align="center">
+          <template scope="scope">
+            <span>{{ scope.$index + 1 }}</span>
+          </template>
+        </el-table-column>
         <el-table-column
           prop="user_id"
           label="id"
           width="100"
+          align="center"
         ></el-table-column>
-        <el-table-column prop="name" label="姓名"></el-table-column>
-        <el-table-column prop="user_name" label="昵称"></el-table-column>
-        <el-table-column prop="password" label="密码"></el-table-column>
+        <el-table-column
+          align="center"
+          prop="name"
+          label="姓名"
+        ></el-table-column>
+        <el-table-column
+          align="center"
+          prop="user_name"
+          label="昵称"
+        ></el-table-column>
+        <el-table-column
+          align="center"
+          prop="password"
+          label="密码"
+        ></el-table-column>
         <el-table-column
           prop="birthday"
           label="出生日期"
           width="350"
+          align="center"
         ></el-table-column>
-        <el-table-column prop="sex" label="性别">
+        <el-table-column align="center" prop="sex" label="性别">
           <template slot-scope="{ row: { sex } }">
             <span v-if="+sex == '0'">男</span>
             <span v-else-if="+sex == '1'">女</span>
@@ -27,6 +46,7 @@
         </el-table-column>
         <el-table-column
           prop="phone"
+          align="center"
           label="电话号码"
           width="200"
         ></el-table-column>
@@ -34,8 +54,9 @@
           prop="studenid"
           label="学号"
           width="200"
+          align="center"
         ></el-table-column>
-        <el-table-column prop="user_type" label="用户类型"
+        <el-table-column prop="user_type" align="center" label="用户类型"
           >骑手</el-table-column
         >
 
@@ -63,10 +84,21 @@
         style="width: 400px"
       >
         <el-form-item label="昵称" prop="name">
-          <el-input v-model="ruleForm.name" :disabled="disname"></el-input>
+          <el-input
+            v-model="ruleForm.name"
+            :disabled="disname"
+          ></el-input> </el-form-item
+        ><el-form-item label="昵称" prop="user_name">
+          <el-input v-model="ruleForm.user_name" :disabled="disname"></el-input>
         </el-form-item>
         <el-form-item label="密码" prop="password">
           <el-input type="password" v-model="ruleForm.password"></el-input>
+        </el-form-item>
+        <el-form-item label="手机号" prop="phone">
+          <el-input v-model="ruleForm.phone"></el-input>
+        </el-form-item>
+        <el-form-item label="学号" prop="studenid">
+          <el-input v-model="ruleForm.studenid"></el-input>
         </el-form-item>
         <el-form-item size="large" class="btn">
           <el-button type="primary" @click="onSubmit('ruleForm')"
@@ -76,6 +108,18 @@
         </el-form-item>
       </el-form>
     </el-dialog>
+
+    <!-- 翻页 -->
+    <el-pagination
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page="currentPage4"
+      :page-sizes="[5, 10, 25, 20]"
+      :page-size="PageSize"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="dataTotal"
+    >
+    </el-pagination>
   </div>
 </template>
 <script>
@@ -84,6 +128,10 @@ export default {
   data() {
     return {
       tableData: [], //数据列表
+      table: [], //缓存数据列表
+      dataTotal: 0,
+      currentPage4: 1, // 当前页数
+      PageSize: 5, // 当前个数
       id: null, //操作id
       disname: false, //昵称禁止操作
       dia_title: "创建用户", //弹出框文字提示
@@ -91,11 +139,19 @@ export default {
       ruleForm: {
         //弹窗内容
         name: null,
+        user_name: null,
         password: "",
+        phone: "",
+        studenid: "",
+        user_type: "0",
+        user_id: "",
       },
       rules: {
         name: [{ required: true, message: "请输入昵称", trigger: "blur" }],
+        user_name: [{ required: true, message: "请输入昵称", trigger: "blur" }],
         password: [{ required: true, message: "请输入密码", trigger: "blur" }],
+        phone: [{ required: true, message: "请输入手机号", trigger: "blur" }],
+        studenid: [{ required: true, message: "请输入学号", trigger: "blur" }],
       },
     };
   },
@@ -110,11 +166,16 @@ export default {
           console.log(response);
           if (response.code == 200) {
             this.tableData = response.data;
+            this.data = this.tableData;
+            this.dataTotal = this.tableData.length;
+            this.tableData = this.tableData.slice(0, this.PageSize);
             this.tableData.forEach((item) => {
               item.time = moment(item.time).format("YYYY-MM-DD hh:mm:ss");
               item.newtime = moment(item.newtime).format("YYYY-MM-DD hh:mm:ss");
               // item.time
             });
+          } else {
+            this.$message.error("获取失败！");
           }
         })
         .catch((err) => {
@@ -160,7 +221,12 @@ export default {
                 if (response.code == 200) {
                   this.ruleForm = {
                     name: null,
+                    user_name: null,
                     password: "",
+                    phone: "",
+                    user_id: "",
+                    user_type: "",
+                    studenid: "",
                   };
                   this.$message.success(response.message);
                   this.dialogVisible = false;
@@ -191,7 +257,12 @@ export default {
       this.disname = true;
       this.id = e.id;
       this.ruleForm.name = e.name;
+      this.ruleForm.user_name = e.user_name;
       this.ruleForm.password = e.password;
+      this.ruleForm.phone = e.phone;
+      this.ruleForm.user_id = e.user_id;
+      this.ruleForm.user_type = e.user_type;
+      this.ruleForm.studenid = e.studenid;
       this.dia_title = "编辑用户";
       this.dialogVisible = true;
     },
@@ -215,6 +286,26 @@ export default {
         })
         .catch((_) => {});
     },
+    // 翻页
+    handleCurrentChange(e) {
+      let data = this.data;
+      let pageprev = (e - 1) * this.PageSize;
+      let pagenext = this.PageSize * e;
+      this.tableData = data.slice(pageprev, pagenext);
+      // console.log(this.currentPage4, "1", this.PageSize);
+    },
+    // 页几个
+    handleSizeChange(e) {
+      let data = this.data;
+      this.PageSize = e;
+      this.currentPage4 = 1;
+      let pageprev = (this.currentPage4 - 1) * e;
+      let pagenext = this.currentPage4 * e;
+      this.tableData = data.slice(pageprev, pagenext);
+      // console.log(this.currentPage4, this.PageSize);
+      // console.log(this.tableData, "ta");
+      // this.list();
+    },
   },
 };
 </script>
@@ -234,5 +325,10 @@ export default {
 }
 .has-gutter .cell {
   text-align: center;
+}
+.el-pagination {
+  display: flex;
+  margin-bottom: 10px;
+  justify-content: center;
 }
 </style>

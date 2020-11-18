@@ -135,13 +135,14 @@ router.get('/vue/index',async (ctx, next) => {
 // 前端用户添加
 router.post('/vue/usersadd',koaBody(),async (ctx, next) => {
   // 二次加密
-  let md5Pass = md5(md5(ctx.request.body.password))
-  data = [
-    ctx.request.body.name,
-    md5Pass,
-    moment(new Date()).format('YYYY-MM-DD hh:mm:ss'),
-    moment(new Date()).format('YYYY-MM-DD hh:mm:ss'),
-  ]
+  // let md5Pass = md5(md5(ctx.request.body.password))
+  // data = [
+  //   ctx.request.body.name,
+  //   md5Pass,
+  //   moment(new Date()).format('YYYY-MM-DD hh:mm:ss'),
+  //   moment(new Date()).format('YYYY-MM-DD hh:mm:ss'),
+  // ]
+  let data = ctx.request.body
   await apiModel
     .usersAdd(data)
     .then(res => {
@@ -193,8 +194,8 @@ router.get('/vue/courierFind',async (ctx, next) => {
 })
 // 前端用户修改
 router.post('/vue/usersupdate',koaBody(),async (ctx, next) => {
-  ctx.request.body.password = md5(md5(ctx.request.body.password))
-  ctx.request.body.newtime = moment(new Date()).format('YYYY-MM-DD hh:mm:ss'),
+  // ctx.request.body.password = md5(md5(ctx.request.body.password))
+  // ctx.request.body.newtime = moment(new Date()).format('YYYY-MM-DD hh:mm:ss'),
   await apiModel
     .usersupdate(ctx.request.body)
     .then(res => {
@@ -211,14 +212,14 @@ router.post('/vue/usersupdate',koaBody(),async (ctx, next) => {
       };
     });
 })
-// 前端用户修改
+// 前端用户删除
 router.post('/vue/usersDelete',koaBody(),async (ctx, next) => {
   await apiModel
     .usersDelete(ctx.request.body.id)
     .then(res => {
       ctx.body = {
         code: 200,
-        message:"成功修改",
+        message:"成功删除",
       };
     })
     .catch(res => {
