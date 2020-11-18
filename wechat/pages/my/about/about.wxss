@@ -1,0 +1,5 @@
+/* pages/my/about/about.wxss */
+page{background:#f9f9fa}
+.weui-cell{
+  font-size: 30rpx;
+}

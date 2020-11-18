@@ -1,0 +1,35 @@
+/* pages/details/details.wxss */
+.titel{
+  font-size:30rpx;
+  margin:10rpx 20rpx;
+  font-weight: bold;
+}
+.tim{
+  padding-bottom:30rpx;
+  border-bottom:1px solid #ddd;
+  display: flex;
+  align-items: center;
+  margin:0 20rpx;
+  font-size:24rpx;
+  color:#666;
+}
+.tim .click{
+  margin:0 20rpx;
+}
+.tim .class{
+  background:#f89063;
+  color:#fff;
+  padding:5rpx 15rpx;
+  border-radius:10rpx;
+}
+.text{
+  margin:20rpx;
+  font-size:28rpx;
+  display: block;
+}
+.text img{
+  width:100%;
+  display: block;
+}
+
+

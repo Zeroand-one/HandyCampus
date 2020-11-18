@@ -1,0 +1,9 @@
+<!--pages/details/details.wxml-->
+<view class="titel">{{detail.title}}</view>
+<view class="tim">
+  <text class="time">发布时间：{{detail.newtime}}</text>
+  <text class="click">阅读（{{detail.onclick}}）</text>
+  <text class="class" bindtap="navclass" data-="{{detail.class}}">{{detail.nav}}</text>
+</view>
+<rich-text nodes="{{detail.value}}" class="text"></rich-text>
+

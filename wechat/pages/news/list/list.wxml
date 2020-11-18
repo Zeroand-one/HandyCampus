@@ -1,0 +1,30 @@
+<view class="navd">
+  <scroll-view class="nav" scroll-x="true" scroll-with-animation="{{true}}">
+    <view 
+      class="{{id == item.id ? 'nav_item on' : 'nav_item'}}" 
+      wx:for="{{nav}}" 
+      wx:key="index" 
+      bindtap="NavClick" 
+      data-id="{{item.id}}">{{item.name}}</view>
+  </scroll-view>
+</view>
+<view class="list">
+  <navigator class="item" wx:for="{{list}}" wx:key="index" url="/pages/news/details/details?id={{item.id}}">
+    <image src="{{item.img}}" class="item_pic"></image>
+    <view class="item_but">
+      <view class="item_h">{{item.title}}</view>
+      <rich-text class="item_p" nodes="{{item.value}}"></rich-text>
+      <view class="item_ov">
+        <view class="item_time">
+          <text class="item_t">{{item.newtime}} | </text>
+          <navigator url="/pages/news/details/details?id={{item.id}}" class="item_red">{{item.name}}</navigator>
+        </view>
+        <view class="item_click">
+          <mp-icon icon="eyes-on" color="black" extClass="item_icon"></mp-icon>
+          <text class="item_num">{{item.onclick}}</text>
+        </view>
+      </view>
+    </view>
+  </navigator>
+  <view class="list_text" wx:if="{{!footer}}">没有更多数据……</view>
+</view>
