@@ -25,6 +25,11 @@
           /></template>
         </el-table-column>
         <el-table-column
+          prop="money"
+          label="金额"
+          width="100"
+        ></el-table-column>
+        <el-table-column
           prop="start_date"
           label="创建时间"
           width="200"
