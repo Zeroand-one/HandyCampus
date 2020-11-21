@@ -51,7 +51,7 @@
           >
         </el-form>
       </div>
-       <!-- 注册 -->
+      <!-- 注册 -->
       <div class="loginCon" v-else key="reg">
         <div class="titleDiv">
           <h3 @click="Bool = true">立即登陆</h3>
@@ -105,65 +105,71 @@ import SlideVerify from "@/components/SlideVerify";
 export default {
   data() {
     var con_password = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('请再次输入密码'));
+      if (value === "") {
+        callback(new Error("请再次输入密码"));
       } else if (value !== this.reg_ruleForm.password) {
-        callback(new Error('两次输入密码不一致!'));
+        callback(new Error("两次输入密码不一致!"));
       } else {
         callback();
       }
     };
     var email = (rule, value, callback) => {
-      var regEmail = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
-      if (value === '') {
-        callback(new Error('请填写电子邮箱'));
+      var regEmail = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+      if (value === "") {
+        callback(new Error("请填写电子邮箱"));
       } else if (!regEmail.test(value)) {
-        callback(new Error('请填写正确的邮箱地址'));
+        callback(new Error("请填写正确的邮箱地址"));
       } else {
         callback();
       }
     };
     return {
-      Bool:true,        //登陆/注册切换
+      Bool: true, //登陆/注册切换
       showSlide: false, //提交验证
-      ruleForm:{        //登陆参数
+      ruleForm: {
+        //登陆参数
         username: "",
-        password: ""
+        password: "",
       },
-      reg_ruleForm:{    //注册参数
-        username:"",
-        email:"",
-        password:"",
-        con_password:"",
+      reg_ruleForm: {
+        //注册参数
+        username: "",
+        email: "",
+        password: "",
+        con_password: "",
       },
-      rules: {        //登陆验证
+      rules: {
+        //登陆验证
         username: [
           { required: true, message: "请输入用户名", trigger: "blur" },
-          { min: 3, max: 15, message: "长度在3到15个字符", trigger: "blur" }
+          { min: 3, max: 15, message: "长度在3到15个字符", trigger: "blur" },
         ],
-        password: [{ required: true, message: "请输入密码", trigger: "blur" }]
+        password: [{ required: true, message: "请输入密码", trigger: "blur" }],
       },
-      reg_rules:{     //注册验证
-         username: [
+      reg_rules: {
+        //注册验证
+        username: [
           { required: true, message: "请输入用户名", trigger: "blur" },
-          { min: 3, max: 15, message: "长度在3到15个字符", trigger: "blur" }
+          { min: 3, max: 15, message: "长度在3到15个字符", trigger: "blur" },
         ],
         email: [{ required: true, validator: email, trigger: "blur" }],
         password: [{ required: true, message: "请输入密码", trigger: "blur" }],
-        con_password: [{ required: true, validator: con_password, trigger: "blur" }]
-      }
-    }
+        con_password: [
+          { required: true, validator: con_password, trigger: "blur" },
+        ],
+      },
+    };
   },
   mounted() {
     // 显示提示框
-    this.$cookies.remove("token")
-    this.$cookies.remove("name")
+    this.$cookies.remove("token");
+    this.$cookies.remove("name");
   },
   methods: {
     // 登录
     loginYz(form) {
-      console.log(123)
-      this.$refs[form].validate(valid => {
+      console.log(123);
+      this.$refs[form].validate((valid) => {
         if (valid) {
           this.showSlide = true;
         } else {
@@ -172,21 +178,22 @@ export default {
       });
     },
     // 验证注册昵称是否已被注册
-    reg(form){
-      this.$refs[form].validate(valid => {
+    reg(form) {
+      this.$refs[form].validate((valid) => {
         if (valid) {
-          let data = {username:this.reg_ruleForm.username}
-          this.$api.RegName(this.$get,data)
+          let data = { username: this.reg_ruleForm.username };
+          this.$api
+            .RegName(this.$get, data)
             .then((response) => {
-              if(response.code == 200){
+              if (response.code == 200) {
                 this.showSlide = true;
-              }else if(response.code == 2002){
+              } else if (response.code == 2002) {
                 this.$message.error(response.message);
               }
             })
-            .catch(err => {
+            .catch((err) => {
               this.$message.error(err.message);
-            })
+            });
         } else {
           return;
         }
@@ -195,9 +202,9 @@ export default {
     // 验证成功
     onSuccess() {
       this.showSlide = false;
-      if(this.Bool){
+      if (this.Bool) {
         this._login();
-      }else{
+      } else {
         this._reg();
       }
     },
@@ -210,45 +217,57 @@ export default {
       this.$refs.slideDiv.reset();
     },
     // 登录处理
-    _login(){
-      this.$api.login(this.$get,this.ruleForm)
+    _login() {
+      this.$api
+        .login(this.$get, this.ruleForm)
         .then((response) => {
-          if(response.code == 200){
+          if (response.code == 200) {
             this.$message.success(response.message);
-            this.$cookies.set('token',response.token)
-            this.$cookies.set('name',response.name)
-            this.$router.push('/')
-          }else if(response.code == 500){
+            this.$cookies.set("token", response.token);
+            this.$cookies.set("name", response.name);
+            this.$router.push("/");
+          } else if (response.code == 500) {
             this.$message.error(response.message);
           }
         })
-        .catch(err => {
+        .catch((err) => {
           this.$message.error(err.message);
-        })
+        });
     },
     // 注册
-    _reg(){
-      this.$api.login(this.$post,this.reg_ruleForm)
+    _reg() {
+      this.$api
+        .register(this.$post, {
+          name: this.reg_ruleForm.username,
+          email: this.reg_ruleForm.email,
+          pass: this.reg_ruleForm.password,
+        })
         .then((response) => {
-          if(response.code == 200){
+          if (response.code == 200) {
             this.$message.success(response.message);
-            this.$router.go(0)
+            this.$router.go(0);
+          } else {
+            this.$message.error(response.message);
           }
         })
-        .catch(err => {
-          console.log(err)
+        .catch((err) => {
+          console.log(err);
           this.$message.error(err.message);
-        })
-    }
+        });
+    },
   },
-  components:{
-    SlideVerify
-  }
-}
+  components: {
+    SlideVerify,
+  },
+};
 </script>
 <style lang="scss" scoped>
-  @import '../../../static/css/login.scss';
+@import "../../../static/css/login.scss";
 </style>
 <style>
-.el-notification .el-icon-s-opportunity{color: #ffc107;font-size: 22px;margin-top: 2px;}
+.el-notification .el-icon-s-opportunity {
+  color: #ffc107;
+  font-size: 22px;
+  margin-top: 2px;
+}
 </style>

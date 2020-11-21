@@ -1,8 +1,10 @@
 let api = {};
 // 验证注册昵称是否已被注册
 api.RegName = (axios,data) => {return axios('/vue/regname',data)}
-// 登陆、注册
+// 登陆
 api.login = (axios,data) => {return axios('/vue/login',data)}
+// 注册
+api.register = (axios,data) => {return axios('/vue/register',data)}
 
 // 模块列表
 api.ClassFind = (axios) => {return axios('/vue/ClassFind')}

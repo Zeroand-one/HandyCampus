@@ -17,7 +17,7 @@
           <span class="hea_span1">首页</span>
         </p>
         <p class="herile_p" v-else-if="path != '/home' && headerNav">
-          <span class="hea_span1">首页</span>
+          <!-- <span class="hea_span1">首页</span> -->
           <span class="">/</span>
           <router-link :to="titlink" class="hea_span">{{ tit1 }}</router-link>
           <span class="" v-if="tit2">/</span>

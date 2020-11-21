@@ -37,6 +37,9 @@ export const currencyRoutes = [
     component: () => import("@p/error/404.vue"),
     meta: { title: "404" },
     hidden: true
+  },{
+    path: '*',
+    redirect:'/404'
   }
 ]
 

@@ -28,21 +28,21 @@ router.get('/vue/regname', async (ctx, next) => {
       };
     })
 })
-// 注册
-router.post('/vue/login',koaBody(),async (ctx, next) => {
+// 后台注册
+router.post('/vue/register',koaBody(),async (ctx, next) => {
   // 二次加密
-  let md5Pass = md5(md5(ctx.request.body.password))
-  data = [
-    ctx.request.body.username,
-    md5Pass,
-    '/static/img/user01.jpg',
-    ctx.request.body.email,
-    moment(new Date()).format('YYYY-MM-DD hh:mm:ss'),
-    moment(new Date()).format('YYYY-MM-DD hh:mm:ss'),
-    0
-  ]
+  // let md5Pass = md5(md5(ctx.request.body.password))
+  // data = [
+  //   ctx.request.body.username,
+  //   md5Pass,
+  //   '/static/img/user01.jpg',
+  //   ctx.request.body.email,
+  //   moment(new Date()).format('YYYY-MM-DD hh:mm:ss'),
+  //   moment(new Date()).format('YYYY-MM-DD hh:mm:ss'),
+  //   0
+  // ]
   await apiModel
-    .userAdd(data)
+    .userAdd(ctx.request.body)
     .then(res => {
       ctx.body = {
         code: 200,
@@ -175,7 +175,7 @@ router.get('/vue/usersFind',async (ctx, next) => {
       };
     });
 })
-// 前端用户查询
+// 后台骑手查询
 router.get('/vue/courierFind',async (ctx, next) => {
   await apiModel
     .courierFind()

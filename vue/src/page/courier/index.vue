@@ -6,7 +6,7 @@
     <div class="classpage">
       <el-table :data="tableData" border stripe>
         <el-table-column label="序号" type="index" width="50" align="center">
-          <template scope="scope">
+          <template slot-scope="scope">
             <span>{{ scope.$index + 1 }}</span>
           </template>
         </el-table-column>
@@ -38,9 +38,9 @@
           align="center"
         ></el-table-column>
         <el-table-column align="center" prop="sex" label="性别">
-          <template slot-scope="{ row: { sex } }">
-            <span v-if="+sex == '0'">男</span>
-            <span v-else-if="+sex == '1'">女</span>
+          <template slot-scope="scope">
+            <span v-if="+scope.rowsex == '0'">男</span>
+            <span v-else-if="+scope.row.sex == '1'">女</span>
             <span v-else>未知</span>
           </template>
         </el-table-column>

@@ -55,6 +55,13 @@ let users = `create table if not exists users_a(
   PRIMARY KEY ( user_id )
 );`;
 
+// 创建数据
+// INSERT INTO users_a SET user_id='8474657',user_type='1',sex=0, user_name='5654bfb',birthday='2020-11-02',password='4sgf5',phone='27904',studenid='237465744';
+// INSERT INTO users_a SET user_id='645863754',user_type='1',sex=0, user_name='agdfg',birthday='2020-11-02',password='4sgd5',phone='246978906',studenid='23674564';
+// INSERT INTO users_a SET user_id='7488u563745',user_type='1',sex=0, user_name='agdfgar',birthday='2020-11-02',password='4sgbr5',phone='245674',studenid='2376454';
+// INSERT INTO users_a SET user_id='563853756',user_type='1',sex=1, user_name='afgrbareb',birthday='2020-11-02',password='45gzr',phone='24657',studenid='247534';
+// INSERT INTO users_a SET user_id='83568745',user_type='1',sex=1, user_name='baerbaer',birthday='2020-11-02',password='45hahearehb',phone='2745674',studenid='267484534';
+
 // // 模块表
 // let Class = `create table if not exists class(
 //   id INT NOT NULL AUTO_INCREMENT,
@@ -106,15 +113,16 @@ exports.Table = ( value ) => {
 
 // // 后台用户
 // // 后端账号注册
-// exports.userAdd = ( value ) => {
-//   let _sql = "INSERT INTO user SET name=?,pass=?,avator=?,email=?,time=?,newtime=?,vip=?;"
-//   return query( _sql, value )
-// }
-// // 后端账号登录
-// exports.userName = ( value ) => {
-//   let _sql = `SELECT * FROM user WHERE name="${value}"`;
-//   return query( _sql, value )
-// }
+exports.userAdd = ( value ) => {
+  let _sql = `INSERT INTO user_b SET name="${value.name}",pass="${value.pass}",email="${value.email}";`
+  return query( _sql, value )
+}
+// // 后台账号登录
+exports.userName = ( value ) => {
+  let _sql = `SELECT * FROM user_b WHERE name="${value}"`;
+  return query( _sql, value )
+}
+
 // 后端账号登录
 exports.userFind = ( value ) => {
   let _sql = `SELECT * FROM user_b WHERE name="${value.username}" AND pass="${value.password}" `;
@@ -143,14 +151,14 @@ exports.courierFind = ( value ) => {
 } 
 // // 前端账号修改
 exports.usersupdate = ( value ) => {
-  let _sql = `UPDATE users_a SET password="${value.password}", newtime="${value.newtime}" WHERE user_id="${value.id}"`;
+  let _sql = `UPDATE users_a SET user_id="${value.user_id}",user_type="${value.user_type}", user_name="${value.user_name}", name="${value.name}",password="${value.password}",phone="${value.phone}",sex="${value.sex}",studenid="${value.studenid}" WHERE user_id="${value.user_id}"`;
   return query( _sql, value )
 }
 // // 前端账号删除
-// exports.usersDelete = ( id ) => {
-//   let _sql = `DELETE FROM users WHERE id="${id}"`;
-//   return query( _sql, id )
-// }
+exports.usersDelete = ( id ) => {
+  let _sql = `DELETE FROM users_a WHERE user_id="${id}"`;
+  return query( _sql, id )
+}
 
 // 模块列表查询
 exports.ClassFind = ( value ) => {

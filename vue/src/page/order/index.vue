@@ -61,6 +61,11 @@
           width="200"
         ></el-table-column>
         <el-table-column
+          prop="courier_name"
+          label="骑手姓名"
+          width="100"
+        ></el-table-column>
+        <el-table-column
           prop="user_estimate"
           label="用户评价"
           width="200"
