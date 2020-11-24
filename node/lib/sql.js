@@ -46,6 +46,7 @@ let users = `create table if not exists users_a(
   user_id varchar(30) NOT NULL COMMENT '用户id', 
   user_name VARCHAR(30) NOT NULL COMMENT '用户名',
   name VARCHAR(30) NOT NULL COMMENT '姓名',
+  address VARCHAR(100)  NULL COMMENT '地址',
   password VARCHAR(30) NOT NULL COMMENT '密码',
   birthday date NULL COMMENT '出生日期',
   sex int(2) NULL COMMENT '性别',
@@ -136,7 +137,7 @@ exports.UserUpdate = ( value ) => {
 
 // 前端账号增加
 exports.usersAdd = ( value ) => {
-  let _sql = `INSERT INTO users_a SET user_id="${value.user_id}",user_type="${value.user_type}", user_name="${value.user_name}",password="${value.password}",phone="${value.phone}",studenid="${value.studenid}";`
+  let _sql = `INSERT INTO users_a SET user_id="${value.user_id}",user_type="${value.user_type}", user_name="${value.user_name}",password="${value.password}",phone="${value.phone}",address="${value.address}",studenid="${value.studenid}";`
   return query( _sql, value )
 }
 // 前端用户账号查询
@@ -151,7 +152,7 @@ exports.courierFind = ( value ) => {
 } 
 // // 前端账号修改
 exports.usersupdate = ( value ) => {
-  let _sql = `UPDATE users_a SET user_id="${value.user_id}",user_type="${value.user_type}", user_name="${value.user_name}", name="${value.name}",password="${value.password}",phone="${value.phone}",sex="${value.sex}",studenid="${value.studenid}" WHERE user_id="${value.user_id}"`;
+  let _sql = `UPDATE users_a SET user_id="${value.user_id}",user_type="${value.user_type}", user_name="${value.user_name}", name="${value.name}",password="${value.password}",address="${value.address}",phone="${value.phone}",sex="${value.sex}",studenid="${value.studenid}" WHERE user_id="${value.user_id}"`;
   return query( _sql, value )
 }
 // // 前端账号删除

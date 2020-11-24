@@ -32,6 +32,11 @@
           label="密码"
         ></el-table-column>
         <el-table-column
+          prop="address"
+          align="center"
+          label="地址"
+        ></el-table-column>
+        <el-table-column
           prop="birthday"
           label="出生日期"
           width="350"
@@ -83,27 +88,42 @@
         label-width="80px"
         style="width: 400px"
       >
-        <el-form-item label="昵称" prop="name">
-          <el-input
-            v-model="ruleForm.name"
-            :disabled="disname"
-          ></el-input> </el-form-item
-        ><el-form-item label="昵称" prop="user_name">
+        <el-form-item label="昵称" prop="user_name">
           <el-input v-model="ruleForm.user_name" :disabled="disname"></el-input>
+        </el-form-item>
+        <el-form-item label="姓名" prop="name" v-if="distype">
+          <!-- :disabled="distype" 允许修改 -->
+          <!-- <el-input v-model="ruleForm.name" :disabled="distype"></el-input> -->
+          <el-input v-model="ruleForm.name"></el-input>
+        </el-form-item>
+        <el-form-item label="角色" prop="user_type" v-if="distype">
+          <el-radio-group v-model="ruleForm.user_type" size="small">
+            <el-radio :label="0" border>用户</el-radio>
+            <el-radio :label="1" border>骑手</el-radio>
+          </el-radio-group>
         </el-form-item>
         <el-form-item label="密码" prop="password">
           <el-input type="password" v-model="ruleForm.password"></el-input>
         </el-form-item>
+        <el-form-item label="地址" prop="address" v-if="distype">
+          <el-input type="text" v-model="ruleForm.address"></el-input>
+        </el-form-item>
         <el-form-item label="手机号" prop="phone">
           <el-input v-model="ruleForm.phone"></el-input>
+        </el-form-item>
+        <el-form-item label="性别" prop="sex" v-if="distype">
+          <el-radio-group v-model="ruleForm.sex" size="small">
+            <el-radio :label="0" border>男</el-radio>
+            <el-radio :label="1" border>女</el-radio>
+          </el-radio-group>
         </el-form-item>
         <el-form-item label="学号" prop="studenid">
           <el-input v-model="ruleForm.studenid"></el-input>
         </el-form-item>
         <el-form-item size="large" class="btn">
-          <el-button type="primary" @click="onSubmit('ruleForm')"
-            >立即创建</el-button
-          >
+          <el-button type="primary" @click="onSubmit('ruleForm')">{{
+            distype ? "确认修改" : "立即创建"
+          }}</el-button>
           <el-button @click="handleClose">取消</el-button>
         </el-form-item>
       </el-form>
@@ -134,7 +154,8 @@ export default {
       PageSize: 5, // 当前个数
       id: null, //操作id
       disname: false, //昵称禁止操作
-      dia_title: "创建用户", //弹出框文字提示
+      distype: false, // 修改弹框
+      dia_title: "创建骑手", //弹出框文字提示
       dialogVisible: false, //弹出框
       ruleForm: {
         //弹窗内容
@@ -142,16 +163,16 @@ export default {
         user_name: null,
         password: "",
         phone: "",
+        address: "",
         studenid: "",
         user_type: "0",
         user_id: "",
       },
       rules: {
-        name: [{ required: true, message: "请输入昵称", trigger: "blur" }],
         user_name: [{ required: true, message: "请输入昵称", trigger: "blur" }],
         password: [{ required: true, message: "请输入密码", trigger: "blur" }],
         phone: [{ required: true, message: "请输入手机号", trigger: "blur" }],
-        studenid: [{ required: true, message: "请输入学号", trigger: "blur" }],
+        // studenid: [{ required: true, message: "请输入学号", trigger: "blur" }],
       },
     };
   },
@@ -186,6 +207,7 @@ export default {
     // 创建
     addRolesTab() {
       this.disname = false;
+      this.distype = false;
       this.dia_title = "创建用户";
       this.dialogVisible = true;
     },
@@ -193,18 +215,24 @@ export default {
     onSubmit(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          if (this.dia_title == "创建用户") {
+          if (this.dia_title == "创建骑手") {
             //新建
             this.$post("/vue/usersadd", this.ruleForm)
               .then((response) => {
                 if (response.code == 200) {
                   this.ruleForm = {
-                    name: null,
+                    user_name: null,
                     password: "",
+                    phone: "",
+                    user_id: "",
+                    user_type: "0",
+                    studenid: "",
                   };
                   this.$message.success(response.message);
                   this.dialogVisible = false;
                   this.list();
+                } else {
+                  this.$message.error(response.message);
                 }
               })
               .catch((err) => {
@@ -213,16 +241,15 @@ export default {
               });
           } else {
             //更新
-            this.$post("/vue/usersupdate", {
-              id: this.id,
-              password: this.ruleForm.password,
-            })
+            this.distype = true;
+            this.$post("/vue/usersupdate", this.ruleForm)
               .then((response) => {
                 if (response.code == 200) {
                   this.ruleForm = {
                     name: null,
                     user_name: null,
                     password: "",
+                    address: "",
                     phone: "",
                     user_id: "",
                     user_type: "",
@@ -231,6 +258,8 @@ export default {
                   this.$message.success(response.message);
                   this.dialogVisible = false;
                   this.list();
+                } else {
+                  this.$message.error("提交失败！");
                 }
               })
               .catch((err) => {
@@ -249,26 +278,35 @@ export default {
       this.ruleForm = {
         name: null,
         password: "",
+        phone: "",
+        address: "",
+        user_id: "",
+        user_type: "0",
+        studenid: "",
+        sex: "",
+        user_name: "",
       };
       this.dialogVisible = false;
     },
     // 编辑
     editTable(e) {
       this.disname = true;
+      this.distype = true;
       this.id = e.id;
       this.ruleForm.name = e.name;
       this.ruleForm.user_name = e.user_name;
       this.ruleForm.password = e.password;
       this.ruleForm.phone = e.phone;
       this.ruleForm.user_id = e.user_id;
+      this.ruleForm.address = e.address;
       this.ruleForm.user_type = e.user_type;
       this.ruleForm.studenid = e.studenid;
-      this.dia_title = "编辑用户";
+      this.dia_title = "编辑骑手";
       this.dialogVisible = true;
     },
     // 删除
     Delete(e) {
-      this.$confirm("确认删除这个用户吗？")
+      this.$confirm("确认删除这个骑手吗？")
         .then((_) => {
           this.$post(`/vue/usersDelete`, { id: e.id })
             .then((response) => {

@@ -40,12 +40,12 @@
           width="150"
         ></el-table-column>
         <el-table-column
-          prop="receive_data"
+          prop="receive_date"
           label="接收时间"
           width="150"
         ></el-table-column>
         <el-table-column
-          prop="transfer_data"
+          prop="transfer_date"
           label="转让时间"
           width="150"
         ></el-table-column>

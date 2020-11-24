@@ -39,6 +39,11 @@
           label="密码"
         ></el-table-column>
         <el-table-column
+          prop="address"
+          align="center"
+          label="地址"
+        ></el-table-column>
+        <el-table-column
           prop="birthday"
           label="出生日期"
           width="350"
@@ -111,6 +116,9 @@
         <el-form-item label="密码" prop="password">
           <el-input type="password" v-model="ruleForm.password"></el-input>
         </el-form-item>
+        <el-form-item label="地址" prop="address" v-if="distype">
+          <el-input type="text" v-model="ruleForm.address"></el-input>
+        </el-form-item>
         <el-form-item label="手机号" prop="phone">
           <el-input v-model="ruleForm.phone"></el-input>
         </el-form-item>
@@ -125,7 +133,7 @@
         </el-form-item>
         <el-form-item size="large" class="btn">
           <el-button type="primary" @click="onSubmit('ruleForm')">{{
-            distype ? "修改" : "立即创建"
+            distype ? "确认修改" : "立即创建"
           }}</el-button>
           <el-button @click="handleClose">取消</el-button>
         </el-form-item>
@@ -157,7 +165,7 @@ export default {
       PageSize: 5, // 当前个数
       id: null, //操作id
       disname: false, //昵称禁止操作
-      distype: false, // 角色选择
+      distype: false, // 修改弹框
       dia_title: "创建用户", //弹出框文字提示
       dialogVisible: false, //弹出框
       ruleForm: {
@@ -166,6 +174,7 @@ export default {
         name: null,
         password: "",
         phone: "",
+        address: "",
         studenid: "",
         user_type: "0",
         user_id: "",
@@ -190,6 +199,7 @@ export default {
           if (response.code == 200) {
             this.tableData = response.data;
             this.data = this.tableData;
+            // console.log(this.data);
             this.dataTotal = this.tableData.length;
             this.tableData = this.tableData.slice(0, this.PageSize);
             this.tableData.forEach((item) => {
@@ -222,7 +232,7 @@ export default {
               .then((response) => {
                 if (response.code == 200) {
                   this.ruleForm = {
-                    name: null,
+                    user_name: null,
                     password: "",
                     phone: "",
                     user_id: "",
@@ -250,6 +260,7 @@ export default {
                     name: null,
                     password: "",
                     phone: "",
+                    address: "",
                     user_id: "",
                     user_type: "0",
                     studenid: "",
@@ -280,6 +291,7 @@ export default {
         name: null,
         password: "",
         phone: "",
+        address: "",
         user_id: "",
         user_type: "0",
         studenid: "",
@@ -297,6 +309,7 @@ export default {
       this.ruleForm.name = e.name;
       this.ruleForm.password = e.password;
       this.ruleForm.phone = e.phone;
+      this.ruleForm.address = e.address;
       this.ruleForm.user_id = e.user_id;
       this.ruleForm.sex = e.sex;
       this.ruleForm.user_type = e.user_type;
