@@ -1,7 +1,7 @@
 <template>
   <div class="className">
     <div class="classBut">
-      <el-button type="primary" @click="addRolesTab">添加用户</el-button>
+      <el-button type="primary" @click="addRolesTab">添加骑手</el-button>
     </div>
     <div class="classpage">
       <el-table :data="tableData" border stripe>
@@ -44,7 +44,7 @@
         ></el-table-column>
         <el-table-column align="center" prop="sex" label="性别">
           <template slot-scope="scope">
-            <span v-if="+scope.rowsex == '0'">男</span>
+            <span v-if="+scope.row.sex == '0'">男</span>
             <span v-else-if="+scope.row.sex == '1'">女</span>
             <span v-else>未知</span>
           </template>
@@ -208,7 +208,7 @@ export default {
     addRolesTab() {
       this.disname = false;
       this.distype = false;
-      this.dia_title = "创建用户";
+      this.dia_title = "创建骑手";
       this.dialogVisible = true;
     },
     // 确认发布
@@ -298,6 +298,7 @@ export default {
       this.ruleForm.password = e.password;
       this.ruleForm.phone = e.phone;
       this.ruleForm.user_id = e.user_id;
+      this.ruleForm.sex = e.sex;
       this.ruleForm.address = e.address;
       this.ruleForm.user_type = e.user_type;
       this.ruleForm.studenid = e.studenid;
@@ -308,7 +309,7 @@ export default {
     Delete(e) {
       this.$confirm("确认删除这个骑手吗？")
         .then((_) => {
-          this.$post(`/vue/usersDelete`, { id: e.id })
+          this.$post(`/vue/usersDelete`, { id: e.user_id })
             .then((response) => {
               console.log(response);
               if (response.code == 200) {

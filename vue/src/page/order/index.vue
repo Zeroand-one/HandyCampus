@@ -18,7 +18,14 @@
           prop="order_body"
           label="订单内容"
           width="200"
-        ></el-table-column>
+          height="10"
+        >
+          <template slot-scope="scope">
+            <el-button type="info" @click="openOrderBody(scope.row)"
+              >查看订单内容</el-button
+            >
+          </template>
+        </el-table-column>
         <el-table-column label="图片" width="200">
           <template slot-scope="scope">
             <img :src="scope.row.order_img" alt="" class="intropic"
@@ -65,16 +72,20 @@
           label="骑手姓名"
           width="100"
         ></el-table-column>
-        <el-table-column
-          prop="user_estimate"
-          label="用户评价"
-          width="200"
-        ></el-table-column>
-        <el-table-column
-          prop="courier_back"
-          label="骑手反馈"
-          width="200"
-        ></el-table-column>
+        <el-table-column prop="user_estimate" label="用户评价" width="200">
+          <template slot-scope="scope">
+            <el-button type="info" @click="openUserEstimate(scope.row)">
+              查看用户评价
+            </el-button>
+          </template>
+        </el-table-column>
+        <el-table-column prop="courier_back" label="骑手反馈" width="200">
+          <template slot-scope="scope">
+            <el-button type="info" @click="openCourierBack(scope.row)">
+              查看骑手反馈
+            </el-button>
+          </template>
+        </el-table-column>
         <el-table-column label="操作" width="300">
           <template slot-scope="scope">
             <el-button type="primary" @click="editTable(scope.row)"
@@ -104,7 +115,7 @@
         <el-form-item label="轮播图片" prop="img">
           <el-upload
             class="avatar-uploader"
-            action="https://jsonplaceholder.typicode.com/posts/"
+            action="http://127.0.0.1:3030/"
             :show-file-list="false"
             :on-success="handleAvatarSuccess"
             :before-upload="beforeAvatarUpload"
@@ -132,15 +143,34 @@
         </el-form-item>
       </el-form>
     </el-dialog>
+    <!-- 查看内容弹出框 -->
+    <el-dialog
+      :title="body_title"
+      :visible.sync="bodyDialogVisible"
+      :before-close="bodyHandleClose"
+      width="50%"
+    >
+      <p>{{ bodyDialog }}</p>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="bodyDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="bodyDialogVisible = false"
+          >确 定</el-button
+        >
+      </span>
+    </el-dialog>
   </div>
 </template>
 <script>
+import getNumList from "../../utils/getNumberList";
 export default {
   data() {
     return {
       tableData: [],
       dia_title: "创建轮播图", //弹出框文字提示
-      dialogVisible: false, //弹出框
+      body_title: "查看订单内容", //弹出框文字提示
+      dialogVisible: false, //添加弹出框
+      bodyDialogVisible: false, // 查看内容
+      bodyDialog: null, // 弹框内容
       ruleForm: {}, //弹窗内容
       options: [
         {
@@ -164,6 +194,56 @@ export default {
           label: "北京烤鸭",
         },
       ],
+      // 转态对应组
+      statusList: [
+        {
+          id: 0,
+          text: "未发布",
+        },
+        {
+          id: 1,
+          text: "草稿箱",
+        },
+        {
+          id: 2,
+          text: "已发布",
+        },
+        {
+          id: 3,
+          text: "骑手已接收",
+        },
+        {
+          id: 4,
+          text: "转让",
+        },
+        {
+          id: 5,
+          text: "完成",
+        },
+      ],
+      // 类型对应组
+      typeList: [
+        {
+          id: 0,
+          text: "取快递",
+        },
+        {
+          id: 1,
+          text: "取外卖",
+        },
+        {
+          id: 2,
+          text: "代买",
+        },
+        {
+          id: 3,
+          text: "代赠",
+        },
+        {
+          id: 4,
+          text: "其他",
+        },
+      ],
       rules: {
         title: [{ required: true, message: "请输入标题", trigger: "blur" }],
         img: [{ required: true, message: "请上传轮播图片", trigger: "blur" }],
@@ -179,55 +259,28 @@ export default {
       this.$get("/vue/orderFind")
         .then((response) => {
           if (response.code == 200) {
-            this.tableData = response.data;
-            this.tableData.forEach((item) => {
-              console.log(item);
-              switch (item.order_state) {
-                case 0:
-                  item.order_state = "未发布";
-                  break;
-                case 1:
-                  item.order_state = "草稿箱";
-                  break;
-                case 2:
-                  item.order_state = "已发布";
-                  break;
-                case 3:
-                  item.order_state = "骑手已接收";
-                  break;
-                case 4:
-                  item.order_state = "转让";
-                  break;
-                default:
-                  item.order_state = "完成";
-                  break;
-              }
-              switch (item.order_type) {
-                case 0:
-                  item.order_type = "取快递";
-                  break;
-                case 1:
-                  item.order_type = "取外卖";
-                  break;
-                case 2:
-                  item.order_type = "代买";
-                  break;
-                case 3:
-                  item.order_type = "代赠";
-                  break;
-                default:
-                  item.order_type = "其他";
-                  break;
-              }
-              item.time = moment(item.time).format("YYYY-MM-DD hh:mm:ss");
-              item.newtime = moment(item.newtime).format("YYYY-MM-DD hh:mm:ss");
-              // item.time
+            let list = response.data;
+            console.log(list, "ta");
+            list.forEach((item) => {
+              item.order_img = "http://127.0.0.1:3030/" + item.order_img;
+              this.statusList.forEach((e) => {
+                if (e.id == item.order_state) {
+                  item.order_state = e.text;
+                }
+              });
+              this.typeList.forEach((e) => {
+                if (e.id == item.order_type) {
+                  item.order_type = e.text;
+                }
+              });
             });
+            this.tableData = list;
+          } else {
+            this.$message.error(response.message);
           }
         })
         .catch((err) => {
-          this.$message.error(response.message);
-          console.log(err);
+          this.$message.error("获取失败");
         });
     },
     // 创建
@@ -254,6 +307,38 @@ export default {
     handleClose() {
       this.ruleForm = {};
       this.dialogVisible = false;
+    },
+    // 查看订单框打开
+    openOrderBody(e) {
+      this.bodyDialogVisible = true;
+      this.body_title = "查看订单内容";
+      // (this.ruleForm.order_body = e.order_body);
+      this.bodyDialog = e.order_body;
+    },
+    // 查看框关闭
+    bodyHandleClose() {
+      this.bodyDialogVisible = false;
+      this.bodyDialog = null;
+    },
+    // 查看用户反馈框打开
+    openUserEstimate(e) {
+      this.bodyDialogVisible = true;
+      this.body_title = "查看用户反馈";
+      if (e.user_estimate == null) {
+        this.bodyDialog = "暂无";
+      } else {
+        this.bodyDialog = e.user_estimate;
+      }
+    },
+    // 查看骑手反馈框打开
+    openCourierBack(e) {
+      this.bodyDialogVisible = true;
+      this.body_title = "查看骑手反馈";
+      if (e.courier_back == null) {
+        this.bodyDialog = "暂无";
+      } else {
+        this.bodyDialog = e.courier_back;
+      }
     },
     // 编辑
     editTable(e) {

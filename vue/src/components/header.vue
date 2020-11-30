@@ -34,12 +34,7 @@
         <el-dropdown class="heri_lr">
           <span class="el-dropdown-link">
             {{ admin.name }}<i class="el-icon-caret-bottom el-icon--right"></i>
-            <img
-              v-if="admin.avator"
-              :src="admin.avator"
-              alt=""
-              class="usepic"
-            />
+            <img v-if="srcFormImg" :src="srcFormImg" alt="" class="usepic" />
           </span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item>
@@ -76,6 +71,7 @@ export default {
       UseName: "admin", //用户名
       titlink: "", //分级地址
       admin: {}, //用户信息
+      srcFormImg: "", //头像地址
     };
   },
   props: {
@@ -86,6 +82,7 @@ export default {
   },
   mounted() {
     this.admin = this.$cookies.get("name");
+    this.srcFormImg = process.env.API_ROOT + "/" + this.admin.avator;
     this.path = this.$route.fullPath;
     let tit1 = this.path.split("/")[1];
     let tit2 = this.path.split("/")[2];

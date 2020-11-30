@@ -38,6 +38,7 @@ let user = `create table if not exists user_b(
   name VARCHAR(100) NOT NULL COMMENT '用户名',
   pass VARCHAR(100) NOT NULL COMMENT '密码',
   email VARCHAR(100) NOT NULL COMMENT '邮箱',
+  img VARCHAR(100)  NULL COMMENT '头像',
   PRIMARY KEY ( id )
 );`;
 
@@ -131,7 +132,7 @@ exports.userFind = ( value ) => {
 }
 // // 后端账号修改
 exports.UserUpdate = ( value ) => {
-  let _sql = `UPDATE user_b SET name="${value.name}", pass="${value.password}", email="${value.email}" WHERE id="${value.id}" `;
+  let _sql = `UPDATE user_b SET name="${value.name}", pass="${value.password}", email="${value.email}", avator="${value.avator}" WHERE id="${value.id}" `;
   return query( _sql, value )
 }
 

@@ -31,7 +31,7 @@
             :on-success="handleAvatarSuccess"
             :before-upload="beforeAvatarUpload"
           >
-            <img v-if="FormImg" :src="FormImg" class="avatar" />
+            <img v-if="FormImg" :src="srcFormImg" class="avatar" />
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
         </el-form-item>
@@ -67,6 +67,7 @@ export default {
       }, //输出信息
       API_ROOT: "", //接口前缀地址
       FormImg: "",
+      srcFormImg: "", //显示头像
       rules: {
         password: [{ required: true, message: "请输入密码", trigger: "blur" }],
         avator: [{ required: true, message: "请上传头像", trigger: "change" }],
@@ -81,6 +82,7 @@ export default {
     this.ruleForm.avator = this.$cookies.get("name").avator;
     this.FormImg = this.$cookies.get("name").avator;
     this.API_ROOT = process.env.API_ROOT;
+    this.srcFormImg = this.API_ROOT + "/" + this.FormImg;
   },
   methods: {
     // 确认发布
@@ -88,6 +90,7 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.ruleForm.id = this.$cookies.get("name").id;
+          this.ruleForm.avator = this.ruleForm.avator.substring(22);
           this.$post("/vue/UserUpdate", this.ruleForm)
             .then((response) => {
               if (response.code == 200) {
@@ -110,7 +113,9 @@ export default {
     // 图片上传成功后
     handleAvatarSuccess(res, file) {
       this.ruleForm.avator = res.imgUrl;
-      this.FormImg = res.imgUrl;
+      this.srcFormImg = res.imgUrl;
+      // this.srcFormImg = this.API_ROOT + "/" + this.FormImg;
+      console.log(res, "res");
     },
     // 图片上传中
     beforeAvatarUpload(file) {

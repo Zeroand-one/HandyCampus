@@ -319,9 +319,10 @@ export default {
     },
     // 删除
     Delete(e) {
+      console.log(e, "e");
       this.$confirm("确认删除这个用户吗？")
         .then((_) => {
-          this.$post(`/vue/usersDelete`, { id: e.id })
+          this.$post(`/vue/usersDelete`, { id: e.user_id })
             .then((response) => {
               console.log(response);
               if (response.code == 200) {

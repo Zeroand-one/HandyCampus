@@ -38,6 +38,7 @@ let query = ( sql, values ) => {
 let orders = `create table if not exists orders(
   user_id varchar(30) NOT NULL COMMENT '用户id', 
   user_name VARCHAR(30) NOT NULL COMMENT '用户名',
+  name VARCHAR(30) NOT NULL COMMENT '姓名',
   order_id VARCHAR(30) NOT NULL COMMENT '订单id',		
   order_state INT(2) NOT NULL COMMENT '订单状态',
   order_title VARCHAR(40) NOT NULL COMMENT '订单标题',
