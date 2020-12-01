@@ -90,7 +90,7 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.ruleForm.id = this.$cookies.get("name").id;
-          this.ruleForm.avator = this.ruleForm.avator.substring(22);
+          // this.ruleForm.avator = this.ruleForm.avator.substring(22);
           this.$post("/vue/UserUpdate", this.ruleForm)
             .then((response) => {
               if (response.code == 200) {
@@ -113,8 +113,8 @@ export default {
     // 图片上传成功后
     handleAvatarSuccess(res, file) {
       this.ruleForm.avator = res.imgUrl;
-      this.srcFormImg = res.imgUrl;
-      // this.srcFormImg = this.API_ROOT + "/" + this.FormImg;
+      // this.srcFormImg = res.imgUrl;
+      this.srcFormImg = this.API_ROOT + "/" + res.imgUrl;
       console.log(res, "res");
     },
     // 图片上传中

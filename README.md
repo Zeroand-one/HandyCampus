@@ -1,18 +1,32 @@
 ### 介绍
 本项目是关于“便利校园通”的小程序的毕业设计，使用JavaScript语言，由 vue 做后台管理，node做后端，MySQL做数据库
 
-
 ### 启动
 
 ```bash
-#目录
+#数据库配置
+database: {
+  DATABASE: 'test',
+  USER: 'root',
+  PASSWORD: '123',
+  PORT: '3306',
+  HOST: 'localhost',
+},
+
+#启动后端
 cd node
 
-#安装 
 npm i
 
-#启动
 node app.js
+
+#后台管理
+cd vue
+
+npm i 
+
+npm run dev
+
 ```
 
 

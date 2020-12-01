@@ -186,7 +186,7 @@
         <el-button type="primary" @click="imgHandleClose">确 定</el-button>
       </span>
     </el-dialog>
-    <el-dialog :visible.sync="dialogVisible">
+    <el-dialog :visible.sync="PicturedialogVisible">
       <img width="100%" :src="dialogImageUrl" alt="" />
     </el-dialog>
   </div>
@@ -204,6 +204,7 @@ export default {
       bodyDialog: null, // 弹框内容
       dialogImageUrl: "",
       imgDialogVisible: false,
+      PicturedialogVisible: false,
       API_ROOT: "", //接口前缀地址
       imgRuleForm: {}, //图片弹窗内容
       ruleForm: {}, //弹窗内容
@@ -384,17 +385,22 @@ export default {
     openOrderImg(e) {
       this.imgDialogVisible = true;
       this.imgRuleForm.order_id = e.order_id;
-      let file_list = e.order_img.substring(1).split(",");
-      let item = {};
-      file_list.forEach((i) => {
-        item = {};
-        if (i != "") {
-          item.uid = Date.parse(new Date()) + Math.random() * 10;
-          item.name = i;
-          item.url = this.API_ROOT + "/" + i;
-        }
-        this.fileList.push(item);
-      });
+      let file_list = [];
+      if (e.order_img) {
+        file_list = e.order_img.substring(1).split(",");
+        let item = {};
+        file_list.forEach((i) => {
+          item = {};
+          if (i != "") {
+            item.uid = Date.parse(new Date()) + Math.random() * 10;
+            item.name = i;
+            item.url = this.API_ROOT + "/" + i;
+          }
+          this.fileList.push(item);
+        });
+      } else {
+        this.fileList = [];
+      }
     },
     // 关闭弹框查看图片弹框
     imgHandleClose() {
@@ -446,11 +452,18 @@ export default {
           // this.$message.error("已修改");
           this.list();
         });
+      this.$post("/deleteImg", { filename: file.name })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((res) => {
+          console.log(res);
+        });
     },
-    // 放大
+    // 放大图片
     handlePictureCardPreview(file) {
       this.dialogImageUrl = file.url;
-      this.dialogVisible = true;
+      this.PicturedialogVisible = true;
     },
     // 编辑
     editTable(e) {
