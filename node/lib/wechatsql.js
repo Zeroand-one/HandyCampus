@@ -85,7 +85,11 @@ exports.orderAdd = ( value ) => {
   return query( _sql, value )
 }
 
-
+// 修改订单
+exports.orderImg = ( value ) => {
+  let _sql = `UPDATE orders SET order_img="${value.order_img}" WHERE order_id="${value.order_id}";`
+  return query( _sql, value )
+}
 // INSERT INTO orders SET user_id="41432423",user_name="霍比特人和",name="热",order_id="42534534",order_state="1",order_title="bfs",order_body="弄死他人社厅",order_address="火热额",money="44",order_type="1",courier_id="4153432",courier_name="哈哈巴尔";
 
 

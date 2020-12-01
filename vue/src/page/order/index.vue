@@ -27,9 +27,14 @@
           </template>
         </el-table-column>
         <el-table-column label="图片" width="200">
-          <template slot-scope="scope">
+          <!-- <template slot-scope="scope">
             <img :src="scope.row.order_img" alt="" class="intropic"
-          /></template>
+          /></template> -->
+          <template slot-scope="scope">
+            <el-button type="info" @click="openOrderImg(scope.row)"
+              >查看订单图片</el-button
+            >
+          </template>
         </el-table-column>
         <el-table-column
           prop="money"
@@ -158,6 +163,32 @@
         >
       </span>
     </el-dialog>
+    <!-- 查看图片弹框 -->
+    <el-dialog
+      title="查看图片弹框"
+      :visible.sync="imgDialogVisible"
+      :before-close="imgHandleClose"
+      width="50%"
+    >
+      <el-upload
+        :action="API_ROOT + '/uploadFile'"
+        list-type="picture-card"
+        :file-list="fileList"
+        :on-preview="handlePictureCardPreview"
+        :before-upload="beforeAvatarUpload"
+        :on-remove="handleRemove"
+        :on-success="handleSuccess"
+      >
+        <i class="el-icon-plus"></i>
+      </el-upload>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="imgHandleClose">取 消</el-button>
+        <el-button type="primary" @click="imgHandleClose">确 定</el-button>
+      </span>
+    </el-dialog>
+    <el-dialog :visible.sync="dialogVisible">
+      <img width="100%" :src="dialogImageUrl" alt="" />
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -171,6 +202,10 @@ export default {
       dialogVisible: false, //添加弹出框
       bodyDialogVisible: false, // 查看内容
       bodyDialog: null, // 弹框内容
+      dialogImageUrl: "",
+      imgDialogVisible: false,
+      API_ROOT: "", //接口前缀地址
+      imgRuleForm: {}, //图片弹窗内容
       ruleForm: {}, //弹窗内容
       options: [
         {
@@ -248,7 +283,12 @@ export default {
         title: [{ required: true, message: "请输入标题", trigger: "blur" }],
         img: [{ required: true, message: "请上传轮播图片", trigger: "blur" }],
       },
+      // 图片列表
+      fileList: [],
     };
+  },
+  mounted() {
+    this.API_ROOT = process.env.API_ROOT;
   },
   created() {
     this.list();
@@ -262,7 +302,7 @@ export default {
             let list = response.data;
             console.log(list, "ta");
             list.forEach((item) => {
-              item.order_img = "http://127.0.0.1:3030/" + item.order_img;
+              // item.order_img = "http://127.0.0.1:3030/" + item.order_img;
               this.statusList.forEach((e) => {
                 if (e.id == item.order_state) {
                   item.order_state = e.text;
@@ -340,6 +380,78 @@ export default {
         this.bodyDialog = e.courier_back;
       }
     },
+    // 查看图片弹框
+    openOrderImg(e) {
+      this.imgDialogVisible = true;
+      this.imgRuleForm.order_id = e.order_id;
+      let file_list = e.order_img.substring(1).split(",");
+      let item = {};
+      file_list.forEach((i) => {
+        item = {};
+        if (i != "") {
+          item.uid = Date.parse(new Date()) + Math.random() * 10;
+          item.name = i;
+          item.url = this.API_ROOT + "/" + i;
+        }
+        this.fileList.push(item);
+      });
+    },
+    // 关闭弹框查看图片弹框
+    imgHandleClose() {
+      this.fileList = [];
+      // console.log(1);
+      this.imgDialogVisible = false;
+      // this.$message.info("您以取消上传");
+      // clearFiles();
+    },
+    // 上传成功
+    handleSuccess(res, file, fileList) {
+      console.log(res, file, fileList);
+      file.name = res.imgUrl;
+      let fileListStr = "";
+      fileList.forEach((item) => {
+        fileListStr += "," + item.name;
+      });
+      let parmas = {
+        order_id: this.imgRuleForm.order_id,
+        order_img: fileListStr,
+      };
+      this.$post("/wechat/orderImg", parmas)
+        .then((res) => {
+          this.$message.success(response.message);
+          this.list();
+        })
+        .catch((err) => {
+          // this.$message.error("上传成功");
+          this.list();
+        });
+    },
+    // 删除图片
+    handleRemove(file, fileList) {
+      console.log(file, fileList);
+      let fileListStr = "";
+      fileList.forEach((item) => {
+        fileListStr += "," + item.name;
+      });
+      let parmas = {
+        order_id: this.imgRuleForm.order_id,
+        order_img: fileListStr,
+      };
+      this.$post("/wechat/orderImg", parmas)
+        .then((res) => {
+          this.$message.success(response.message);
+          this.list();
+        })
+        .catch((err) => {
+          // this.$message.error("已修改");
+          this.list();
+        });
+    },
+    // 放大
+    handlePictureCardPreview(file) {
+      this.dialogImageUrl = file.url;
+      this.dialogVisible = true;
+    },
     // 编辑
     editTable(e) {
       this.ruleForm.title = e.title;
@@ -362,15 +474,15 @@ export default {
     },
     // 图片上传中
     beforeAvatarUpload(file) {
-      // const isJPG = file.type === 'image/jpeg';
-      // const isLt2M = file.size / 1024 / 1024 < 2;
-      // if (!isJPG) {
-      //   this.$message.error('上传头像图片只能是 JPG 格式!');
-      // }
-      // if (!isLt2M) {
-      //   this.$message.error('上传头像图片大小不能超过 2MB!');
-      // }
-      // return isJPG && isLt2M;
+      const isJPG = file.type === "image/jpeg";
+      const isLt2M = file.size / 1024 / 1024 < 2;
+      if (!isJPG) {
+        this.$message.error("上传图片只能是 JPG 格式!");
+      }
+      if (!isLt2M) {
+        this.$message.error("上传图片大小不能超过 2MB!");
+      }
+      return isJPG && isLt2M;
     },
   },
 };

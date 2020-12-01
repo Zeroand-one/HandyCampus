@@ -4,6 +4,7 @@ var apiModel = require('../lib/wechatsql.js');
 var md5 = require('blueimp-md5');
 var koaBody = require('koa-body');
 let moment = require('moment')
+let querystring = require('querystring')
 
 
 // 订单查询
@@ -23,7 +24,26 @@ router.get('/vue/orderFind',async (ctx, next) => {
       };
     });
 })
-
+// 订单传图
+router.post('/wechat/orderImg',koaBody(),async (ctx, next) => {
+  // ctx.request.body.order_img=querystring(ctx.request.body.order_img)
+  let data = ctx.request.body
+  await apiModel
+    .orderImg(data)
+    .then(res => {
+      ctx.body = {
+        data:res,
+        code: 200,
+        message: '上传成功!'
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        message: '服务器失联',
+      };
+    });
+})
 // 前端数据处理
 // 轮播图
 router.get('/wechat/Banner',async (ctx, next) => {
