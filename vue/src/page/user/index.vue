@@ -199,7 +199,6 @@ export default {
           if (response.code == 200) {
             this.tableData = response.data;
             this.data = this.tableData;
-            // console.log(this.data);
             this.dataTotal = this.tableData.length;
             this.tableData = this.tableData.slice(0, this.PageSize);
             this.tableData.forEach((item) => {

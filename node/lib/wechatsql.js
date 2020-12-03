@@ -45,7 +45,7 @@ let orders = `create table if not exists orders(
   order_body VARCHAR(500) NOT NULL COMMENT '订单内容',
   order_address VARCHAR(100) NOT NULL COMMENT '订单地址',
   order_img varchar(10) NULL  COMMENT '内容图片',
-  money mediumtext NULL  COMMENT '金额',
+  money varchar(10) NULL  COMMENT '金额',
   start_date date NOT NULL COMMENT '创建时间',
   open_date date NULL COMMENT '发布时间',
   receive_date date NULL COMMENT '接收时间',
@@ -59,7 +59,7 @@ let orders = `create table if not exists orders(
   PRIMARY KEY ( user_id )
 );`;
 
-
+// INSERT INTO orders SET user_id="41432423",user_name="我很帅",name="李四",order_id="412335132412",order_state="1",order_title="找东西",order_body="我很帅我很帅我很帅我很帅我很帅我很帅我很帅",order_address="25栋303",money="11",order_type="2",courier_id="132421351",courier_name="天才";
 
 let createTable = sql => {
   return query(sql, []);
@@ -81,21 +81,40 @@ exports.orderFind = ( value ) => {
 
 // 新增订单
 exports.orderAdd = ( value ) => {
-  let _sql = `INSERT INTO orders SET user_id="${value.user_id}",user_name="${value.user_name}",name="${value.name}",order_id="${value.order_id}",order_state="${value.order_state}",order_title="${value.order_title}",order_body="${value.order_body}",order_address="${value.order_address}",money="${value.money}",start_date="${value.start_date}",open_date="${value.open_date}",receive_date="${value.receive_data}",order_type="${value.order_type}",courier_id="${value.courier_id}",courier_name="${value.courier_name}";`
+  let _sql = `INSERT INTO orders SET user_id="${value.user_id}",user_name="${value.user_name}",order_id="${value.order_id}",order_state="${value.order_state}",order_title="${value.order_title}",order_body="${value.order_body}",order_type="${value.order_type}",order_address="${value.order_address}",money="${value.money}",start_date="${value.start_date}";`
   return query( _sql, value )
 }
 
-// 修改订单
+// 修改订单图片
 exports.orderImg = ( value ) => {
   let _sql = `UPDATE orders SET order_img="${value.order_img}" WHERE order_id="${value.order_id}";`
   return query( _sql, value )
 }
-// INSERT INTO orders SET user_id="41432423",user_name="霍比特人和",name="热",order_id="42534534",order_state="1",order_title="bfs",order_body="弄死他人社厅",order_address="火热额",money="44",order_type="1",courier_id="4153432",courier_name="哈哈巴尔";
 
+// 后台修改订单
+exports.vueOrderUpdate = ( value ) => {
+  let _sql = 'UPDATE orders SET '
+  Object.keys(value).forEach(function (key) {
+    if (typeof value[key] == "number") {
+      _sql = " " + _sql + key + "=" + value[key] + ", ";
+    } else {
+      if (value[key]) {
+        _sql = " " + _sql + key + "='" + value[key] + "', ";
+      } else {
+        _sql =  _sql;
+      }
+    }
+  });
+  _sql = _sql.substring(0, _sql.length - 2);
+  _sql=_sql+" WHERE order_id='"+value.order_id+"'"
+  return query( _sql, value )
+}
 
-
-
-
+// // 后台删除订单
+exports.vueOrderDelete = ( id ) => {
+  let _sql = `DELETE FROM orders WHERE order_id="${id}"`;
+  return query( _sql, id )
+}
 
 
 

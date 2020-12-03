@@ -15,7 +15,7 @@
         <el-form-item label="密码" prop="password">
           <el-input v-model="ruleForm.password" type="password"></el-input>
         </el-form-item>
-        <el-form-item label="账号" prop="email">
+        <el-form-item label="邮箱" prop="email">
           <el-input v-model="ruleForm.email"></el-input>
         </el-form-item>
         <el-form-item label="头像" prop="avator">

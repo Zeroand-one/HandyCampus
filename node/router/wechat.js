@@ -24,9 +24,9 @@ router.get('/vue/orderFind',async (ctx, next) => {
       };
     });
 })
+
 // 订单传图
 router.post('/wechat/orderImg',koaBody(),async (ctx, next) => {
-  // ctx.request.body.order_img=querystring(ctx.request.body.order_img)
   let data = ctx.request.body
   await apiModel
     .orderImg(data)
@@ -44,6 +44,67 @@ router.post('/wechat/orderImg',koaBody(),async (ctx, next) => {
       };
     });
 })
+
+// 新增订单
+router.post('/wechat/orderAdd',koaBody(),async (ctx, next) => {
+  let data = ctx.request.body
+  await apiModel
+    .orderAdd(data)
+    .then(res => {
+      ctx.body = {
+        data:res,
+        code: 200,
+        message: '新建成功!'
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        message: '服务器失联',
+      };
+    });
+})
+
+// 后台修改订单
+router.post('/wechat/orderUpdate',koaBody(),async (ctx, next) => {
+  let data = ctx.request.body
+  await apiModel
+    .vueOrderUpdate(data)
+    .then(res => {
+      ctx.body = {
+        data:res,
+        code: 200,
+        message: '新建成功!'
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        message: '服务器失联',
+      };
+    });
+})
+
+// 后台删除订单
+router.post('/wechat/orderDelete',koaBody(),async (ctx, next) => {
+  // let data = ctx.request.body.order_id
+  await apiModel
+    .vueOrderDelete(ctx.request.body.order_id)
+    .then(res => {
+      ctx.body = {
+        data:res,
+        code: 200,
+        message: '删除成功!'
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        message: '服务器失联',
+      };
+    });
+})
+
 // 前端数据处理
 // 轮播图
 router.get('/wechat/Banner',async (ctx, next) => {

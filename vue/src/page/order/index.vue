@@ -1,23 +1,43 @@
 <template>
   <div class="className">
     <div class="classBut">
-      <el-button type="primary" @click="addRolesTab">添加轮播</el-button>
+      <el-button type="primary" @click="addRolesTab">新建订单</el-button>
     </div>
     <div class="classpage">
       <el-table :data="tableData" border stripe>
-        <el-table-column prop="user_id" label="用户id"></el-table-column>
-        <el-table-column prop="user_name" label="用户名"></el-table-column>
+        <el-table-column
+          align="center"
+          prop="user_id"
+          width="150"
+          label="用户id"
+        ></el-table-column>
+        <el-table-column
+          align="center"
+          prop="user_name"
+          width="100"
+          label="用户名"
+        ></el-table-column>
         <el-table-column
           prop="order_id"
           label="订单id"
+          align="center"
           width="200"
         ></el-table-column>
-        <el-table-column prop="order_state" label="订单状态"></el-table-column>
-        <el-table-column prop="order_title" label="订单标题"></el-table-column>
+        <el-table-column
+          align="center"
+          prop="order_state"
+          label="订单状态"
+        ></el-table-column>
+        <el-table-column
+          prop="order_title"
+          align="center"
+          label="订单标题"
+        ></el-table-column>
         <el-table-column
           prop="order_body"
           label="订单内容"
           width="200"
+          align="center"
           height="10"
         >
           <template slot-scope="scope">
@@ -26,7 +46,7 @@
             >
           </template>
         </el-table-column>
-        <el-table-column label="图片" width="200">
+        <el-table-column align="center" label="图片" width="200">
           <!-- <template slot-scope="scope">
             <img :src="scope.row.order_img" alt="" class="intropic"
           /></template> -->
@@ -39,59 +59,81 @@
         <el-table-column
           prop="money"
           label="金额"
-          width="100"
+          align="center"
+          width="80"
         ></el-table-column>
         <el-table-column
           prop="start_date"
           label="创建时间"
           width="200"
+          align="center"
         ></el-table-column>
         <el-table-column
           prop="open_date"
           label="发布时间"
-          width="150"
+          width="200"
+          align="center"
         ></el-table-column>
         <el-table-column
           prop="receive_date"
           label="接收时间"
-          width="150"
+          width="200"
+          align="center"
         ></el-table-column>
         <el-table-column
           prop="transfer_date"
           label="转让时间"
-          width="150"
+          width="200"
+          align="center"
         ></el-table-column>
         <el-table-column
           prop="end_date"
           label="结束时间"
-          width="150"
+          width="200"
+          align="center"
         ></el-table-column>
-        <el-table-column prop="order_type" label="订单类型"></el-table-column>
+        <el-table-column
+          align="center"
+          prop="order_type"
+          label="订单类型"
+        ></el-table-column>
         <el-table-column
           prop="courier_id"
           label="骑手id"
           width="200"
+          align="center"
         ></el-table-column>
         <el-table-column
           prop="courier_name"
           label="骑手姓名"
           width="100"
+          align="center"
         ></el-table-column>
-        <el-table-column prop="user_estimate" label="用户评价" width="200">
+        <el-table-column
+          align="center"
+          prop="user_estimate"
+          label="用户评价"
+          width="200"
+        >
           <template slot-scope="scope">
             <el-button type="info" @click="openUserEstimate(scope.row)">
               查看用户评价
             </el-button>
           </template>
         </el-table-column>
-        <el-table-column prop="courier_back" label="骑手反馈" width="200">
+        <el-table-column
+          align="center"
+          prop="courier_back"
+          label="骑手反馈"
+          width="200"
+        >
           <template slot-scope="scope">
             <el-button type="info" @click="openCourierBack(scope.row)">
               查看骑手反馈
             </el-button>
           </template>
         </el-table-column>
-        <el-table-column label="操作" width="300">
+        <el-table-column align="center" label="操作" width="300">
           <template slot-scope="scope">
             <el-button type="primary" @click="editTable(scope.row)"
               >编辑</el-button
@@ -101,6 +143,7 @@
         </el-table-column>
       </el-table>
     </div>
+    <!-- 新建订单 -->
     <el-dialog
       :title="dia_title"
       :visible.sync="dialogVisible"
@@ -114,36 +157,127 @@
         label-width="80px"
         style="width: 400px"
       >
-        <el-form-item label="轮播标题" prop="title">
-          <el-input v-model="ruleForm.title"></el-input>
+        <el-form-item label="用户id" prop="user_id">
+          <el-input v-model="ruleForm.user_id" :disabled="display"></el-input>
         </el-form-item>
-        <el-form-item label="轮播图片" prop="img">
-          <el-upload
-            class="avatar-uploader"
-            action="http://127.0.0.1:3030/"
-            :show-file-list="false"
-            :on-success="handleAvatarSuccess"
-            :before-upload="beforeAvatarUpload"
-          >
-            <img v-if="ruleForm.img" :src="ruleForm.img" class="avatar" />
-            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-          </el-upload>
+        <el-form-item label="用户名" prop="user_name">
+          <el-input v-model="ruleForm.user_name" :disabled="display"></el-input>
         </el-form-item>
-        <el-form-item label="选择跳转" prop="title">
-          <el-select v-model="ruleForm.link" placeholder="请选择">
+        <el-form-item label="姓名" v-if="distype" prop="name">
+          <el-input v-model="ruleForm.name"></el-input>
+        </el-form-item>
+        <el-form-item label="订单id" v-if="distype" prop="order_id">
+          <el-input v-model="ruleForm.order_id"></el-input>
+        </el-form-item>
+        <el-form-item label="订单状态" v-if="distype" prop="order_state">
+          <el-select v-model="ruleForm.order_state" placeholder="请选择">
             <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
+              v-for="item in statusList"
+              :key="item.id"
+              :label="item.text"
+              :value="item.id"
             >
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item size="large" class="btn">
-          <el-button type="primary" @click="onSubmit('ruleForm')"
-            >立即创建</el-button
+        <el-form-item label="订单类型" prop="order_type">
+          <el-select v-model="ruleForm.order_type" placeholder="请选择">
+            <el-option
+              v-for="item in typeList"
+              :key="item.id"
+              :label="item.text"
+              :value="item.id"
+            >
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="订单标题" prop="order_title">
+          <el-input v-model="ruleForm.order_title"></el-input>
+        </el-form-item>
+        <el-form-item label="订单内容" prop="order_body">
+          <el-input
+            type="textarea"
+            :rows="3"
+            v-model="ruleForm.order_body"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="订单地址" prop="order_address">
+          <el-input v-model="ruleForm.order_address"></el-input>
+        </el-form-item>
+        <el-form-item label="金额" prop="money">
+          <el-input v-model="ruleForm.money" :disabled="display"></el-input>
+        </el-form-item>
+        <el-form-item label="创建时间" v-if="distype" prop="start_date">
+          <el-date-picker
+            v-model="ruleForm.start_date"
+            type="datetime"
+            value-format="yyyy-MM-dd HH:mm:ss"
+            placeholder="选择日期时间"
           >
+          </el-date-picker>
+        </el-form-item>
+        <el-form-item label="发布时间" v-if="distype" prop="open_date">
+          <el-date-picker
+            v-model="ruleForm.open_date"
+            type="datetime"
+            value-format="yyyy-MM-dd HH:mm:ss"
+            placeholder="选择日期时间"
+          >
+          </el-date-picker>
+        </el-form-item>
+        <el-form-item label="接收时间" v-if="distype" prop="receive_date">
+          <el-date-picker
+            v-model="ruleForm.receive_date"
+            type="datetime"
+            value-format="yyyy-MM-dd HH:mm:ss"
+            placeholder="选择日期时间"
+          >
+          </el-date-picker>
+        </el-form-item>
+        <el-form-item label="转让时间" v-if="distype" prop="transfer_date">
+          <el-date-picker
+            v-model="ruleForm.transfer_date"
+            type="datetime"
+            value-format="yyyy-MM-dd HH:mm:ss"
+            placeholder="选择日期时间"
+          >
+          </el-date-picker>
+          <!-- <el-input v-model="ruleForm.transfer_date"></el-input> -->
+        </el-form-item>
+        <el-form-item label="结束时间" v-if="distype" prop="end_date">
+          <el-date-picker
+            v-model="ruleForm.end_date"
+            type="datetime"
+            value-format="yyyy-MM-dd HH:mm:ss"
+            placeholder="选择日期时间"
+          >
+          </el-date-picker>
+          <!-- <el-input v-model="ruleForm.receive_date"></el-input> -->
+        </el-form-item>
+        <el-form-item label="骑手id" v-if="distype" prop="courier_id">
+          <el-input v-model="ruleForm.courier_id"></el-input>
+        </el-form-item>
+        <el-form-item label="骑手名字" v-if="distype" prop="courier_name">
+          <el-input v-model="ruleForm.courier_name"></el-input>
+        </el-form-item>
+        <el-form-item label="用户评价" v-if="distype" prop="user_estimate">
+          <el-input
+            type="textarea"
+            :rows="3"
+            v-model="ruleForm.user_estimate"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="骑手反馈" v-if="distype" prop="courier_back">
+          <el-input
+            type="textarea"
+            :rows="3"
+            v-model="ruleForm.courier_back"
+          ></el-input>
+        </el-form-item>
+        <el-form-item size="large" class="btn">
+          <el-button type="primary" @click="onSubmit('ruleForm')">{{
+            distype ? "确认修改" : "立即创建"
+          }}</el-button>
           <el-button @click="handleClose">取消</el-button>
         </el-form-item>
       </el-form>
@@ -189,14 +323,28 @@
     <el-dialog :visible.sync="PicturedialogVisible">
       <img width="100%" :src="dialogImageUrl" alt="" />
     </el-dialog>
+
+    <!-- 翻页 -->
+    <el-pagination
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page="currentPage4"
+      :page-sizes="[5, 10, 15, 20]"
+      :page-size="PageSize"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="dataTotal"
+    >
+    </el-pagination>
   </div>
 </template>
 <script>
-import getNumList from "../../utils/getNumberList";
+import randomNum from "../../utils/getRandomNum";
+import getformat from "../../utils/getformat";
 export default {
   data() {
     return {
-      tableData: [],
+      tableData: [], // 显示的数据
+      data: [], // 返回数据
       dia_title: "创建轮播图", //弹出框文字提示
       body_title: "查看订单内容", //弹出框文字提示
       dialogVisible: false, //添加弹出框
@@ -208,28 +356,11 @@ export default {
       API_ROOT: "", //接口前缀地址
       imgRuleForm: {}, //图片弹窗内容
       ruleForm: {}, //弹窗内容
-      options: [
-        {
-          value: "选项1",
-          label: "黄金糕",
-        },
-        {
-          value: "选项2",
-          label: "双皮奶",
-        },
-        {
-          value: "选项3",
-          label: "蚵仔煎",
-        },
-        {
-          value: "选项4",
-          label: "龙须面",
-        },
-        {
-          value: "选项5",
-          label: "北京烤鸭",
-        },
-      ],
+      distype: false, // 是否修改弹框
+      display: false, // 是否编辑
+      dataTotal: 0, // 总数
+      currentPage4: 1, // 当前页数
+      PageSize: 5, // 当前个数
       // 转态对应组
       statusList: [
         {
@@ -301,9 +432,40 @@ export default {
         .then((response) => {
           if (response.code == 200) {
             let list = response.data;
-            console.log(list, "ta");
             list.forEach((item) => {
               // item.order_img = "http://127.0.0.1:3030/" + item.order_img;
+              // 对返回的数据过滤
+              if (item.start_date !== null) {
+                let start_date = item.start_date;
+                item.start_date = new Date(start_date).getformat(
+                  "yyyy-MM-dd hh:mm:ss"
+                );
+              }
+              if (item.open_date !== null) {
+                let open_date = item.open_date;
+                item.open_date = new Date(open_date).getformat(
+                  "yyyy-MM-dd hh:mm:ss"
+                );
+              }
+              if (item.receive_date !== null) {
+                let receive_date = item.receive_date;
+                item.receive_date = new Date(receive_date).getformat(
+                  "yyyy-MM-dd hh:mm:ss"
+                );
+              }
+              if (item.transfer_date !== null) {
+                let transfer_date = item.transfer_date;
+                item.transfer_date = new Date(transfer_date).getformat(
+                  "yyyy-MM-dd hh:mm:ss"
+                );
+              }
+              if (item.end_date !== null) {
+                let end_date = item.end_date;
+                item.end_date = new Date(end_date).getformat(
+                  "yyyy-MM-dd hh:mm:ss"
+                );
+              }
+
               this.statusList.forEach((e) => {
                 if (e.id == item.order_state) {
                   item.order_state = e.text;
@@ -315,7 +477,11 @@ export default {
                 }
               });
             });
+            console.log(list, "ta");
             this.tableData = list;
+            this.data = this.tableData;
+            this.dataTotal = this.tableData.length;
+            this.tableData = this.tableData.slice(0, this.PageSize);
           } else {
             this.$message.error(response.message);
           }
@@ -326,17 +492,90 @@ export default {
     },
     // 创建
     addRolesTab() {
-      this.dia_title = "创建轮播图";
+      this.dia_title = "创建订单";
       this.dialogVisible = true;
+      this.distype = false;
+      this.display = false;
     },
     // 确认发布
     onSubmit(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          if ((this.dia_title = "创建轮播图")) {
-            console.log("创建轮播图");
+          if (this.dia_title == "创建订单") {
+            this.ruleForm.order_id =
+              Date.parse(new Date()).toString() + randomNum(100, 999);
+            this.ruleForm.start_date = new Date().getformat(
+              "yyyy-MM-dd hh:mm:ss"
+            );
+            this.ruleForm.order_state = 0;
+            console.log(this.ruleForm, "创建");
+            this.$post("/wechat/orderAdd", this.ruleForm)
+              .then((res) => {
+                if (res.code == 200) {
+                  console.log(res.message);
+                  this.$message.success(res.message);
+                  this.list();
+                  this.dialogVisible = false;
+                  this.ruleForm = {};
+                } else {
+                  this.$message.error(res.message);
+                }
+              })
+              .catch((err) => {
+                console.log(err);
+              });
           } else {
-            console.log("编辑轮播图");
+            // 修改
+            this.distype = true;
+            let time1 = this.ruleForm.start_date;
+            this.ruleForm.start_date = new Date(time1).getformat(
+              "yyyy-MM-dd hh:mm:ss"
+            );
+            let value = this.ruleForm;
+
+            this.statusList.forEach((e) => {
+              if (e.text == value.order_state) {
+                value.order_state = e.id;
+              }
+            });
+            this.typeList.forEach((e) => {
+              if (e.text == value.order_type) {
+                value.order_type = e.id;
+              }
+            });
+
+            console.log(value, "value");
+            // let value = this.ruleForm;
+            let _sql = "UPDATE orders SET ";
+            Object.keys(value).forEach(function (key) {
+              if (typeof value[key] == "number") {
+                _sql = " " + _sql + key + "=" + value[key] + ", ";
+              } else {
+                if (value[key]) {
+                  _sql = " " + _sql + key + "='" + value[key] + "', ";
+                } else {
+                  _sql = _sql;
+                }
+              }
+            });
+            _sql = _sql.substring(0, _sql.length - 2);
+            _sql = _sql + ` WHERE order_id='${value.order_id}'`;
+            console.log(_sql, "_sql");
+
+            this.$post("/wechat/orderUpdate", this.ruleForm)
+              .then((res) => {
+                if (res.code == 200) {
+                  this.$message.success("修改成功！");
+                  this.ruleForm = {};
+                  this.dialogVisible = false;
+                  this.list();
+                } else {
+                  this.$message.error("修改失败！");
+                }
+              })
+              .catch((err) => {
+                this.$message.error("修改失败！");
+              });
           }
         } else {
           console.log("error submit!!");
@@ -467,17 +706,34 @@ export default {
     },
     // 编辑
     editTable(e) {
-      this.ruleForm.title = e.title;
-      this.ruleForm.img = e.img;
-      this.ruleForm.link = e.link;
-      this.dia_title = "编辑轮播图";
+      this.ruleForm = e;
+      // this.ruleForm.img = e.img;
+      // this.ruleForm.link = e.link;
+      this.dia_title = "编辑订单";
       this.dialogVisible = true;
+      this.distype = true;
+      this.display = true;
     },
     // 删除
     Delete(e) {
       this.$confirm("确认删除这个轮播图吗？")
         .then((_) => {
-          console.log(e.id);
+          console.log(e.order_id);
+          this.$post(`/wechat/orderDelete`, { order_id: e.order_id })
+            .then((response) => {
+              console.log(response);
+              if (response.code == 200) {
+                this.$message.success(response.message);
+                this.dialogVisible = false;
+                this.list();
+              } else {
+                this.$message.error("删除失败");
+              }
+            })
+            .catch((err) => {
+              this.$message.error(response.message);
+              console.log(err);
+            });
         })
         .catch((_) => {});
     },
@@ -497,6 +753,27 @@ export default {
       }
       return isJPG && isLt2M;
     },
+    // 翻页
+    handleCurrentChange(e) {
+      let data = this.data;
+      let pageprev = (e - 1) * this.PageSize;
+      let pagenext = this.PageSize * e;
+      this.currentPage4 = e;
+      this.tableData = data.slice(pageprev, pagenext);
+      // console.log(this.currentPage4, e, "1", this.PageSize);
+    },
+    // 页几个
+    handleSizeChange(e) {
+      let data = this.data;
+      this.PageSize = e;
+      this.currentPage4 = 1;
+      let pageprev = (this.currentPage4 - 1) * e;
+      let pagenext = this.currentPage4 * e;
+      this.tableData = data.slice(pageprev, pagenext);
+      // console.log(this.currentPage4, this.PageSize);
+      // console.log(this.tableData, "ta");
+      // this.list();
+    },
   },
 };
 </script>
@@ -510,5 +787,13 @@ export default {
     width: 200px;
     height: 150px;
   }
+}
+.el-textarea {
+  width: 125%;
+}
+.el-pagination {
+  display: flex;
+  margin-bottom: 10px;
+  justify-content: center;
 }
 </style>
