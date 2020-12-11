@@ -102,6 +102,7 @@
 </template>
 <script>
 import SlideVerify from "@/components/SlideVerify";
+import { RegName, login, register } from "../../api/login";
 export default {
   data() {
     var con_password = (rule, value, callback) => {
@@ -182,13 +183,14 @@ export default {
       this.$refs[form].validate((valid) => {
         if (valid) {
           let data = { username: this.reg_ruleForm.username };
-          this.$api
-            .RegName(this.$get, data)
-            .then((response) => {
-              if (response.code == 200) {
+          // this.$api
+          //   .RegName(this.$get, data)
+          RegName(data)
+            .then((res) => {
+              if (res.data.code == 200) {
                 this.showSlide = true;
-              } else if (response.code == 2002) {
-                this.$message.error(response.message);
+              } else if (res.data.code == 2002) {
+                this.$message.error(res.data.message);
               }
             })
             .catch((err) => {
@@ -218,16 +220,17 @@ export default {
     },
     // 登录处理
     _login() {
-      this.$api
-        .login(this.$get, this.ruleForm)
-        .then((response) => {
-          if (response.code == 200) {
-            this.$message.success(response.message);
-            this.$cookies.set("token", response.token);
-            this.$cookies.set("name", response.name);
+      // this.$api
+      //   .login(this.$get, this.ruleForm)
+      login(this.ruleForm)
+        .then((res) => {
+          if (res.data.code == 200) {
+            this.$message.success(res.data.message);
+            this.$cookies.set("token", res.data.token);
+            this.$cookies.set("name", res.data.name);
             this.$router.push("/");
-          } else if (response.code == 500) {
-            this.$message.error(response.message);
+          } else if (res.data.code == 500) {
+            this.$message.error(res.data.message);
           }
         })
         .catch((err) => {
@@ -236,18 +239,20 @@ export default {
     },
     // 注册
     _reg() {
-      this.$api
-        .register(this.$post, {
-          name: this.reg_ruleForm.username,
-          email: this.reg_ruleForm.email,
-          pass: this.reg_ruleForm.password,
-        })
-        .then((response) => {
-          if (response.code == 200) {
-            this.$message.success(response.message);
+      let parmas = {
+        name: this.reg_ruleForm.username,
+        email: this.reg_ruleForm.email,
+        pass: this.reg_ruleForm.password,
+      };
+      // this.$api
+      //   .register(this.$post, )
+      register(parmas)
+        .then((res) => {
+          if (res.data.code == 200) {
+            this.$message.success(res.data.message);
             this.$router.go(0);
           } else {
-            this.$message.error(response.message);
+            this.$message.error(res.data.message);
           }
         })
         .catch((err) => {

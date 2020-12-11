@@ -155,6 +155,12 @@
 </template>
 <script>
 import moment from "moment";
+import {
+  getUserData,
+  UsersAdd,
+  UsersUpdate,
+  UsersDelete,
+} from "../../api/userA";
 export default {
   data() {
     return {
@@ -193,11 +199,13 @@ export default {
   methods: {
     // 数据列表
     list() {
-      this.$get("/vue/usersFind")
+      // this.$get("/vue/usersFind")
+      // this.$api
+      getUserData()
         .then((response) => {
           console.log(response);
-          if (response.code == 200) {
-            this.tableData = response.data;
+          if (response.data.code == 200) {
+            this.tableData = response.data.data;
             this.data = this.tableData;
             this.dataTotal = this.tableData.length;
             this.tableData = this.tableData.slice(0, this.PageSize);
@@ -209,8 +217,7 @@ export default {
           }
         })
         .catch((err) => {
-          this.$message.error(response.message);
-          console.log(err);
+          this.$message.error("获取失败！");
         });
     },
     // 创建
@@ -227,9 +234,10 @@ export default {
           if (this.dia_title == "创建用户") {
             this.ruleForm.user_id = Date.parse(new Date()).toString();
             //新建
-            this.$post("/vue/usersadd", this.ruleForm)
-              .then((response) => {
-                if (response.code == 200) {
+            // this.$post("/vue/usersadd", this.ruleForm)
+            UsersAdd(this.ruleForm)
+              .then((res) => {
+                if (res.data.code == 200) {
                   this.ruleForm = {
                     user_name: null,
                     password: "",
@@ -238,23 +246,24 @@ export default {
                     user_type: "0",
                     studenid: "",
                   };
-                  this.$message.success(response.message);
+                  this.$message.success(res.data.message);
                   this.dialogVisible = false;
                   this.list();
-                } else if (response.code == 500) {
-                  this.$message.error(response.message);
+                } else if (res.data.code == 500) {
+                  this.$message.error(res.data.message);
                 }
               })
               .catch((err) => {
-                this.$message.error(response.message);
+                this.$message.error(res.data.message);
                 console.log(err);
               });
           } else {
             this.distype = true;
             //更新
-            this.$post("/vue/usersupdate", this.ruleForm)
-              .then((response) => {
-                if (response.code == 200) {
+            // this.$post("/vue/usersupdate", this.ruleForm)
+            UsersUpdate(this.ruleForm)
+              .then((res) => {
+                if (res.data.code == 200) {
                   this.ruleForm = {
                     name: null,
                     password: "",
@@ -266,7 +275,7 @@ export default {
                     sex: "",
                     user_name: "",
                   };
-                  this.$message.success(response.message);
+                  this.$message.success(res.data.message);
                   this.dialogVisible = false;
                   this.list();
                 } else {
@@ -274,7 +283,7 @@ export default {
                 }
               })
               .catch((err) => {
-                this.$message.error(response.message);
+                this.$message.error(err);
                 console.log(err);
               });
           }
@@ -321,11 +330,12 @@ export default {
       console.log(e, "e");
       this.$confirm("确认删除这个用户吗？")
         .then((_) => {
-          this.$post(`/vue/usersDelete`, { id: e.user_id })
-            .then((response) => {
-              console.log(response);
-              if (response.code == 200) {
-                this.$message.success(response.message);
+          // this.$post(`/vue/usersDelete`, { id: e.user_id })
+          UsersDelete({ id: e.user_id })
+            .then((res) => {
+              console.log(res.data);
+              if (res.data.code == 200) {
+                this.$message.success(res.data.message);
                 this.dialogVisible = false;
                 this.list();
               } else {
@@ -333,7 +343,7 @@ export default {
               }
             })
             .catch((err) => {
-              this.$message.error(response.message);
+              this.$message.error(res.data.message);
               console.log(err);
             });
         })
