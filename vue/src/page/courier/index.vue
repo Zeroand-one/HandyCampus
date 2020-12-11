@@ -144,6 +144,8 @@
 </template>
 <script>
 import moment from "moment";
+import { courierFind } from "../../api/courier";
+import { UsersAdd, UsersUpdate, UsersDelete } from "../../api/userA";
 export default {
   data() {
     return {
@@ -182,11 +184,12 @@ export default {
   methods: {
     // 数据列表
     list() {
-      this.$get("/vue/courierFind")
-        .then((response) => {
-          console.log(response);
-          if (response.code == 200) {
-            this.tableData = response.data;
+      // this.$get("/vue/courierFind")
+      courierFind()
+        .then((res) => {
+          console.log(res.data);
+          if (res.data.code == 200) {
+            this.tableData = res.data.data;
             this.data = this.tableData;
             this.dataTotal = this.tableData.length;
             this.tableData = this.tableData.slice(0, this.PageSize);
@@ -200,7 +203,7 @@ export default {
           }
         })
         .catch((err) => {
-          this.$message.error(response.message);
+          this.$message.error(res.data.message);
           console.log(err);
         });
     },
@@ -217,9 +220,9 @@ export default {
         if (valid) {
           if (this.dia_title == "创建骑手") {
             //新建
-            this.$post("/vue/usersadd", this.ruleForm)
-              .then((response) => {
-                if (response.code == 200) {
+            UsersAdd(this.ruleForm)
+              .then((res) => {
+                if (res.data.code == 200) {
                   this.ruleForm = {
                     user_name: null,
                     password: "",
@@ -228,23 +231,23 @@ export default {
                     user_type: "0",
                     studenid: "",
                   };
-                  this.$message.success(response.message);
+                  this.$message.success(res.data.message);
                   this.dialogVisible = false;
                   this.list();
                 } else {
-                  this.$message.error(response.message);
+                  this.$message.error(res.data.message);
                 }
               })
               .catch((err) => {
-                this.$message.error(response.message);
+                this.$message.error(res.data.message);
                 console.log(err);
               });
           } else {
-            //更新
+            // 更新
             this.distype = true;
-            this.$post("/vue/usersupdate", this.ruleForm)
-              .then((response) => {
-                if (response.code == 200) {
+            UsersUpdate(this.ruleForm)
+              .then((res) => {
+                if (res.data.code == 200) {
                   this.ruleForm = {
                     name: null,
                     user_name: null,
@@ -255,7 +258,7 @@ export default {
                     user_type: "",
                     studenid: "",
                   };
-                  this.$message.success(response.message);
+                  this.$message.success(res.data.message);
                   this.dialogVisible = false;
                   this.list();
                 } else {
@@ -263,7 +266,7 @@ export default {
                 }
               })
               .catch((err) => {
-                this.$message.error(response.message);
+                this.$message.error(res.data.message);
                 console.log(err);
               });
           }
@@ -309,17 +312,17 @@ export default {
     Delete(e) {
       this.$confirm("确认删除这个骑手吗？")
         .then((_) => {
-          this.$post(`/vue/usersDelete`, { id: e.user_id })
-            .then((response) => {
-              console.log(response);
-              if (response.code == 200) {
-                this.$message.success(response.message);
+          UsersDelete({ id: e.user_id })
+            .then((res) => {
+              console.log(res.data);
+              if (res.data.code == 200) {
+                this.$message.success(res.data.message);
                 this.dialogVisible = false;
                 this.list();
               }
             })
             .catch((err) => {
-              this.$message.error(response.message);
+              this.$message.error(res.data.message);
               console.log(err);
             });
         })

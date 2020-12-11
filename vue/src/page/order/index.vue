@@ -340,6 +340,14 @@
 <script>
 import randomNum from "../../utils/getRandomNum";
 import getformat from "../../utils/getformat";
+import {
+  orderFind,
+  orderAdd,
+  orderUpdate,
+  orderImg,
+  deleteImg,
+  orderDelete,
+} from "../../api/orders";
 export default {
   data() {
     return {
@@ -428,10 +436,10 @@ export default {
   methods: {
     // 数据列表
     list() {
-      this.$get("/vue/orderFind")
-        .then((response) => {
-          if (response.code == 200) {
-            let list = response.data;
+      orderFind()
+        .then((res) => {
+          if (res.data.code == 200) {
+            let list = res.data.data;
             list.forEach((item) => {
               // item.order_img = "http://127.0.0.1:3030/" + item.order_img;
               // 对返回的数据过滤
@@ -483,7 +491,7 @@ export default {
             this.dataTotal = this.tableData.length;
             this.tableData = this.tableData.slice(0, this.PageSize);
           } else {
-            this.$message.error(response.message);
+            this.$message.error(res.data.message);
           }
         })
         .catch((err) => {
@@ -509,16 +517,16 @@ export default {
             );
             this.ruleForm.order_state = 0;
             console.log(this.ruleForm, "创建");
-            this.$post("/wechat/orderAdd", this.ruleForm)
+            orderAdd(this.ruleForm)
               .then((res) => {
-                if (res.code == 200) {
-                  console.log(res.message);
-                  this.$message.success(res.message);
+                if (res.data.code == 200) {
+                  console.log(res.data.message);
+                  this.$message.success(res.data.message);
                   this.list();
                   this.dialogVisible = false;
                   this.ruleForm = {};
                 } else {
-                  this.$message.error(res.message);
+                  this.$message.error(res.data.message);
                 }
               })
               .catch((err) => {
@@ -562,9 +570,9 @@ export default {
             _sql = _sql + ` WHERE order_id='${value.order_id}'`;
             console.log(_sql, "_sql");
 
-            this.$post("/wechat/orderUpdate", this.ruleForm)
+            orderUpdate(this.ruleForm)
               .then((res) => {
-                if (res.code == 200) {
+                if (res.data.code == 200) {
                   this.$message.success("修改成功！");
                   this.ruleForm = {};
                   this.dialogVisible = false;
@@ -661,9 +669,9 @@ export default {
         order_id: this.imgRuleForm.order_id,
         order_img: fileListStr,
       };
-      this.$post("/wechat/orderImg", parmas)
+      orderImg(parmas)
         .then((res) => {
-          this.$message.success(response.message);
+          this.$message.success(res.data.message);
           this.list();
         })
         .catch((err) => {
@@ -682,16 +690,16 @@ export default {
         order_id: this.imgRuleForm.order_id,
         order_img: fileListStr,
       };
-      this.$post("/wechat/orderImg", parmas)
+      orderImg(parmas)
         .then((res) => {
-          this.$message.success(response.message);
+          this.$message.success(res.data.message);
           this.list();
         })
         .catch((err) => {
           // this.$message.error("已修改");
           this.list();
         });
-      this.$post("/deleteImg", { filename: file.name })
+      deleteImg({ filename: file.name })
         .then((res) => {
           console.log(res);
         })
@@ -719,11 +727,11 @@ export default {
       this.$confirm("确认删除这个轮播图吗？")
         .then((_) => {
           console.log(e.order_id);
-          this.$post(`/wechat/orderDelete`, { order_id: e.order_id })
-            .then((response) => {
-              console.log(response);
-              if (response.code == 200) {
-                this.$message.success(response.message);
+          orderDelete({ order_id: e.order_id })
+            .then((res) => {
+              console.log(res.data);
+              if (res.data.code == 200) {
+                this.$message.success(res.data.message);
                 this.dialogVisible = false;
                 this.list();
               } else {
@@ -731,7 +739,7 @@ export default {
               }
             })
             .catch((err) => {
-              this.$message.error(response.message);
+              this.$message.error(res.data.message);
               console.log(err);
             });
         })
