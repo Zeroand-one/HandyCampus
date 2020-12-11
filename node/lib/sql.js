@@ -113,13 +113,15 @@ exports.Table = ( value ) => {
   return query( _sql, value )
 }
 
-// // 后台用户
-// // 后端账号注册
+// ******************后台用户*****************//
+
+// 后端账号注册
 exports.userAdd = ( value ) => {
   let _sql = `INSERT INTO user_b SET name="${value.name}",pass="${value.pass}",email="${value.email}";`
   return query( _sql, value )
 }
-// // 后台账号登录
+
+// 后台账号登录
 exports.userName = ( value ) => {
   let _sql = `SELECT * FROM user_b WHERE name="${value}"`;
   return query( _sql, value )
@@ -130,28 +132,29 @@ exports.userFind = ( value ) => {
   let _sql = `SELECT * FROM user_b WHERE name="${value.username}" AND pass="${value.password}" `;
   return query( _sql, value )
 }
+
 // // 后端账号修改
 exports.UserUpdate = ( value ) => {
   let _sql = `UPDATE user_b SET name="${value.name}", pass="${value.password}", email="${value.email}", avator="${value.avator}" WHERE id="${value.id}" `;
   return query( _sql, value )
 }
 
+
+// ******************前端用户*****************//
+
 // 前端账号增加
 exports.usersAdd = ( value ) => {
   let _sql = `INSERT INTO users_a SET user_id="${value.user_id}",user_type="${value.user_type}", user_name="${value.user_name}",password="${value.password}",phone="${value.phone}",address="${value.address}",studenid="${value.studenid}";`
   return query( _sql, value )
 }
+
 // 前端用户账号查询
 exports.usersFind = ( value ) => {
   let _sql = `SELECT * FROM users_a where user_type=0`;
   return query( _sql, value )
 } 
-// 骑手账号查询
-exports.courierFind = ( value ) => {
-  let _sql = `SELECT * FROM users_a where user_type=1`;
-  return query( _sql, value )
-} 
-// // 前端账号修改
+
+// 前端账号修改
 exports.usersupdate = ( value ) => {
   let _sql = `UPDATE users_a SET user_id="${value.user_id}",user_type="${value.user_type}", user_name="${value.user_name}", name="${value.name}",password="${value.password}",address="${value.address}",phone="${value.phone}",sex="${value.sex}",studenid="${value.studenid}" WHERE user_id="${value.user_id}"`;
   return query( _sql, value )
@@ -161,6 +164,17 @@ exports.usersDelete = ( id ) => {
   let _sql = `DELETE FROM users_a WHERE user_id="${id}"`;
   return query( _sql, id )
 }
+
+
+// ******************前端骑手*****************//
+
+// 骑手账号查询
+exports.courierFind = ( value ) => {
+  let _sql = `SELECT * FROM users_a where user_type=1`;
+  return query( _sql, value )
+} 
+
+
 
 // 模块列表查询
 exports.ClassFind = ( value ) => {

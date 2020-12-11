@@ -4,6 +4,8 @@ var md5 = require('blueimp-md5');
 var koaBody = require('koa-body');
 let moment = require('moment')
 
+// ******************后台用户*****************//
+
 // 查询账号是否已被注册过
 router.get('/vue/regname', async (ctx, next) => {
   await apiModel
@@ -28,6 +30,7 @@ router.get('/vue/regname', async (ctx, next) => {
       };
     })
 })
+
 // 后台注册
 router.post('/vue/register',koaBody(),async (ctx, next) => {
   // 二次加密
@@ -56,6 +59,7 @@ router.post('/vue/register',koaBody(),async (ctx, next) => {
       };
     });
 })
+
 // 登录
 router.get('/vue/login', async (ctx, next) => {
   // 二次加密
@@ -132,6 +136,8 @@ router.get('/vue/index',async (ctx, next) => {
   }
 })
 
+// *****************************前端用户****************************//
+
 // 前端用户添加
 router.post('/vue/usersadd',koaBody(),async (ctx, next) => {
   // 二次加密
@@ -162,23 +168,6 @@ router.post('/vue/usersadd',koaBody(),async (ctx, next) => {
 router.get('/vue/usersFind',async (ctx, next) => {
   await apiModel
     .usersFind()
-    .then(res => {
-      ctx.body = {
-        data:res,
-        code: 200,
-      };
-    })
-    .catch(res => {
-      ctx.body = {
-        code: 500,
-        message: '服务器失联',
-      };
-    });
-})
-// 后台骑手查询
-router.get('/vue/courierFind',async (ctx, next) => {
-  await apiModel
-    .courierFind()
     .then(res => {
       ctx.body = {
         data:res,
@@ -229,6 +218,28 @@ router.post('/vue/usersDelete',koaBody(),async (ctx, next) => {
       };
     });
 })
+
+
+// *****************************前端骑手****************************//
+
+// 骑手查询
+router.get('/vue/courierFind',async (ctx, next) => {
+  await apiModel
+    .courierFind()
+    .then(res => {
+      ctx.body = {
+        data:res,
+        code: 200,
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        message: '服务器失联',
+      };
+    });
+})
+
 
 // 模块查询
 router.get('/vue/ClassFind',async (ctx, next) => {

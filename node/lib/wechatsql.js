@@ -73,7 +73,10 @@ exports.Table = ( value ) => {
   return query( _sql, value )
 }
 
-// 查询
+
+// ******************订单*****************//
+
+// 订单查询
 exports.orderFind = ( value ) => {
   let _sql = `SELECT * FROM orders`;
   return query( _sql, value )
