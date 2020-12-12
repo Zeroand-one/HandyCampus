@@ -46,7 +46,7 @@ let user = `create table if not exists user_b(
 let users = `create table if not exists users_a(
   user_id varchar(30) NOT NULL COMMENT '用户id', 
   user_name VARCHAR(30) NOT NULL COMMENT '用户名',
-  name VARCHAR(30) NOT NULL COMMENT '姓名',
+  name VARCHAR(30) NULL COMMENT '姓名',
   address VARCHAR(100)  NULL COMMENT '地址',
   password VARCHAR(30) NOT NULL COMMENT '密码',
   birthday date NULL COMMENT '出生日期',
@@ -57,6 +57,31 @@ let users = `create table if not exists users_a(
   PRIMARY KEY ( user_id )
 );`;
 
+
+// 关于我们
+let AboutInfo = `create table if not exists about_info(
+  id INT NOT NULL AUTO_INCREMENT,
+  about_email VARCHAR(100) NULL COMMENT '邮箱',
+  about_QQ VARCHAR(100) NULL COMMENT 'QQ',
+  about_wechat VARCHAR(100) NULL COMMENT '微信',
+  about_phone VARCHAR(100) NULL COMMENT '电话' ,
+  PRIMARY KEY ( id )
+);`;
+
+
+// 消息反馈表
+let Messages = `create table if not exists messages(
+  user_id varchar(30) NOT NULL COMMENT '用户id', 
+  message_email VARCHAR(100) NULL COMMENT '邮箱' ,
+  message_qq VARCHAR(100) NULL COMMENT 'QQ' ,
+  message_title VARCHAR(100) NOT NULL COMMENT '标题' ,
+  message_body VARCHAR(100) NOT NULL COMMENT '内容' ,
+  message_img VARCHAR(100) NULL COMMENT '图片' ,
+  start_date date NOT NULL COMMENT '创建时间' ,
+  read_state int NULL COMMENT '阅读状态' ,
+  PRIMARY KEY ( user_id )
+);`;
+
 // 创建数据
 // INSERT INTO users_a SET user_id='8474657',user_type='1',sex=0, user_name='5654bfb',birthday='2020-11-02',password='4sgf5',phone='27904',studenid='237465744';
 // INSERT INTO users_a SET user_id='645863754',user_type='1',sex=0, user_name='agdfg',birthday='2020-11-02',password='4sgd5',phone='246978906',studenid='23674564';
@@ -64,6 +89,7 @@ let users = `create table if not exists users_a(
 // INSERT INTO users_a SET user_id='563853756',user_type='1',sex=1, user_name='afgrbareb',birthday='2020-11-02',password='45gzr',phone='24657',studenid='247534';
 // INSERT INTO users_a SET user_id='83568745',user_type='1',sex=1, user_name='baerbaer',birthday='2020-11-02',password='45hahearehb',phone='2745674',studenid='267484534';
 
+// INSERT INTO messages SET user_id='432342534',message_qq='312674615',message_email='1gahg32lu@qq.com',message_title='标题1', message_body='内容',start_date='2020-10-02',read_state=1;
 // // 模块表
 // let Class = `create table if not exists class(
 //   id INT NOT NULL AUTO_INCREMENT,
@@ -89,23 +115,14 @@ let users = `create table if not exists users_a(
 //   PRIMARY KEY ( id )
 // );`;
 
-// // 关于我们
-// let About = `create table if not exists about(
-//   id INT NOT NULL AUTO_INCREMENT,
-//   email VARCHAR(100) NOT NULL COMMENT '邮箱' DEFAULT '',
-//   QQ VARCHAR(225) NOT NULL COMMENT 'QQ' DEFAULT '',
-//   wechat VARCHAR(225) NOT NULL COMMENT '微信' DEFAULT '',
-//   PRIMARY KEY ( id )
-// );`;
-
 let createTable = sql => {
   return query(sql, []);
 };
 createTable(user);
 createTable(users);
 // createTable(Class);
-// createTable(Article);
-// createTable(About);
+createTable(Messages);
+createTable(AboutInfo);
 
 // 获取表单总数量
 exports.Table = ( value ) => {
@@ -113,7 +130,7 @@ exports.Table = ( value ) => {
   return query( _sql, value )
 }
 
-// ******************后台用户*****************//
+// *****************************后台用户****************************//
 
 // 后端账号注册
 exports.userAdd = ( value ) => {
@@ -140,7 +157,7 @@ exports.UserUpdate = ( value ) => {
 }
 
 
-// ******************前端用户*****************//
+// *****************************前端用户****************************//
 
 // 前端账号增加
 exports.usersAdd = ( value ) => {
@@ -166,7 +183,7 @@ exports.usersDelete = ( id ) => {
 }
 
 
-// ******************前端骑手*****************//
+// *****************************前端骑手****************************//
 
 // 骑手账号查询
 exports.courierFind = ( value ) => {
@@ -174,6 +191,26 @@ exports.courierFind = ( value ) => {
   return query( _sql, value )
 } 
 
+
+
+// *****************************关于我们****************************//
+
+
+// 关于我们查询
+exports.AboutFind = ( value ) => {
+  let _sql = `SELECT * FROM about_info`;
+  return query( _sql, value )
+}
+// 关于我们增加
+exports.AboutAdd = ( value ) => {
+  let _sql = `INSERT INTO about_info SET about_email="${value.about_email}",about_QQ="${value.about_QQ}",about_wechat="${value.about_wechat}",about_phone="${value.about_phone}"`;
+  return query( _sql, value )
+}
+// 关于我们修改
+exports.AboutUpdate = ( value ) => {
+  let _sql = `UPDATE about_info SET about_email="${value.about_email}",about_QQ="${value.about_QQ}",about_wechat="${value.about_wechat}",about_phone="${value.about_phone}" WHERE id="${value.id}"`;
+  return query( _sql, value )
+}
 
 
 // 模块列表查询
@@ -270,21 +307,6 @@ exports.ClassAdd = ( value ) => {
 //   return query( _sql, id )
 // }
 
-// // 关于我们查询
-// exports.AboutFind = ( value ) => {
-//   let _sql = `SELECT * FROM about`;
-//   return query( _sql, value )
-// }
-// // 关于我们增加
-// exports.AboutAdd = ( value ) => {
-//   let _sql = `INSERT INTO about SET email="${value.email}",QQ="${value.QQ}",wechat="${value.wechat}"`;
-//   return query( _sql, value )
-// }
-// // 关于我们修改
-// exports.AboutUpdate = ( value ) => {
-//   let _sql = `UPDATE about SET email="${value.email}", QQ="${value.QQ}", wechat="${value.wechat}" WHERE id="${value.id}"`;
-//   return query( _sql, value )
-// }
 
 // // 前端数据处理
 // // 轮播图

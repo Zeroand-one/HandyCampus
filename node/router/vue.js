@@ -241,6 +241,66 @@ router.get('/vue/courierFind',async (ctx, next) => {
 })
 
 
+
+// *****************************关于我们****************************//
+
+// 关于我们查询
+router.get('/vue/AboutFind',async (ctx, next) => {
+  await apiModel
+    .AboutFind()
+    .then(res => {
+      ctx.body = {
+        data:res,
+        code: 200,
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        data:res,
+        message: '服务器失联',
+      };
+    });
+})
+// 关于我们添加
+router.post('/vue/AboutAdd',koaBody(),async (ctx, next) => {
+  await apiModel
+    .AboutAdd(ctx.request.body)
+    .then(res => {
+      ctx.body = {
+        code: 200,
+        data: '添加成功',
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        message: '添加失败',
+      };
+    });
+})
+
+// 关于我们修改
+router.post('/vue/AboutUpdata',koaBody(),async (ctx, next) => {
+  await apiModel
+    .AboutUpdate(ctx.request.body)
+    .then(res => {
+      ctx.body = {
+        code: 200,
+        data: '修改成功',
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        message: '添加失败',
+      };
+    });
+})
+
+
+
+
 // 模块查询
 router.get('/vue/ClassFind',async (ctx, next) => {
   await apiModel
@@ -409,58 +469,6 @@ router.get('/vue/ArticleDetails/:id',async (ctx, next) => {
       ctx.body = {
         code: 500,
         message: '服务器失联',
-      };
-    });
-})
-
-// 关于我们查询
-router.get('/vue/AboutFind',async (ctx, next) => {
-  await apiModel
-    .AboutFind()
-    .then(res => {
-      ctx.body = {
-        data:res,
-        code: 200,
-      };
-    })
-    .catch(res => {
-      ctx.body = {
-        code: 500,
-        message: '服务器失联',
-      };
-    });
-})
-// 关于我们添加
-router.post('/vue/AboutAdd',koaBody(),async (ctx, next) => {
-  await apiModel
-    .AboutAdd(ctx.request.body)
-    .then(res => {
-      ctx.body = {
-        code: 200,
-        data: '添加成功',
-      };
-    })
-    .catch(res => {
-      ctx.body = {
-        code: 500,
-        message: '添加失败',
-      };
-    });
-})
-// 关于我们修改
-router.post('/vue/AboutUpdata',koaBody(),async (ctx, next) => {
-  await apiModel
-    .AboutUpdate(ctx.request.body)
-    .then(res => {
-      ctx.body = {
-        code: 200,
-        data: '修改成功',
-      };
-    })
-    .catch(res => {
-      ctx.body = {
-        code: 500,
-        message: '添加失败',
       };
     });
 })
