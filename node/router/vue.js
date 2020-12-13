@@ -262,6 +262,7 @@ router.get('/vue/AboutFind',async (ctx, next) => {
       };
     });
 })
+
 // 关于我们添加
 router.post('/vue/AboutAdd',koaBody(),async (ctx, next) => {
   await apiModel
@@ -299,6 +300,120 @@ router.post('/vue/AboutUpdata',koaBody(),async (ctx, next) => {
 })
 
 
+// *****************************反馈****************************//
+
+// 查询全部反馈
+router.get('/vue/messagesFindAll',async (ctx, next) => {
+  await apiModel
+    .messagesFindAll()
+    .then(res => {
+      ctx.body = {
+        data:res,
+        code: 200,
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        data:res,
+        message: '服务器失联',
+      };
+    });
+})
+
+// 查询已未读反馈
+router.get('/vue/messagesFindRead',async (ctx, next) => {
+  await apiModel
+    .messagesFindRead(ctx.query.read_state)
+    .then(res => {
+      ctx.body = {
+        data:res,
+        code: 200,
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        data:res,
+        message: '服务器失联',
+      };
+    });
+})
+
+// 根据id查询反馈
+router.get('/vue/messagesFindId',async (ctx, next) => {
+  await apiModel
+    .messagesFindId(ctx.query.id)
+    .then(res => {
+      ctx.body = {
+        data:res,
+        code: 200,
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        data:res,
+        message: '服务器失联',
+      };
+    });
+})
+
+// 根据id修改查看状态
+router.post('/vue/messagesFindReadId',koaBody(),async (ctx, next) => {
+  await apiModel
+    .messagesFindReadId(ctx.request.body)
+    .then(res => {
+      ctx.body = {
+        code: 200,
+        data: '修改查看状态成功',
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        data:res,
+        message: '修改查看状态失败',
+      };
+    });
+})
+
+// 反馈回复
+router.post('/vue/messagesUpdate',koaBody(),async (ctx, next) => {
+  await apiModel
+    .messagesUpdate(ctx.request.body)
+    .then(res => {
+      ctx.body = {
+        code: 200,
+        data: '回复成功',
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        message: '回复失败',
+      };
+    });
+})
+
+// 反馈删除
+router.post('/vue/messagesDelete',koaBody(),async (ctx, next) => {
+  await apiModel
+    .messagesDelete(ctx.request.body)
+    .then(res => {
+      ctx.body = {
+        code: 200,
+        data: '删除成功',
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        data:res,
+        message: '删除失败',
+      };
+    });
+})
 
 
 // 模块查询

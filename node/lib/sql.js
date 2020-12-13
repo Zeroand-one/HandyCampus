@@ -71,15 +71,17 @@ let AboutInfo = `create table if not exists about_info(
 
 // 消息反馈表
 let Messages = `create table if not exists messages(
+  id INT NOT NULL AUTO_INCREMENT,
   user_id varchar(30) NOT NULL COMMENT '用户id', 
   message_email VARCHAR(100) NULL COMMENT '邮箱' ,
   message_qq VARCHAR(100) NULL COMMENT 'QQ' ,
   message_title VARCHAR(100) NOT NULL COMMENT '标题' ,
-  message_body VARCHAR(100) NOT NULL COMMENT '内容' ,
+  message_body VARCHAR(300) NOT NULL COMMENT '内容' ,
   message_img VARCHAR(100) NULL COMMENT '图片' ,
   start_date date NOT NULL COMMENT '创建时间' ,
   read_state int NULL COMMENT '阅读状态' ,
-  PRIMARY KEY ( user_id )
+  write_back VARCHAR(300) NULL COMMENT '回复' ,
+  PRIMARY KEY ( id )
 );`;
 
 // 创建数据
@@ -90,6 +92,7 @@ let Messages = `create table if not exists messages(
 // INSERT INTO users_a SET user_id='83568745',user_type='1',sex=1, user_name='baerbaer',birthday='2020-11-02',password='45hahearehb',phone='2745674',studenid='267484534';
 
 // INSERT INTO messages SET user_id='432342534',message_qq='312674615',message_email='1gahg32lu@qq.com',message_title='标题1', message_body='内容',start_date='2020-10-02',read_state=1;
+
 // // 模块表
 // let Class = `create table if not exists class(
 //   id INT NOT NULL AUTO_INCREMENT,
@@ -211,6 +214,45 @@ exports.AboutUpdate = ( value ) => {
   let _sql = `UPDATE about_info SET about_email="${value.about_email}",about_QQ="${value.about_QQ}",about_wechat="${value.about_wechat}",about_phone="${value.about_phone}" WHERE id="${value.id}"`;
   return query( _sql, value )
 }
+
+// *****************************反馈****************************//
+
+// 查询全部反馈
+exports.messagesFindAll = ( value ) => {
+  let _sql = `SELECT * FROM messages`;
+  return query( _sql, value )
+}
+
+// 查询未读反馈
+exports.messagesFindRead = ( value ) => {
+  let _sql = `SELECT * FROM messages WHERE read_state="${value}"`;
+  return query( _sql, value )
+}
+
+// 根据id查看
+exports.messagesFindId = ( value ) => {
+  let _sql = `SELECT * FROM messages WHERE id="${value}";`;
+  return query( _sql, value )
+}
+
+// 根据id修改查看状态
+exports.messagesFindReadId = ( value ) => {
+  let _sql = `UPDATE messages SET read_state=1 WHERE id="${value.id}";`;
+  return query( _sql, value )
+}
+
+// 反馈回复
+exports.messagesUpdate = ( value ) => {
+  let _sql = `UPDATE messages SET write_back="${value.write_back}" WHERE id="${value.id}"`;
+  return query( _sql, value )
+}
+
+// 反馈删除
+exports.messagesDelete = ( value ) => {
+  let _sql = `DELETE FROM messages WHERE id="${value.id}"`;
+  return query( _sql, value )
+}
+
 
 
 // 模块列表查询

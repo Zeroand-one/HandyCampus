@@ -83,13 +83,13 @@ export const asyncRoutes =[
     hidden: true,
     component: Layout,
     redirect: "/courier/index",
-    meta: { title: "骑手", icon: "el-icon-s-ticket" },
+    meta: { title: "骑手", icon: "el-icon-bicycle" },
     children: [
     {
       path: "index",
       name: "courier_index",
       component: () => import("@p/courier"),
-      meta: { title: "骑手信息", icon: "el-icon-video-camera-solid" },
+      meta: { title: "骑手信息", icon: "el-icon-bicycle" },
     }
     ]
   },
@@ -99,16 +99,54 @@ export const asyncRoutes =[
     hidden: true,
     component: Layout,
     redirect: "/order/index",
-    meta: { title: "订单", icon: "el-icon-s-ticket" },
+    meta: { title: "订单", icon: "el-icon-s-order" },
     children: [
     {
       path: "index",
       name: "order_index",
       component: () => import("@p/order"),
-      meta: { title: "订单信息", icon: "el-icon-video-camera-solid" },
+      meta: { title: "订单信息", icon: "el-icon-s-order" },
     }
     ]
   },
+  {
+    path: '/messageInfo',
+    name: 'messageInfo',
+    hidden: true,
+    component: Layout,
+    redirect: "/messageInfo/index",
+    meta: { title: "反馈", icon: "el-icon-document" },
+    children: [
+    {
+      path: "index",
+      name: "messageInfo_index",
+      component: () => import("@p/messageInfo"),
+      meta: { title: "反馈信息", icon: "el-icon-message-solid" },
+    },
+    {
+      path: "info",
+      name: "messageInfo_index_id",
+      component: () => import("@p/messageInfo/info.vue"),
+      meta: { title: "反馈信息详情", icon: "el-icon-message-solid" },
+    }
+    ]
+  },
+  // {
+  //   path: '/messageInfo',
+  //   name: 'messageInfo',
+  //   hidden: true,
+  //   component: Layout,
+  //   redirect: "/messageInfo/info",
+  //   meta: { title: "反馈信息", icon: "el-icon-document" },
+  //   children: [
+  //   {
+  //     path: "info",
+  //     name: "messageInfo_index_id",
+  //     component: () => import("@p/messageInfo/info.vue"),
+  //     meta: { title: "反馈信息详情", icon: "el-icon-message-solid" },
+  //   }
+  //   ]
+  // },
   // {
   //   path: '/nav',
   //   name: 'nav',
