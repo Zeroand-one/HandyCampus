@@ -17,12 +17,12 @@
           align="center"
           width="60"
         ></el-table-column>
-        <el-table-column
+        <!-- <el-table-column
           label="id值"
           prop="id"
           align="center"
           width="60"
-        ></el-table-column>
+        ></el-table-column> -->
         <el-table-column
           prop="user_id"
           label="user_id"
@@ -95,17 +95,6 @@ export default {
       currentPage4: 1, // 当前页数
       PageSize: 5, // 当前个数
       id: null, //操作id
-      ruleForm: {
-        //弹窗内容
-        user_name: null,
-        name: null,
-        password: "",
-        phone: "",
-        address: "",
-        studenid: "",
-        user_type: "0",
-        user_id: "",
-      },
       searchInput: "",
     };
   },
@@ -123,11 +112,6 @@ export default {
             this.data = this.tableData;
             this.dataTotal = this.tableData.length;
             this.tableData = this.tableData.slice(0, this.PageSize);
-            this.tableData.forEach((item) => {
-              item.time = moment(item.time).format("YYYY-MM-DD hh:mm:ss");
-              item.newtime = moment(item.newtime).format("YYYY-MM-DD hh:mm:ss");
-              // item.time
-            });
           }
         })
         .catch((err) => {
@@ -151,11 +135,9 @@ export default {
     },
     // 删除
     Delete(e) {
-      console.log(e, "e");
       this.$confirm("确认删除这个反馈吗？")
         .then((_) => {
           messagesDelete({ id: e.id }).then((res) => {
-            console.log(res.data);
             if (res.data.code == 200) {
               this.$message.success(res.data.data);
               this.list();
@@ -175,7 +157,6 @@ export default {
       let pagenext = this.PageSize * e;
       this.currentPage4 = e;
       this.tableData = data.slice(pageprev, pagenext);
-      console.log(this.currentPage4, e, "1", this.PageSize);
     },
     // 页几个
     handleSizeChange(e) {
@@ -185,9 +166,6 @@ export default {
       let pageprev = (this.currentPage4 - 1) * e;
       let pagenext = this.currentPage4 * e;
       this.tableData = data.slice(pageprev, pagenext);
-      // console.log(this.currentPage4, this.PageSize);
-      // console.log(this.tableData, "ta");
-      // this.list();
     },
   },
 };

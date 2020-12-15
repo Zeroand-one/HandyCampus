@@ -185,6 +185,11 @@ exports.usersDelete = ( id ) => {
   return query( _sql, id )
 }
 
+// 前端用户账号搜索
+exports.usersFindSearch = ( value ) => {
+  let _sql = `SELECT * FROM users_a where  user_type=0 and ( user_id like '%${value}%' or name like '%${value}%'  or phone like '%${value}%'  or user_name like '%${value}%'   or address like '%${value}%'   or studenid like '%${value}%' ) `;
+  return query( _sql, value )
+} 
 
 // *****************************前端骑手****************************//
 
@@ -194,6 +199,11 @@ exports.courierFind = ( value ) => {
   return query( _sql, value )
 } 
 
+// 骑手账号搜索
+exports.courierFindSearch = ( value ) => {
+  let _sql = `SELECT * FROM users_a where  user_type=1 and ( user_id like '%${value}%' or name like '%${value}%'  or phone like '%${value}%'  or user_name like '%${value}%'   or address like '%${value}%'   or studenid like '%${value}%' ) `;
+  return query( _sql, value )
+} 
 
 
 // *****************************关于我们****************************//

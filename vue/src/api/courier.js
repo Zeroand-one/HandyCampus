@@ -7,3 +7,12 @@ export function courierFind() {
     method: 'get',
   })
 };
+
+// 搜索骑手数据
+export function getCourierFindSearch(params) {
+  return request({
+    url: '/vue/courierFindSearch',
+    method: 'get',
+    params:params
+  })
+};

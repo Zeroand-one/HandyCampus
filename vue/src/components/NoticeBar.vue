@@ -83,14 +83,13 @@ export default {
       console.log(e, "e");
       messagesFindReadId({ id: e.id }).then((res) => {
         if (res.data.code == 200) {
-          console.log(res.data);
+          this.list();
         }
       });
       this.$router.push({
         path: "/messageInfo/info",
         query: { id: e.id },
       });
-      this.list();
     },
   },
 };

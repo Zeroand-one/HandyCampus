@@ -181,6 +181,24 @@ router.get('/vue/usersFind',async (ctx, next) => {
       };
     });
 })
+// 前端用户搜索
+router.get('/vue/usersFindSearch',async (ctx, next) => {
+  await apiModel
+    .usersFindSearch(ctx.query.key)
+    .then(res => {
+      ctx.body = {
+        data:res,
+        code: 200,
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        data:res,
+        message: '服务器失联',
+      };
+    });
+})
 // 前端用户修改
 router.post('/vue/usersupdate',koaBody(),async (ctx, next) => {
   // ctx.request.body.password = md5(md5(ctx.request.body.password))
@@ -241,6 +259,24 @@ router.get('/vue/courierFind',async (ctx, next) => {
 })
 
 
+// 骑手账号搜索
+router.get('/vue/courierFindSearch',async (ctx, next) => {
+  await apiModel
+    .courierFindSearch(ctx.query.key)
+    .then(res => {
+      ctx.body = {
+        data:res,
+        code: 200,
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        data:res,
+        message: '服务器失联',
+      };
+    });
+})
 
 // *****************************关于我们****************************//
 

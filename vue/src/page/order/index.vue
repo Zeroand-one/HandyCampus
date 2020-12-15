@@ -6,6 +6,13 @@
     <div class="classpage">
       <el-table :data="tableData" border stripe>
         <el-table-column
+          type="index"
+          label="序号"
+          :index="(currentPage4 - 1) * PageSize + 1"
+          align="center"
+          width="60"
+        ></el-table-column>
+        <el-table-column
           align="center"
           prop="user_id"
           width="150"

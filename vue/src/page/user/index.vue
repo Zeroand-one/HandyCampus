@@ -2,6 +2,14 @@
   <div class="className">
     <div class="classBut">
       <el-button type="primary" @click="addRolesTab">添加用户</el-button>
+      <el-input
+        placeholder="请输入内容"
+        prefix-icon="el-icon-search"
+        v-model="searchInput"
+        clearable
+        @change="changeBlur"
+      >
+      </el-input>
     </div>
     <div class="classpage">
       <el-table :data="tableData" border stripe>
@@ -20,7 +28,7 @@
         <el-table-column
           prop="user_id"
           label="id"
-          width="100"
+          width="200"
           align="center"
         ></el-table-column>
         <el-table-column
@@ -42,11 +50,13 @@
           prop="address"
           align="center"
           label="地址"
+          width="180"
         ></el-table-column>
         <el-table-column
           prop="birthday"
           label="出生日期"
-          width="350"
+          width="180"
+          align="center"
         ></el-table-column>
         <el-table-column prop="sex" align="center" label="性别">
           <template slot-scope="{ row: { sex } }">
@@ -75,7 +85,7 @@
           </template>
         </el-table-column>
 
-        <el-table-column label="操作" width="200">
+        <el-table-column label="操作" align="center" width="200">
           <template slot-scope="scope">
             <el-button type="primary" @click="editTable(scope.row)"
               >编辑</el-button
@@ -160,6 +170,7 @@ import {
   UsersAdd,
   UsersUpdate,
   UsersDelete,
+  getUserFindSearch,
 } from "../../api/userA";
 export default {
   data() {
@@ -185,6 +196,7 @@ export default {
         user_type: "0",
         user_id: "",
       },
+      searchInput: "",
       rules: {
         user_name: [{ required: true, message: "请输入昵称", trigger: "blur" }],
         password: [{ required: true, message: "请输入密码", trigger: "blur" }],
@@ -205,15 +217,17 @@ export default {
         .then((response) => {
           console.log(response);
           if (response.data.code == 200) {
+            response.data.data.forEach((item) => {
+              if (item.birthday) {
+                item.birthday = moment(item.birthday).format(
+                  "YYYY-MM-DD hh:mm:ss"
+                );
+              }
+            });
             this.tableData = response.data.data;
             this.data = this.tableData;
             this.dataTotal = this.tableData.length;
             this.tableData = this.tableData.slice(0, this.PageSize);
-            this.tableData.forEach((item) => {
-              item.time = moment(item.time).format("YYYY-MM-DD hh:mm:ss");
-              item.newtime = moment(item.newtime).format("YYYY-MM-DD hh:mm:ss");
-              // item.time
-            });
           }
         })
         .catch((err) => {
@@ -351,6 +365,29 @@ export default {
           this.$message.info("已取消");
         });
     },
+    // 搜索
+    changeBlur(queryString, cb) {
+      console.log(this.searchInput, "se");
+      getUserFindSearch({ key: this.searchInput })
+        .then((res) => {
+          if (res.data.code == 200) {
+            res.data.data.forEach((item) => {
+              if (item.birthday) {
+                item.birthday = moment(item.birthday).format(
+                  "YYYY-MM-DD hh:mm:ss"
+                );
+              }
+            });
+            this.tableData = res.data.data;
+            this.data = this.tableData;
+            this.dataTotal = this.tableData.length;
+            this.tableData = this.tableData.slice(0, this.PageSize);
+          }
+        })
+        .catch((err) => {
+          this.$message.error("获取失败！");
+        });
+    },
     // 翻页
     handleCurrentChange(e) {
       let data = this.data;
@@ -378,6 +415,11 @@ export default {
 <style lang="scss"  scoped>
 .classBut {
   margin: 20px;
+  display: flex;
+  justify-content: space-between;
+  .el-input--prefix {
+    width: 50%;
+  }
 }
 .classpage {
   margin: 20px;

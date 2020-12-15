@@ -9,6 +9,15 @@ export function getUserData(params) {
   })
 };
 
+// 搜索用户数据
+export function getUserFindSearch(params) {
+  return request({
+    url: '/vue/usersFindSearch',
+    method: 'get',
+    params:params
+  })
+};
+
 // 增加用户
 export function UsersAdd(params) {
   return request({
