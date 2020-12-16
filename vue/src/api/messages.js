@@ -53,3 +53,12 @@ export function messagesDelete(params) {
     data:params
   })
 };
+
+// 反馈关键字搜索
+export function messagesFindSearch(params) {
+  return request({
+    url: '/vue/messagesFindSearch',
+    method: 'get',
+    params:params
+  })
+};

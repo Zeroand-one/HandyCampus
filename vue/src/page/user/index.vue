@@ -7,7 +7,7 @@
         prefix-icon="el-icon-search"
         v-model="searchInput"
         clearable
-        @change="changeBlur"
+        @change="changeKeySearch"
       >
       </el-input>
     </div>
@@ -366,7 +366,7 @@ export default {
         });
     },
     // 搜索
-    changeBlur(queryString, cb) {
+    changeKeySearch(queryString, cb) {
       console.log(this.searchInput, "se");
       getUserFindSearch({ key: this.searchInput })
         .then((res) => {

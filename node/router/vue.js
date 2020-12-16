@@ -452,6 +452,26 @@ router.post('/vue/messagesDelete',koaBody(),async (ctx, next) => {
 })
 
 
+// 反馈搜索
+router.get('/vue/messagesFindSearch',async (ctx, next) => {
+  await apiModel
+    .messagesFindSearch(ctx.query.key)
+    .then(res => {
+      ctx.body = {
+        data:res,
+        code: 200,
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        data:res,
+        message: '服务器失联',
+      };
+    });
+})
+
+
 // 模块查询
 router.get('/vue/ClassFind',async (ctx, next) => {
   await apiModel

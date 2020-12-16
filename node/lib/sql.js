@@ -264,6 +264,12 @@ exports.messagesDelete = ( value ) => {
 }
 
 
+// 反馈关键字搜索
+exports.messagesFindSearch = ( value ) => {
+  let _sql = `SELECT * FROM messages where  user_id like '%${value}%' or message_email like '%${value}%'  or message_qq like '%${value}%'  or message_title like '%${value}%'   or write_back like '%${value}%'   `;
+  return query( _sql, value )
+} 
+
 
 // 模块列表查询
 exports.ClassFind = ( value ) => {

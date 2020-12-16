@@ -5,6 +5,8 @@
         placeholder="请输入内容"
         prefix-icon="el-icon-search"
         v-model="searchInput"
+        clearable
+        @change="changeKeySearch"
       >
       </el-input>
     </div>
@@ -85,6 +87,7 @@ import {
   messagesUpdate,
   messagesDelete,
   messagesFindReadId,
+  messagesFindSearch,
 } from "../../api/messages";
 export default {
   data() {
@@ -148,6 +151,28 @@ export default {
         })
         .catch((_) => {
           this.$message.info("已取消");
+        });
+    },
+    // 搜索
+    changeKeySearch(queryString, cb) {
+      console.log(this.searchInput, "se");
+      messagesFindSearch({ key: this.searchInput })
+        .then((res) => {
+          if (res.data.code == 200) {
+            res.data.data.forEach((item) => {
+              if (item.start_date) {
+                item.start_date = moment(item.start_date).format(
+                  "YYYY-MM-DD hh:mm:ss"
+                );
+              }
+            });
+            this.tableData = res.data.data;
+            this.dataTotal = this.tableData.length;
+            this.tableData = this.tableData.slice(0, this.PageSize);
+          }
+        })
+        .catch((err) => {
+          this.$message.error("获取失败！");
         });
     },
     // 翻页
