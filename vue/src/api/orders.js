@@ -53,3 +53,21 @@ export function orderDelete(params) {
     data:params
   })
 };
+
+// 订单开始时间搜索
+export function orderStartTimeSearch(params) {
+  return request({
+    url: '/wechat/orderStartTimeSearch',
+    method: 'post',
+    data:params
+  })
+};
+
+// 订单关键字搜索
+export function orderKeySearch(params) {
+  return request({
+    url: '/wechat/orderKeySearch',
+    method: 'get',
+    params:params
+  })
+};

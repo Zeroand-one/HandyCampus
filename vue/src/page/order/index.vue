@@ -2,6 +2,27 @@
   <div class="className">
     <div class="classBut">
       <el-button type="primary" @click="addRolesTab">新建订单</el-button>
+
+      <el-date-picker
+        v-model="datetimerange"
+        type="datetimerange"
+        @change="changeDatetimeRange"
+        :picker-options="pickerOptions"
+        range-separator="至"
+        start-placeholder="搜索订单开始时间"
+        end-placeholder="结束日期"
+        align="center"
+      >
+      </el-date-picker>
+
+      <el-input
+        placeholder="请输入内容"
+        prefix-icon="el-icon-search"
+        v-model="searchInput"
+        clearable
+        @change="changeBlur"
+      >
+      </el-input>
     </div>
     <div class="classpage">
       <el-table :data="tableData" border stripe>
@@ -347,6 +368,7 @@
 <script>
 import randomNum from "../../utils/getRandomNum";
 import getformat from "../../utils/getformat";
+import moment from "moment";
 import {
   orderFind,
   orderAdd,
@@ -354,6 +376,8 @@ import {
   orderImg,
   deleteImg,
   orderDelete,
+  orderStartTimeSearch,
+  orderKeySearch,
 } from "../../api/orders";
 export default {
   data() {
@@ -376,6 +400,40 @@ export default {
       dataTotal: 0, // 总数
       currentPage4: 1, // 当前页数
       PageSize: 5, // 当前个数
+      searchInput: "",
+      datetimerange: [], //时间范围
+      // 默认时间范围
+      pickerOptions: {
+        shortcuts: [
+          {
+            text: "最近一周",
+            onClick(picker) {
+              const end = new Date();
+              const start = new Date();
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+              picker.$emit("pick", [start, end]);
+            },
+          },
+          {
+            text: "最近一个月",
+            onClick(picker) {
+              const end = new Date();
+              const start = new Date();
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
+              picker.$emit("pick", [start, end]);
+            },
+          },
+          {
+            text: "最近三个月",
+            onClick(picker) {
+              const end = new Date();
+              const start = new Date();
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
+              picker.$emit("pick", [start, end]);
+            },
+          },
+        ],
+      },
       // 转态对应组
       statusList: [
         {
@@ -493,8 +551,8 @@ export default {
               });
             });
             console.log(list, "ta");
-            this.tableData = list;
-            this.data = this.tableData;
+            this.data = list;
+            this.tableData = this.data;
             this.dataTotal = this.tableData.length;
             this.tableData = this.tableData.slice(0, this.PageSize);
           } else {
@@ -768,6 +826,133 @@ export default {
       }
       return isJPG && isLt2M;
     },
+    // 搜索
+    changeBlur(queryString, cb) {
+      orderKeySearch({ key: this.searchInput }).then((res) => {
+        if (res.data.code == 200) {
+          let list = res.data.data;
+          list.forEach((item) => {
+            // item.order_img = "http://127.0.0.1:3030/" + item.order_img;
+            // 对返回的数据过滤
+            if (item.start_date !== null) {
+              let start_date = item.start_date;
+              item.start_date = moment(start_date).format(
+                "yyyy-MM-dd hh:mm:ss"
+              );
+            }
+            if (item.open_date !== null) {
+              let open_date = item.open_date;
+              item.open_date = moment(open_date).format("yyyy-MM-dd hh:mm:ss");
+            }
+            if (item.receive_date !== null) {
+              let receive_date = item.receive_date;
+              item.receive_date = moment(receive_date).format(
+                "yyyy-MM-dd hh:mm:ss"
+              );
+            }
+            if (item.transfer_date !== null) {
+              let transfer_date = item.transfer_date;
+              item.transfer_date = moment(transfer_date).format(
+                "yyyy-MM-dd hh:mm:ss"
+              );
+            }
+            if (item.end_date !== null) {
+              let end_date = item.end_date;
+              item.end_date = moment(end_date).format("yyyy-MM-dd hh:mm:ss");
+            }
+
+            this.statusList.forEach((e) => {
+              if (e.id == item.order_state) {
+                item.order_state = e.text;
+              }
+            });
+            this.typeList.forEach((e) => {
+              if (e.id == item.order_type) {
+                item.order_type = e.text;
+              }
+            });
+          });
+          console.log(list, "ta");
+          this.tableData = list;
+          this.dataTotal = this.tableData.length;
+          this.tableData = this.tableData.slice(0, this.PageSize);
+        } else {
+          this.$message.error(res.data.message);
+        }
+      });
+    },
+    // 时间搜索
+    changeDatetimeRange(e) {
+      if (!e) {
+        this.tableData = this.data;
+        console.log(this.data, "d");
+      } else {
+        let params = {
+          start_time: null,
+          end_time: null,
+        };
+        console.log(e, "e");
+
+        // params.start_time = moment(e[0]).format("yyyy-MM-dd hh:mm:ss");
+        params.start_time = new Date(e[0]).getformat("yyyy-MM-dd hh:mm:ss");
+        // params.end_time = moment(e[1]).format("yyyy-MM-dd hh:mm:ss");
+        params.end_time = new Date(e[1]).getformat("yyyy-MM-dd hh:mm:ss");
+        console.log(params);
+        orderStartTimeSearch(params).then((res) => {
+          if (res.data.code == 200) {
+            let list = res.data.data;
+            list.forEach((item) => {
+              // item.order_img = "http://127.0.0.1:3030/" + item.order_img;
+              // 对返回的数据过滤
+              if (item.start_date !== null) {
+                let start_date = item.start_date;
+                item.start_date = moment(start_date).format(
+                  "yyyy-MM-dd hh:mm:ss"
+                );
+              }
+              if (item.open_date !== null) {
+                let open_date = item.open_date;
+                item.open_date = moment(open_date).format(
+                  "yyyy-MM-dd hh:mm:ss"
+                );
+              }
+              if (item.receive_date !== null) {
+                let receive_date = item.receive_date;
+                item.receive_date = moment(receive_date).format(
+                  "yyyy-MM-dd hh:mm:ss"
+                );
+              }
+              if (item.transfer_date !== null) {
+                let transfer_date = item.transfer_date;
+                item.transfer_date = moment(transfer_date).format(
+                  "yyyy-MM-dd hh:mm:ss"
+                );
+              }
+              if (item.end_date !== null) {
+                let end_date = item.end_date;
+                item.end_date = moment(end_date).format("yyyy-MM-dd hh:mm:ss");
+              }
+
+              this.statusList.forEach((e) => {
+                if (e.id == item.order_state) {
+                  item.order_state = e.text;
+                }
+              });
+              this.typeList.forEach((e) => {
+                if (e.id == item.order_type) {
+                  item.order_type = e.text;
+                }
+              });
+            });
+            this.tableData = list;
+            this.dataTotal = this.tableData.length;
+            this.tableData = this.tableData.slice(0, this.PageSize);
+          } else {
+            this.$message.error(res.data.message);
+          }
+        });
+      }
+    },
     // 翻页
     handleCurrentChange(e) {
       let data = this.data;
@@ -795,6 +980,14 @@ export default {
 <style lang="scss"  scoped>
 .classBut {
   margin: 20px;
+  display: flex;
+  justify-content: space-between;
+  .el-input--prefix {
+    width: 30%;
+  }
+  .el-date-editor {
+    width: 58%;
+  }
 }
 .classpage {
   margin: 20px;

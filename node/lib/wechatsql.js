@@ -46,10 +46,10 @@ let orders = `create table if not exists orders(
   order_address VARCHAR(100) NOT NULL COMMENT '订单地址',
   order_img varchar(10) NULL  COMMENT '内容图片',
   money varchar(10) NULL  COMMENT '金额',
-  start_date date NOT NULL COMMENT '创建时间',
-  open_date date NULL COMMENT '发布时间',
-  receive_date date NULL COMMENT '接收时间',
-  transfer_date date NULL COMMENT '转让时间',
+  start_date datetime NOT NULL COMMENT '创建时间',
+  open_date datetime NULL COMMENT '发布时间',
+  receive_date datetime NULL COMMENT '接收时间',
+  transfer_date datetime NULL COMMENT '转让时间',
   end_date date NULL COMMENT '结束时间',
   order_type int(2) NOT NULL COMMENT '订单类型',
   courier_id varchar(30)  NULL COMMENT '骑手id',
@@ -113,14 +113,23 @@ exports.vueOrderUpdate = ( value ) => {
   return query( _sql, value )
 }
 
-// // 后台删除订单
+// 后台删除订单
 exports.vueOrderDelete = ( id ) => {
   let _sql = `DELETE FROM orders WHERE order_id="${id}"`;
   return query( _sql, id )
 }
 
+// 订单开始时间搜索
+exports.orderStartTimeSearch = ( value ) => {
+  let _sql = `select * FROM orders where start_date >='${value.start_time}'  and start_date < '${value.end_time}'`;
+  return query( _sql, value )
+} 
 
-
+// 订单关键字搜索
+exports.orderKeySearch = ( value ) => {
+  let _sql = `SELECT * FROM orders where user_id like '%${value}%' or name like '%${value}%' or order_title like '%${value}%' or order_id like '%${value}%' or user_name like '%${value}%' or order_body like '%${value}%' or order_address like '%${value}%' or courier_id like '%${value}%' or courier_name like '%${value}%' or user_estimate like '%${value}%' or courier_back like '%${value}%' `;
+  return query( _sql, value )
+} 
 
 
 

@@ -78,7 +78,7 @@ let Messages = `create table if not exists messages(
   message_title VARCHAR(100) NOT NULL COMMENT '标题' ,
   message_body VARCHAR(300) NOT NULL COMMENT '内容' ,
   message_img VARCHAR(100) NULL COMMENT '图片' ,
-  start_date date NOT NULL COMMENT '创建时间' ,
+  start_date datetime NOT NULL COMMENT '创建时间' ,
   read_state int NULL COMMENT '阅读状态' ,
   write_back VARCHAR(300) NULL COMMENT '回复' ,
   PRIMARY KEY ( id )

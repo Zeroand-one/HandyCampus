@@ -151,6 +151,7 @@ export default {
       this.allRoute.forEach((item) => {
         if (item.name == tit1) {
           this.tit1 = item.meta.title;
+          this.titlink = item.redirect;
           item.children.forEach((citem) => {
             if (citem.path == tit2) {
               this.tit2 = citem.meta.title;

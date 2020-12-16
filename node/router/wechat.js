@@ -107,6 +107,46 @@ router.post('/wechat/orderDelete',koaBody(),async (ctx, next) => {
     });
 })
 
+// 订单开始时间搜索
+router.post('/wechat/orderStartTimeSearch',koaBody(),async (ctx, next) => {
+  await apiModel
+    .orderStartTimeSearch(ctx.request.body)
+    .then(res => {
+      ctx.body = {
+        data:res,
+        code: 200,
+        message: '搜索成功!'
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        data:res,
+        message: '服务器失联',
+      };
+    });
+})
+
+// 订单关键字搜索
+router.get('/wechat/orderKeySearch',koaBody(),async (ctx, next) => {
+  await apiModel
+    .orderKeySearch(ctx.query.key)
+    .then(res => {
+      ctx.body = {
+        data:res,
+        code: 200,
+        message: '搜索成功!'
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        data:res,
+        message: '服务器失联',
+      };
+    });
+})
+
 // 前端数据处理
 // 轮播图
 router.get('/wechat/Banner',async (ctx, next) => {
