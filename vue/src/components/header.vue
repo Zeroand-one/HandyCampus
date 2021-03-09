@@ -125,7 +125,7 @@ export default {
     },
     // 退出登录
     loginOut() {
-      this.$get("/v1/admin/loginOut", this.ruleForm)
+      this.$get("/v1/api/admin/loginOut", this.ruleForm)
         .then((response) => {
           this.$message.success(response.message);
           this.$cookies.remove("token");

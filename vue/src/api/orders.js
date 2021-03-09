@@ -3,7 +3,7 @@ import request from '../utils/request'
 // 获取订单数据
 export function orderFind(params) {
   return request({
-    url: '/v1/admin/orderFind',
+    url: '/v1/api/admin/orderFind',
     method: 'get',
     params:params
   })
@@ -12,7 +12,7 @@ export function orderFind(params) {
 // 增加订单
 export function orderAdd(params) {
   return request({
-    url: '/v1/admin/orderAdd',
+    url: '/v1/api/admin/orderAdd',
     method: 'post',
     data:params
   })
@@ -21,7 +21,7 @@ export function orderAdd(params) {
 // 更新订单
 export function orderUpdate(params) {
   return request({
-    url: '/v1/admin/orderUpdate',
+    url: '/v1/api/admin/orderUpdate',
     method: 'post',
     data:params
   })
@@ -30,7 +30,7 @@ export function orderUpdate(params) {
 // 更改图片
 export function orderImg(params) {
   return request({
-    url: '/v1/admin/orderImg',
+    url: '/v1/api/admin/orderImg',
     method: 'post',
     data:params
   })
@@ -48,7 +48,7 @@ export function deleteImg(params) {
 // 删除订单
 export function orderDelete(params) {
   return request({
-    url: '/v1/admin/orderDelete',
+    url: '/v1/api/admin/orderDelete',
     method: 'post',
     data:params
   })
@@ -57,7 +57,7 @@ export function orderDelete(params) {
 // 订单开始时间搜索
 export function orderStartTimeSearch(params) {
   return request({
-    url: '/v1/admin/orderStartTimeSearch',
+    url: '/v1/api/admin/orderStartTimeSearch',
     method: 'post',
     data:params
   })
@@ -66,7 +66,7 @@ export function orderStartTimeSearch(params) {
 // 订单关键字搜索
 export function orderKeySearch(params) {
   return request({
-    url: '/v1/admin/orderKeySearch',
+    url: '/v1/api/admin/orderKeySearch',
     method: 'get',
     params:params
   })

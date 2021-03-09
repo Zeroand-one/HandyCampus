@@ -3,7 +3,7 @@ import request from '../utils/request'
 // 获取用户数据
 export function getUserData(params) {
   return request({
-    url: '/v1/admin/usersFind',
+    url: '/v1/api/admin/usersFind',
     method: 'get',
     params:params
   })
@@ -12,7 +12,7 @@ export function getUserData(params) {
 // 搜索用户数据
 export function getUserFindSearch(params) {
   return request({
-    url: '/v1/admin/usersFindSearch',
+    url: '/v1/api/admin/usersFindSearch',
     method: 'get',
     params:params
   })
@@ -21,7 +21,7 @@ export function getUserFindSearch(params) {
 // 增加用户
 export function UsersAdd(params) {
   return request({
-    url: '/v1/admin/usersadd',
+    url: '/v1/api/admin/usersadd',
     method: 'post',
     data:params
   })
@@ -30,7 +30,7 @@ export function UsersAdd(params) {
 // 更新用户数据
 export function UsersUpdate(params) {
   return request({
-    url: '/v1/admin/usersupdate',
+    url: '/v1/api/admin/usersupdate',
     method: 'post',
     data:params
   })
@@ -39,7 +39,7 @@ export function UsersUpdate(params) {
 // 删除用户数据
 export function UsersDelete(params) {
   return request({
-    url: '/v1/admin/usersDelete',
+    url: '/v1/api/admin/usersDelete',
     method: 'post',
     data:params
   })

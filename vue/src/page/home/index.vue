@@ -5,7 +5,7 @@
 // import left
 export default {
   mounted() {
-    this.$get("/v1/admin/index")
+    this.$get("/v1/api/admin/index")
       .then((response) => {
         // console.log(response)
         if (response.code == 200) {

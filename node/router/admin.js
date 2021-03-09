@@ -7,7 +7,7 @@ let moment = require('moment')
 // ******************后台用户*****************//
 
 // 查询账号是否已被注册过
-router.get('/v1/admin/regname', async (ctx, next) => {
+router.get('/v1/api/admin/regname', async (ctx, next) => {
   await apiModel
     .userName(ctx.query.username)
     .then(res => {
@@ -32,7 +32,7 @@ router.get('/v1/admin/regname', async (ctx, next) => {
 })
 
 // 后台注册
-router.post('/v1/admin/register',koaBody(),async (ctx, next) => {
+router.post('/v1/api/admin/register',koaBody(),async (ctx, next) => {
   // 二次加密
   // let md5Pass = md5(md5(ctx.request.body.password))
   // data = [
@@ -61,7 +61,7 @@ router.post('/v1/admin/register',koaBody(),async (ctx, next) => {
 })
 
 // 登录
-router.get('/v1/admin/login', async (ctx, next) => {
+router.get('/v1/api/admin/login', async (ctx, next) => {
   // 二次加密
   // ctx.query.password = md5(md5(ctx.query.password))
   await apiModel
@@ -94,7 +94,7 @@ router.get('/v1/admin/login', async (ctx, next) => {
     });
 })
 // 修改信息
-router.post('/v1/admin/UserUpdate',koaBody(),async (ctx, next) => {
+router.post('/v1/api/admin/UserUpdate',koaBody(),async (ctx, next) => {
   let password = ctx.session.token.password
   let data = ctx.request.body
   // 二次加密
@@ -120,7 +120,7 @@ router.post('/v1/admin/UserUpdate',koaBody(),async (ctx, next) => {
     });
 })
 // 退出登录
-router.get('/v1/admin/loginOut', async (ctx, next) => {
+router.get('/v1/api/admin/loginOut', async (ctx, next) => {
   ctx.session = {}
   ctx.body = {
     code: 200,
@@ -129,7 +129,7 @@ router.get('/v1/admin/loginOut', async (ctx, next) => {
 })
 
 // 首页
-router.get('/v1/admin/index',async (ctx, next) => {
+router.get('/v1/api/admin/index',async (ctx, next) => {
   ctx.body = {
     code: 200,
     message: '成功'
@@ -139,7 +139,7 @@ router.get('/v1/admin/index',async (ctx, next) => {
 // *****************************前端用户****************************//
 
 // 前端用户添加
-router.post('/v1/admin/usersadd',koaBody(),async (ctx, next) => {
+router.post('/v1/api/admin/usersadd',koaBody(),async (ctx, next) => {
   // 二次加密
   // let md5Pass = md5(md5(ctx.request.body.password))
   // data = [
@@ -165,7 +165,7 @@ router.post('/v1/admin/usersadd',koaBody(),async (ctx, next) => {
     });
 })
 // 前端用户查询
-router.get('/v1/admin/usersFind',async (ctx, next) => {
+router.get('/v1/api/admin/usersFind',async (ctx, next) => {
   await apiModel
     .usersFind()
     .then(res => {
@@ -182,7 +182,7 @@ router.get('/v1/admin/usersFind',async (ctx, next) => {
     });
 })
 // 前端用户搜索
-router.get('/v1/admin/usersFindSearch',async (ctx, next) => {
+router.get('/v1/api/admin/usersFindSearch',async (ctx, next) => {
   await apiModel
     .usersFindSearch(ctx.query.key)
     .then(res => {
@@ -200,7 +200,7 @@ router.get('/v1/admin/usersFindSearch',async (ctx, next) => {
     });
 })
 // 前端用户修改
-router.post('/v1/admin/usersupdate',koaBody(),async (ctx, next) => {
+router.post('/v1/api/admin/usersupdate',koaBody(),async (ctx, next) => {
   // ctx.request.body.password = md5(md5(ctx.request.body.password))
   // ctx.request.body.newtime = moment(new Date()).format('YYYY-MM-DD hh:mm:ss'),
   await apiModel
@@ -220,7 +220,7 @@ router.post('/v1/admin/usersupdate',koaBody(),async (ctx, next) => {
     });
 })
 // 前端用户删除
-router.post('/v1/admin/usersDelete',koaBody(),async (ctx, next) => {
+router.post('/v1/api/admin/usersDelete',koaBody(),async (ctx, next) => {
   await apiModel
     .usersDelete(ctx.request.body.id)
     .then(res => {
@@ -241,7 +241,7 @@ router.post('/v1/admin/usersDelete',koaBody(),async (ctx, next) => {
 // *****************************前端骑手****************************//
 
 // 骑手查询
-router.get('/v1/admin/courierFind',async (ctx, next) => {
+router.get('/v1/api/admin/courierFind',async (ctx, next) => {
   await apiModel
     .courierFind()
     .then(res => {
@@ -260,7 +260,7 @@ router.get('/v1/admin/courierFind',async (ctx, next) => {
 
 
 // 骑手账号搜索
-router.get('/v1/admin/courierFindSearch',async (ctx, next) => {
+router.get('/v1/api/admin/courierFindSearch',async (ctx, next) => {
   await apiModel
     .courierFindSearch(ctx.query.key)
     .then(res => {
@@ -281,7 +281,7 @@ router.get('/v1/admin/courierFindSearch',async (ctx, next) => {
 // *****************************关于我们****************************//
 
 // 关于我们查询
-router.get('/v1/admin/AboutFind',async (ctx, next) => {
+router.get('/v1/api/admin/AboutFind',async (ctx, next) => {
   await apiModel
     .AboutFind()
     .then(res => {
@@ -300,7 +300,7 @@ router.get('/v1/admin/AboutFind',async (ctx, next) => {
 })
 
 // 关于我们添加
-router.post('/v1/admin/AboutAdd',koaBody(),async (ctx, next) => {
+router.post('/v1/api/admin/AboutAdd',koaBody(),async (ctx, next) => {
   await apiModel
     .AboutAdd(ctx.request.body)
     .then(res => {
@@ -318,7 +318,7 @@ router.post('/v1/admin/AboutAdd',koaBody(),async (ctx, next) => {
 })
 
 // 关于我们修改
-router.post('/v1/admin/AboutUpdata',koaBody(),async (ctx, next) => {
+router.post('/v1/api/admin/AboutUpdata',koaBody(),async (ctx, next) => {
   await apiModel
     .AboutUpdate(ctx.request.body)
     .then(res => {
@@ -339,7 +339,7 @@ router.post('/v1/admin/AboutUpdata',koaBody(),async (ctx, next) => {
 // *******************************订单******************************//
 
 // 订单查询
-router.get('/v1/admin/orderFind',async (ctx, next) => {
+router.get('/v1/api/admin/orderFind',async (ctx, next) => {
   await apiModel
     .orderFind()
     .then(res => {
@@ -357,7 +357,7 @@ router.get('/v1/admin/orderFind',async (ctx, next) => {
 })
 
 // 订单传图
-router.post('/v1/admin/orderImg',koaBody(),async (ctx, next) => {
+router.post('/v1/api/admin/orderImg',koaBody(),async (ctx, next) => {
   let data = ctx.request.body
   await apiModel
     .orderImg(data)
@@ -377,7 +377,7 @@ router.post('/v1/admin/orderImg',koaBody(),async (ctx, next) => {
 })
 
 // 新增订单
-router.post('/v1/admin/orderAdd',koaBody(),async (ctx, next) => {
+router.post('/v1/api/admin/orderAdd',koaBody(),async (ctx, next) => {
   let data = ctx.request.body
   await apiModel
     .orderAdd(data)
@@ -397,7 +397,7 @@ router.post('/v1/admin/orderAdd',koaBody(),async (ctx, next) => {
 })
 
 // 后台修改订单
-router.post('/v1/admin/orderUpdate',koaBody(),async (ctx, next) => {
+router.post('/v1/api/admin/orderUpdate',koaBody(),async (ctx, next) => {
   let data = ctx.request.body
   await apiModel
     .vueOrderUpdate(data)
@@ -417,7 +417,7 @@ router.post('/v1/admin/orderUpdate',koaBody(),async (ctx, next) => {
 })
 
 // 后台删除订单
-router.post('/v1/admin/orderDelete',koaBody(),async (ctx, next) => {
+router.post('/v1/api/admin/orderDelete',koaBody(),async (ctx, next) => {
   // let data = ctx.request.body.order_id
   await apiModel
     .vueOrderDelete(ctx.request.body.order_id)
@@ -437,7 +437,7 @@ router.post('/v1/admin/orderDelete',koaBody(),async (ctx, next) => {
 })
 
 // 订单开始时间搜索
-router.post('/v1/admin/orderStartTimeSearch',koaBody(),async (ctx, next) => {
+router.post('/v1/api/admin/orderStartTimeSearch',koaBody(),async (ctx, next) => {
   await apiModel
     .orderStartTimeSearch(ctx.request.body)
     .then(res => {
@@ -457,7 +457,7 @@ router.post('/v1/admin/orderStartTimeSearch',koaBody(),async (ctx, next) => {
 })
 
 // 订单关键字搜索
-router.get('/v1/admin/orderKeySearch',koaBody(),async (ctx, next) => {
+router.get('/v1/api/admin/orderKeySearch',koaBody(),async (ctx, next) => {
   await apiModel
     .orderKeySearch(ctx.query.key)
     .then(res => {
@@ -480,7 +480,7 @@ router.get('/v1/admin/orderKeySearch',koaBody(),async (ctx, next) => {
 // *****************************反馈****************************//
 
 // 查询全部反馈
-router.get('/v1/admin/messagesFindAll',async (ctx, next) => {
+router.get('/v1/api/admin/messagesFindAll',async (ctx, next) => {
   await apiModel
     .messagesFindAll()
     .then(res => {
@@ -499,7 +499,7 @@ router.get('/v1/admin/messagesFindAll',async (ctx, next) => {
 })
 
 // 查询已未读反馈
-router.get('/v1/admin/messagesFindRead',async (ctx, next) => {
+router.get('/v1/api/admin/messagesFindRead',async (ctx, next) => {
   await apiModel
     .messagesFindRead(ctx.query.read_state)
     .then(res => {
@@ -518,7 +518,7 @@ router.get('/v1/admin/messagesFindRead',async (ctx, next) => {
 })
 
 // 根据id查询反馈
-router.get('/v1/admin/messagesFindId',async (ctx, next) => {
+router.get('/v1/api/admin/messagesFindId',async (ctx, next) => {
   await apiModel
     .messagesFindId(ctx.query.id)
     .then(res => {
@@ -537,7 +537,7 @@ router.get('/v1/admin/messagesFindId',async (ctx, next) => {
 })
 
 // 根据id修改查看状态
-router.post('/v1/admin/messagesFindReadId',koaBody(),async (ctx, next) => {
+router.post('/v1/api/admin/messagesFindReadId',koaBody(),async (ctx, next) => {
   await apiModel
     .messagesFindReadId(ctx.request.body)
     .then(res => {
@@ -556,7 +556,7 @@ router.post('/v1/admin/messagesFindReadId',koaBody(),async (ctx, next) => {
 })
 
 // 反馈回复
-router.post('/v1/admin/messagesUpdate',koaBody(),async (ctx, next) => {
+router.post('/v1/api/admin/messagesUpdate',koaBody(),async (ctx, next) => {
   await apiModel
     .messagesUpdate(ctx.request.body)
     .then(res => {
@@ -574,7 +574,7 @@ router.post('/v1/admin/messagesUpdate',koaBody(),async (ctx, next) => {
 })
 
 // 反馈删除
-router.post('/v1/admin/messagesDelete',koaBody(),async (ctx, next) => {
+router.post('/v1/api/admin/messagesDelete',koaBody(),async (ctx, next) => {
   await apiModel
     .messagesDelete(ctx.request.body)
     .then(res => {
@@ -594,7 +594,7 @@ router.post('/v1/admin/messagesDelete',koaBody(),async (ctx, next) => {
 
 
 // 反馈搜索
-router.get('/v1/admin/messagesFindSearch',async (ctx, next) => {
+router.get('/v1/api/admin/messagesFindSearch',async (ctx, next) => {
   await apiModel
     .messagesFindSearch(ctx.query.key)
     .then(res => {
@@ -614,7 +614,7 @@ router.get('/v1/admin/messagesFindSearch',async (ctx, next) => {
 
 
 // 模块查询
-router.get('/v1/admin/ClassFind',async (ctx, next) => {
+router.get('/v1/api/admin/ClassFind',async (ctx, next) => {
   await apiModel
     .ClassFind()
     .then(res => {
@@ -631,7 +631,7 @@ router.get('/v1/admin/ClassFind',async (ctx, next) => {
     });
 })
 // 模块添加
-router.post('/v1/admin/ClassAdd',koaBody(),async (ctx, next) => {
+router.post('/v1/api/admin/ClassAdd',koaBody(),async (ctx, next) => {
   ctx.request.body.number = 0;
   ctx.request.body.time = moment(new Date()).format('YYYY-MM-DD hh:mm:ss');
   ctx.request.body.newtime = moment(new Date()).format('YYYY-MM-DD hh:mm:ss');
@@ -651,7 +651,7 @@ router.post('/v1/admin/ClassAdd',koaBody(),async (ctx, next) => {
     });
 })
 // 修改模块名称
-router.post('/v1/admin/ClassUpdateName',koaBody(),async (ctx, next) => {
+router.post('/v1/api/admin/ClassUpdateName',koaBody(),async (ctx, next) => {
   ctx.request.body.newtime = moment(new Date()).format('YYYY-MM-DD hh:mm:ss a');
   await apiModel
     .ClassUpdateName(ctx.request.body)
@@ -669,7 +669,7 @@ router.post('/v1/admin/ClassUpdateName',koaBody(),async (ctx, next) => {
     });
 })
 // 删除列表
-router.post('/v1/admin/ClassDelete',koaBody(),async (ctx, next) => {
+router.post('/v1/api/admin/ClassDelete',koaBody(),async (ctx, next) => {
   await apiModel
     .ClassDelete(ctx.request.body.id)
     .then(res => {
@@ -688,7 +688,7 @@ router.post('/v1/admin/ClassDelete',koaBody(),async (ctx, next) => {
 
 
 // 资讯内容添加
-router.post('/v1/admin/ArticleAdd',koaBody(),async (ctx, next) => {
+router.post('/v1/api/admin/ArticleAdd',koaBody(),async (ctx, next) => {
   ctx.request.body.time = moment(new Date()).format('YYYY-MM-DD hh:mm:ss')
   ctx.request.body.newtime = moment(new Date()).format('YYYY-MM-DD hh:mm:ss');
   await apiModel 
@@ -713,7 +713,7 @@ router.post('/v1/admin/ArticleAdd',koaBody(),async (ctx, next) => {
   await apiModel.ClassNumber(data)
 })
 // 资讯删除
-router.delete('/v1/admin/ArticleDelete/:id',async (ctx, next) => {
+router.delete('/v1/api/admin/ArticleDelete/:id',async (ctx, next) => {
   await apiModel
     .ArticleDelete(ctx.params.id)
     .then(res => {
@@ -730,7 +730,7 @@ router.delete('/v1/admin/ArticleDelete/:id',async (ctx, next) => {
     });
 })
 // 资讯修改
-router.post('/v1/admin/ArticleUpdate',koaBody(),async (ctx, next) => {
+router.post('/v1/api/admin/ArticleUpdate',koaBody(),async (ctx, next) => {
   ctx.request.body.newtime = moment(new Date()).format('YYYY-MM-DD hh:mm:ss');
   await apiModel
     .ArticleUpdate(ctx.request.body)
@@ -748,7 +748,7 @@ router.post('/v1/admin/ArticleUpdate',koaBody(),async (ctx, next) => {
     });
 })
 // 资讯列表
-router.get('/v1/admin/ArticleFind',async (ctx, next) => {
+router.get('/v1/api/admin/ArticleFind',async (ctx, next) => {
   // 表单总数
   let total = await apiModel.Table('article')
   await apiModel
@@ -768,7 +768,7 @@ router.get('/v1/admin/ArticleFind',async (ctx, next) => {
     });
 })
 // 资讯详情
-router.get('/v1/admin/ArticleDetails/:id',async (ctx, next) => {
+router.get('/v1/api/admin/ArticleDetails/:id',async (ctx, next) => {
   await apiModel
     .ArticleDetails(ctx.params.id)
     .then(res => {
@@ -788,7 +788,7 @@ router.get('/v1/admin/ArticleDetails/:id',async (ctx, next) => {
 
 // 前端数据处理
 // 轮播图
-router.get('/v1/admin/Banner',async (ctx, next) => {
+router.get('/v1/api/admin/Banner',async (ctx, next) => {
   await apiModel
     .Banner()
     .then(res => {
@@ -805,7 +805,7 @@ router.get('/v1/admin/Banner',async (ctx, next) => {
     });
 })
 // 列表数据
-router.post('/v1/admin/List',koaBody(),async (ctx, next) => {
+router.post('/v1/api/admin/List',koaBody(),async (ctx, next) => {
   await apiModel
     .ArticleFind(ctx.request.body)
     .then(res => {
@@ -822,7 +822,7 @@ router.post('/v1/admin/List',koaBody(),async (ctx, next) => {
     });
 })
 // 模糊查询
-router.post('/v1/admin/IndexQuery',koaBody(),async (ctx, next) => {
+router.post('/v1/api/admin/IndexQuery',koaBody(),async (ctx, next) => {
   await apiModel
     .query(ctx.request.body.Search)
     .then(res => {
@@ -839,7 +839,7 @@ router.post('/v1/admin/IndexQuery',koaBody(),async (ctx, next) => {
     });
 })
 // 资讯详情
-router.get('/v1/admin/ArticleDetails/:id',async (ctx, next) => {
+router.get('/v1/api/admin/ArticleDetails/:id',async (ctx, next) => {
   await apiModel
     .ArticleDetails(ctx.params.id)
     .then(res => {
@@ -856,7 +856,7 @@ router.get('/v1/admin/ArticleDetails/:id',async (ctx, next) => {
     });
 })
 // 模块查询
-router.get('/v1/admin/ClassFind',async (ctx, next) => {
+router.get('/v1/api/admin/ClassFind',async (ctx, next) => {
   await apiModel
     .ClassFind()
     .then(res => {
@@ -873,7 +873,7 @@ router.get('/v1/admin/ClassFind',async (ctx, next) => {
     });
 })
 // 关于我们查询
-router.get('/v1/admin/About',async (ctx, next) => {
+router.get('/v1/api/admin/About',async (ctx, next) => {
   await apiModel
     .AboutFind()
     .then(res => {
@@ -890,7 +890,7 @@ router.get('/v1/admin/About',async (ctx, next) => {
     });
 })
 // 列表数据
-router.post('/v1/admin/NavList',koaBody(),async (ctx, next) => {
+router.post('/v1/api/admin/NavList',koaBody(),async (ctx, next) => {
   await apiModel
     .NavArticle(ctx.request.body)
     .then(res => {
