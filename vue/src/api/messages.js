@@ -3,7 +3,7 @@ import request from '../utils/request'
 // 查询全部反馈
 export function messagesFindAll(params) {
   return request({
-    url: '/vue/messagesFindAll',
+    url: '/v1/admin/messagesFindAll',
     method: 'get',
     params:params
   })
@@ -12,7 +12,7 @@ export function messagesFindAll(params) {
 // 查询未读反馈
 export function messagesFindRead(params) {
   return request({
-    url: '/vue/messagesFindRead',
+    url: '/v1/admin/messagesFindRead',
     method: 'get',
     params:params
   })
@@ -21,7 +21,7 @@ export function messagesFindRead(params) {
 // 根据id查询反馈
 export function messagesFindId(params) {
   return request({
-    url: '/vue/messagesFindId',
+    url: '/v1/admin/messagesFindId',
     method: 'get',
     params:params
   })
@@ -30,7 +30,7 @@ export function messagesFindId(params) {
 // 根据id修改查看状态
 export function messagesFindReadId(params) {
   return request({
-    url: '/vue/messagesFindReadId',
+    url: '/v1/admin/messagesFindReadId',
     method: 'post',
     data:params
   })
@@ -39,7 +39,7 @@ export function messagesFindReadId(params) {
 // 反馈回复
 export function messagesUpdate(params) {
   return request({
-    url: '/vue/messagesUpdate',
+    url: '/v1/admin/messagesUpdate',
     method: 'post',
     data:params
   })
@@ -48,7 +48,7 @@ export function messagesUpdate(params) {
 // 反馈删除
 export function messagesDelete(params) {
   return request({
-    url: '/vue/messagesDelete',
+    url: '/v1/admin/messagesDelete',
     method: 'post',
     data:params
   })
@@ -57,7 +57,7 @@ export function messagesDelete(params) {
 // 反馈关键字搜索
 export function messagesFindSearch(params) {
   return request({
-    url: '/vue/messagesFindSearch',
+    url: '/v1/admin/messagesFindSearch',
     method: 'get',
     params:params
   })

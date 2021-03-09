@@ -67,7 +67,7 @@ app.use(
 // 图片上传
 app.use(require('./router/uploadFile.js').routes()).use(route.allowedMethods());
 
-app.use(require('./router/vue.js').routes()).use(route.allowedMethods());
+app.use(require('./router/admin.js').routes()).use(route.allowedMethods());
 app.use(require('./router/wechat.js').routes()).use(route.allowedMethods());
 // 连接数据库
 let connection = mysql.createConnection(sessionMysqlConfig)

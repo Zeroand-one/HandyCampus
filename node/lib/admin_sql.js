@@ -271,6 +271,66 @@ exports.messagesFindSearch = ( value ) => {
 } 
 
 
+// **********************************订单*********************************//
+
+// 订单查询
+exports.orderFind = ( value ) => {
+  let _sql = `SELECT * FROM orders`;
+  return query( _sql, value )
+} 
+
+// 新增订单
+exports.orderAdd = ( value ) => {
+  let _sql = `INSERT INTO orders SET user_id="${value.user_id}",user_name="${value.user_name}",order_id="${value.order_id}",order_state="${value.order_state}",order_title="${value.order_title}",order_body="${value.order_body}",order_type="${value.order_type}",order_address="${value.order_address}",money="${value.money}",start_date="${value.start_date}";`
+  return query( _sql, value )
+}
+
+// 修改订单图片
+exports.orderImg = ( value ) => {
+  let _sql = `UPDATE orders SET order_img="${value.order_img}" WHERE order_id="${value.order_id}";`
+  return query( _sql, value )
+}
+
+// 后台修改订单
+exports.vueOrderUpdate = ( value ) => {
+  let _sql = 'UPDATE orders SET '
+  Object.keys(value).forEach(function (key) {
+    if (typeof value[key] == "number") {
+      _sql = " " + _sql + key + "=" + value[key] + ", ";
+    } else {
+      if (value[key]) {
+        _sql = " " + _sql + key + "='" + value[key] + "', ";
+      } else {
+        _sql =  _sql;
+      }
+    }
+  });
+  _sql = _sql.substring(0, _sql.length - 2);
+  _sql=_sql+" WHERE order_id='"+value.order_id+"'"
+  return query( _sql, value )
+}
+
+// 后台删除订单
+exports.vueOrderDelete = ( id ) => {
+  let _sql = `DELETE FROM orders WHERE order_id="${id}"`;
+  return query( _sql, id )
+}
+
+// 订单开始时间搜索
+exports.orderStartTimeSearch = ( value ) => {
+  let _sql = `select * FROM orders where start_date >='${value.start_time}'  and start_date < '${value.end_time}'`;
+  return query( _sql, value )
+} 
+
+// 订单关键字搜索
+exports.orderKeySearch = ( value ) => {
+  let _sql = `SELECT * FROM orders where user_id like '%${value}%' or name like '%${value}%' or order_title like '%${value}%' or order_id like '%${value}%' or user_name like '%${value}%' or order_body like '%${value}%' or order_address like '%${value}%' or courier_id like '%${value}%' or courier_name like '%${value}%' or user_estimate like '%${value}%' or courier_back like '%${value}%' `;
+  return query( _sql, value )
+} 
+
+
+
+
 // 模块列表查询
 exports.ClassFind = ( value ) => {
   let _sql = `SELECT 

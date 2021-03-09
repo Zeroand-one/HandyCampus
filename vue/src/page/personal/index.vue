@@ -91,7 +91,7 @@ export default {
         if (valid) {
           this.ruleForm.id = this.$cookies.get("name").id;
           // this.ruleForm.avator = this.ruleForm.avator.substring(22);
-          this.$post("/vue/UserUpdate", this.ruleForm)
+          this.$post("/v1/admin/UserUpdate", this.ruleForm)
             .then((response) => {
               if (response.code == 200) {
                 this.$message.success(response.message);

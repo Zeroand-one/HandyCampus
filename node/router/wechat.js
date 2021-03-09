@@ -7,31 +7,13 @@ let moment = require('moment')
 let querystring = require('querystring')
 
 
-// ******************订单*****************//
+// *****************************我的****************************//
 
-// 订单查询
-router.get('/vue/orderFind',async (ctx, next) => {
-  await apiModel
-    .orderFind()
-    .then(res => {
-      ctx.body = {
-        data:res,
-        code: 200,
-      };
-    })
-    .catch(res => {
-      ctx.body = {
-        code: 500,
-        message: '服务器失联',
-      };
-    });
-})
-
-// 订单传图
-router.post('/wechat/orderImg',koaBody(),async (ctx, next) => {
+// 获取个人信息
+router.post('/wx/user/info',koaBody(),async (ctx, next) => {
   let data = ctx.request.body
   await apiModel
-    .orderImg(data)
+    .getPhoneUserInfo(data)
     .then(res => {
       ctx.body = {
         data:res,
@@ -47,105 +29,6 @@ router.post('/wechat/orderImg',koaBody(),async (ctx, next) => {
     });
 })
 
-// 新增订单
-router.post('/wechat/orderAdd',koaBody(),async (ctx, next) => {
-  let data = ctx.request.body
-  await apiModel
-    .orderAdd(data)
-    .then(res => {
-      ctx.body = {
-        data:res,
-        code: 200,
-        message: '新建成功!'
-      };
-    })
-    .catch(res => {
-      ctx.body = {
-        code: 500,
-        message: '服务器失联',
-      };
-    });
-})
-
-// 后台修改订单
-router.post('/wechat/orderUpdate',koaBody(),async (ctx, next) => {
-  let data = ctx.request.body
-  await apiModel
-    .vueOrderUpdate(data)
-    .then(res => {
-      ctx.body = {
-        data:res,
-        code: 200,
-        message: '新建成功!'
-      };
-    })
-    .catch(res => {
-      ctx.body = {
-        code: 500,
-        message: '服务器失联',
-      };
-    });
-})
-
-// 后台删除订单
-router.post('/wechat/orderDelete',koaBody(),async (ctx, next) => {
-  // let data = ctx.request.body.order_id
-  await apiModel
-    .vueOrderDelete(ctx.request.body.order_id)
-    .then(res => {
-      ctx.body = {
-        data:res,
-        code: 200,
-        message: '删除成功!'
-      };
-    })
-    .catch(res => {
-      ctx.body = {
-        code: 500,
-        message: '服务器失联',
-      };
-    });
-})
-
-// 订单开始时间搜索
-router.post('/wechat/orderStartTimeSearch',koaBody(),async (ctx, next) => {
-  await apiModel
-    .orderStartTimeSearch(ctx.request.body)
-    .then(res => {
-      ctx.body = {
-        data:res,
-        code: 200,
-        message: '搜索成功!'
-      };
-    })
-    .catch(res => {
-      ctx.body = {
-        code: 500,
-        data:res,
-        message: '服务器失联',
-      };
-    });
-})
-
-// 订单关键字搜索
-router.get('/wechat/orderKeySearch',koaBody(),async (ctx, next) => {
-  await apiModel
-    .orderKeySearch(ctx.query.key)
-    .then(res => {
-      ctx.body = {
-        data:res,
-        code: 200,
-        message: '搜索成功!'
-      };
-    })
-    .catch(res => {
-      ctx.body = {
-        code: 500,
-        data:res,
-        message: '服务器失联',
-      };
-    });
-})
 
 // 前端数据处理
 // 轮播图

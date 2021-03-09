@@ -5,7 +5,7 @@
 // import left
 export default {
   mounted() {
-    this.$get("/vue/index")
+    this.$get("/v1/admin/index")
       .then((response) => {
         // console.log(response)
         if (response.code == 200) {

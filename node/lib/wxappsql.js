@@ -73,5 +73,10 @@ exports.Table = ( value ) => {
   return query( _sql, value )
 }
 
+// *****************************我的****************************//
 
-
+// 获取个人信息
+exports.getPhoneUserInfo = ( value ) => {
+  let _sql = `SELECT * FROM user1 where phone='${value}'  `;
+  return query( _sql, value )
+} 
