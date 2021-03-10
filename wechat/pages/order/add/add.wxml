@@ -1,0 +1,28 @@
+<view class="map_container">
+  <view class="container">
+    <button bindtap="showMap">选择位置</button>
+    <view style="margin-top:10px">地址：{{address?address:"暂无"}}</view>
+    <view style="margin-top:10px">名称：{{locationName?locationName:"暂无"}}</view>
+  </view>
+</view>
+<view class="box">
+  <view class='type1' wx:if="{{order_type==0}}">
+    <view class="get">
+      <view class="get_le">
+        <text class="cir">取</text>
+        从哪取快递
+      </view>
+      <view class="oft">常用</view>
+    </view>
+    <view class="get">
+      <view class="get_ri">
+        <text class="cir">收</text>
+        送到哪
+      </view>
+      <view class="oft">常用</view>
+    </view>
+  </view>
+  <view class='list-guide' wx:elif="{{order_type==1}}">取快递1</view>
+  <view class='list-guide' wx:else>取快递2</view>
+</view>
+<view class=""></view>

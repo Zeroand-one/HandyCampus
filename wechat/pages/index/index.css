@@ -1,0 +1,28 @@
+.list {
+  background-color: #ffffff;
+  padding: 2rpx 10rpx;
+  display: flex;
+  flex-wrap: wrap;
+}
+.list .item {
+  width: 48%;
+  display: flex;
+  height: 180rpx;
+}
+.list .item .item_pic {
+  width: 100rpx;
+  height: 100rpx;
+  margin: 20rpx 10rpx 5rpx;
+}
+.list .item .item_but {
+  margin-top: 20rpx;
+}
+.list .item .item_but .item_h {
+  color: #111;
+  font-size: 32rpx;
+  font-weight: bold;
+}
+.list .item .item_but .item_f {
+  font-size: 26rpx;
+  color: #333;
+}
