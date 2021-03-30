@@ -1,13 +1,22 @@
 {
   "pages": [
     "pages/index/index",
+
     "pages/news/list/list",
     "pages/news/details/details",
+
     "pages/my/index/index",
-    "pages/search/search",
     "pages/my/about/about",
+    
+    "pages/search/search",
+
     "pages/order/add/add",
-    "pages/order/list/list"
+    "pages/order/list/list",
+
+    "pages/address/info/info",
+    "pages/address/add/add",
+
+    "pages/login/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

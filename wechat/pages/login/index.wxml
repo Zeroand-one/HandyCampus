@@ -1,0 +1,25 @@
+<view wx:if="{{isHide}}">
+  <view wx:if="{{canIUse}}">
+    <view class='header'>
+      <image src='../../images/logo5.png'></image>
+    </view>
+    <view class='content'>
+      <text>请允许获得你的公开信息</text>
+    </view>
+    <view class="">
+      <!-- <button class="{{flag?'show':'hide'}}" type="primary" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="bindGetUserInfo">
+        {{AuthorizedLogin}}
+      </button> -->
+      <!-- <button class="{{flag?'hide':'show'}}" type="primary" lang="zh_CN" open-type='getPhoneNumber' bindgetphonenumber="getPhoneNumber">
+        {{UserPhone}}
+      </button> -->
+      <input class="" maxlength="11" data-name="phone_number" bindinput="bindInput" type="number" placeholder="输入11位手机号码"></input>
+      <input type="text" id="code" name="codeImg" placeholder-class="C3" bindinput="codeImgInput" placeholder="请输入图形验证码" maxlength="4" value='{{imgCode}}' />
+      <view style="position:relative;" bindtap="onTap">
+        <canvas style="width:160rpx;height:70rpx;position:absolute;right:0rpx;bottom:10rpx;text-align: center;z-index:9999;" canvas-id="canvas"></canvas>
+      </view>
+    </view>
+    <button class="" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="submit">登录 / 注册</button>
+  </view>
+  <view wx:else>请升级微信版本</view>
+</view>

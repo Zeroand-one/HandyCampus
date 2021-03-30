@@ -5,6 +5,30 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
+    var that = this;
+    //获取用户本地是否是第一次进入新版本
+    var versions = wx.getStorageSync('versions');
+    console.log('versions:' + versions);
+    //判断是不是需要授权
+    if (versions == '1'){
+      // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
+      wx.getUserInfo({
+        success: function (res) {
+          that.globalData.userInfo = res.userInfo
+          console.log(that.globalData.userInfo)
+        },
+        fail: function () {
+          wx.redirectTo({
+            url: '/pages/login/index',
+          })
+        }
+      })
+    }else{
+      //未授权, 跳转登录页面
+      wx.redirectTo({
+        url: '/pages/login/index',
+      })
+    }
 
     // 登录
     wx.login({

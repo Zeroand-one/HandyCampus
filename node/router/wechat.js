@@ -6,7 +6,25 @@ var koaBody = require('koa-body');
 let moment = require('moment')
 let querystring = require('querystring')
 
+// ******************************常用地址表***************************//
 
+// 常用地址表查询
+router.get('/v1/api/wechat/oftenAddresFind',async (ctx, next) => {
+  await apiModel
+    .oftenAddresFind(ctx.query.id)
+    .then(res => {
+      ctx.body = {
+        code: 200,
+        data: res,
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        message: '服务器失联',
+      };
+    });
+})
 // *****************************我的****************************//
 
 // 获取个人信息

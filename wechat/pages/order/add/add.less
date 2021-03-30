@@ -10,14 +10,52 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
+      align-items: center;
+      height: 100rpx;
 
       .get_le {
-        width: 70%;
+        width: 80%;
+        display: flex;
+        align-items: center;
+        height: 100rpx;
+        font-size: 44rpx;
+
+        text {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+
+        .cir {
+          background-color: #666;
+          width: 40rpx;
+          min-width: 40rpx;
+          height: 40rpx;
+          border-radius: 50%;
+          color: #fff;
+          font-size: 30rpx;
+          text-align: center;
+          line-height: 40rpx;
+          margin-top: 10rpx;
+          margin-right: 20rpx;
+        }
+
+        .setcir {
+          background-color: #fac655;
+        }
       }
 
-      .get_ri {
-        width: 30%;
+      .oft {
+        width: 130rpx;
+        height: 60rpx;
+        background: #ddd;
+        border-radius: 40rpx;
+        text-align: center;
+        line-height: 60rpx;
+        font-size: 30rpx;
+
       }
+
     }
   }
 }

@@ -1,6 +1,6 @@
 var app = getApp();
 //这里因为是本地调试，所以host不规范，实际上应该是备案的域名信息
-var host = 'http://127.0.0.1:3030';
+var host = 'http://127.0.0.1:3030/v1/api/wechat';
 
 // post封装
 function Post(url, postData, doSuccess, doFail) {

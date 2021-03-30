@@ -1,0 +1,20 @@
+.i-cell-group {
+  font-size: 32rpx;
+}
+.card {
+  margin: 0 auto;
+  width: 96%;
+  border-radius: 6rpx;
+}
+.card .item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  font-size: 35rpx;
+}
+.card .item .i-icon {
+  margin-left: 10rpx;
+}
+.card .item i-input {
+  width: 80%;
+}

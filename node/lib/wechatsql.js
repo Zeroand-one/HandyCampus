@@ -61,11 +61,25 @@ let orders = `create table if not exists orders(
 
 // INSERT INTO orders SET user_id="41432423",user_name="我很帅",name="李四",order_id="412335132412",order_state="1",order_title="找东西",order_body="我很帅我很帅我很帅我很帅我很帅我很帅我很帅",order_address="25栋303",money="11",order_type="2",courier_id="132421351",courier_name="天才";
 
+// 常用地址表
+let oftenAddres = `create table if not exists oftenAddres(
+  user_id varchar(30) NOT NULL COMMENT '用户id', 
+  address_det VARCHAR(30) NOT NULL COMMENT '详细地址',
+  address_name VARCHAR(30) NOT NULL COMMENT '地址名称',
+  address_username VARCHAR(30) NOT NULL COMMENT '姓名',
+  address_iphone VARCHAR(30) NOT NULL COMMENT '电话',
+  PRIMARY KEY ( user_id )
+);`;
+// INSERT INTO oftenAddres SET address_username="twre",address_iphone="43512341",address_name="还不如特别",address_det="法国人务必确认",user_id="234123412351324";
+
+// SELECT * FROM users_a,oftenAddres WHERE users_a.user_id=oftenAddres.user_id and users_a.user_id='22345234';
+
 let createTable = sql => {
   return query(sql, []);
 };
 
 createTable(orders);
+createTable(oftenAddres);
 
 // 获取表单总数量
 exports.Table = ( value ) => {
@@ -74,4 +88,22 @@ exports.Table = ( value ) => {
 }
 
 
+// ******************************常用地址表***************************//
 
+// 常用地址表添加
+exports.oftenAddresAdd = ( value ) => {
+  let _sql = `INSERT INTO oftenAddres SET address_username="${value.address_username}",address_iphone="${value.address_det}",address_name="${value.address_det}",address_det="${value.address_det}",user_id="${value.user_id}";`
+  return query( _sql, value )
+}
+
+// 常用地址表查询
+exports.oftenAddresFind = ( value ) => {
+  let _sql = `SELECT * FROM users_a,oftenAddres WHERE users_a.user_id=oftenAddres.user_id AND users_a.user_id="${value}";`;
+  return query( _sql, value )
+}
+
+// // 常用地址表修改
+exports.UserUpdate = ( value ) => {
+  let _sql = `UPDATE oftenAddres SET name="${value.name}", pass="${value.password}", email="${value.email}", avator="${value.avator}" WHERE id="${value.id}" `;
+  return query( _sql, value )
+}

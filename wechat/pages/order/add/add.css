@@ -10,10 +10,43 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  align-items: center;
+  height: 100rpx;
 }
 .box .type1 .get .get_le {
-  width: 70%;
+  width: 80%;
+  display: flex;
+  align-items: center;
+  height: 100rpx;
+  font-size: 44rpx;
 }
-.box .type1 .get .get_ri {
-  width: 30%;
+.box .type1 .get .get_le text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.box .type1 .get .get_le .cir {
+  background-color: #666;
+  width: 40rpx;
+  min-width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 30rpx;
+  text-align: center;
+  line-height: 40rpx;
+  margin-top: 10rpx;
+  margin-right: 20rpx;
+}
+.box .type1 .get .get_le .setcir {
+  background-color: #fac655;
+}
+.box .type1 .get .oft {
+  width: 130rpx;
+  height: 60rpx;
+  background: #ddd;
+  border-radius: 40rpx;
+  text-align: center;
+  line-height: 60rpx;
+  font-size: 30rpx;
 }
