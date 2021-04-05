@@ -5,6 +5,63 @@ var md5 = require('blueimp-md5');
 var koaBody = require('koa-body');
 let moment = require('moment')
 let querystring = require('querystring')
+const koa2Req = require('koa2-request'); // 请求库
+const config = require('../config/default.js');
+
+// ******************************用户管理***************************//
+
+// 获取openID
+let appId = config.appId,
+AppSecret = config.AppSecret;
+const APP_URL = 'https://api.weixin.qq.com/sns/jscode2session'
+router.post('/v1/api/wechat/user/getSessionKeyOpenid',koaBody(),async (ctx, next) => {
+	let  {code}  = ctx.request.body; // 在post中获取jscode
+	// 发送到微信服务器获取OpenId
+	let qres = await koa2Req({
+    url: `${APP_URL}?appid=${appId}&secret=${AppSecret}&js_code=${code}&grant_type=authorization_code`
+  })
+	let body = JSON.parse(qres.body); // 解析
+	ctx.body = {
+    data: body,
+    msg: "500"
+  } // OpenId最好仅在服务端使用，不建议发送到客户端
+})
+
+// 注册用户
+router.post('/v1/api/wechat/user/userAuth',koaBody(),async (ctx, next) => {
+  await apiModel
+    .userAuth(ctx.request.body)
+    .then(res => {
+      ctx.body = {
+        code: 200,
+        data: "注册成功",
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        message: '服务器失联',
+      };
+    });
+})
+
+// 注册用户查询
+router.get('/v1/api/wechat/user/userAuthFind',async (ctx, next) => {
+  await apiModel
+    .userAuthFind(ctx.query.id)
+    .then(res => {
+      ctx.body = {
+        code: 200,
+        data: res,
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        message: '服务器失联',
+      };
+    });
+})
 
 // ******************************常用地址表***************************//
 

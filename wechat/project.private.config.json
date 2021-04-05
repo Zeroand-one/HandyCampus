@@ -20,8 +20,15 @@
           "scene": null
         },
         {
-          "name": "pages/login/index",
-          "pathName": "pages/login/index",
+          "name": "pages/login/login/login",
+          "pathName": "pages/login/login/login",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/login/authorize/authorize",
+          "pathName": "pages/login/authorize/authorize",
+          "query": "",
           "scene": null
         }
       ]

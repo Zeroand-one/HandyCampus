@@ -1,4 +1,22 @@
-/**app.wxss**/
-@import '/miniprogram_npm/weui-miniprogram/weui-wxss/dist/style/weui.wxss';
+@import "./styles/iconfont.wxss";
 
+page,
+view,
+text,
+swiper,
+swiper-item,
+image,
+navigator {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
+page {
+  --themeColor: #eb4450;
+  font-size: 28rpx;
+}
+
+image {
+  width: 100%;
+}

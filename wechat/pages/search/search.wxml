@@ -1,4 +1,4 @@
-<!--pages/search/search.wxml-->
+<!-- pages/search/search.wxml -->
 <view class="index_search">
   <view class="search_inputd">
     <mp-icon icon="search" extClass="search_icon" color="black" size="{{15}}"></mp-icon>
@@ -14,11 +14,13 @@
       <rich-text class="item_p" nodes="{{item.value}}"></rich-text>
       <view class="item_ov">
         <view class="item_time">
-          <text class="item_t">{{item.newtime}} | </text>
-          <navigator url="/pages/news/details/details?id={{item.id}}" class="item_red">{{item.name}}</navigator>
+          <text class="item_t">{{item.newtime}} |</text>
+          <navigator url="/pages/news/details/details?id={{item.id}}" class="item_red">
+            {{item.name}}
+          </navigator>
         </view>
         <view class="item_click">
-          <mp-icon icon="eyes-on" color="black" extClass="item_icon"></mp-icon>
+          <!-- <mp-icon icon="eyes-on" color="black" extClass="item_icon"></mp-icon> -->
           <text class="item_num">{{item.onclick}}</text>
         </view>
       </view>

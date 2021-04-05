@@ -8,7 +8,8 @@
   </swiper-item>
 </swiper>
 <view class="msg">
-  <mp-icon icon="info" color="black" size="{{15}}"></mp-icon>
+  <!-- <mp-icon icon="info" color="black" size="{{15}}"></mp-icon> -->
+  <!-- <view class="iconfont icon-shoucang "></view> -->
   <text class="info">信息提示:</text>
   <text>{{message}}</text>
 </view>

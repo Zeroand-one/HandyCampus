@@ -1,60 +1,133 @@
-/**index.wxss**/
-page{background:#f9f9fa}
-.my1{
+page {
+  background-color: #edece8;
+}
+
+.user_info_wrap {
+  height: 45vh;
+  overflow: hidden;
+  background-color: rgba(255, 0, 0, 0.1);
   position: relative;
 }
-.my1 .my_but {
-  height:90rpx;
-  line-height: 90rpx;
-  text-align: center;
-  font-size:30rpx;
-  width:300rpx;
-  font-weight: initial;
-  position: absolute;
-  top:calc(50% - 45rpx);
-  left:calc(50% - 150rpx);
-  padding:0px;
-}
-.my1 .my_banner{
-  width:100%;
-  display: block;
-  height:270rpx;
-}
-.my1 .my_picd{
-  position: absolute;
-  text-align: center;
-  top:60rpx;
-  width: 100%;
-}
-.my1 .avatar{
-  width:128rpx;
-  height:128rpx;
-  border-radius: 50%;
-  margin:0 auto;
-}
-.my1 .nickname{
-  text-align: center;
-  font-size:30rpx;
-  color:#111;
+
+.user_info_wrap .user_img_wrap {
+  position: relative;
 }
 
-.userinfo {
+.user_info_wrap .user_img_wrap .user_bg {
+  height: 50vh;
+  filter: blur(10rpx);
+}
+
+.user_info_wrap .user_img_wrap .user_info {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 20%;
+  text-align: center;
+}
+
+.user_info_wrap .user_img_wrap .user_info .user_icon {
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 50%;
+}
+
+.user_info_wrap .user_img_wrap .user_info .user_name {
+  color: #fff;
+  margin-top: 40rpx;
+}
+
+.user_info_wrap .user_btn {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 40%;
+  border: 2rpx solid greenyellow;
+  color: greenyellow;
+  font-size: 48rpx;
+  padding: 30rpx;
+  border-radius: 30rpx;
+  width: 300rpx;
+  text-align: center;
+}
+
+.user_content {
+  position: relative;
+}
+
+.user_content .user_main {
+  padding-bottom: 100rpx;
+  color: #666;
+  position: absolute;
+  width: 90%;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -40rpx;
+}
+
+.user_content .user_main .history_wrap {
+  background-color: #fff;
   display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
+.user_content .user_main .history_wrap navigator {
+  flex: 1;
+  text-align: center;
+  padding: 10rpx 0;
 }
 
-.userinfo-nickname {
-  color: #aaa;
+.user_content .user_main .history_wrap navigator .his_num {
+  color: var(--themeColor);
 }
 
-.usermotto {
-  margin-top: 200px;
+.user_content .user_main .orders_wrap {
+  background-color: #fff;
+  margin-top: 30rpx;
+}
+
+.user_content .user_main .orders_wrap .orders_title {
+  padding: 20rpx;
+  border-bottom: 1rpx solid #ccc;
+}
+
+.user_content .user_main .orders_wrap .order_content {
+  display: flex;
+}
+
+.user_content .user_main .orders_wrap .order_content navigator {
+  padding: 15rpx 0;
+  flex: 1;
+  text-align: center;
+}
+
+.user_content .user_main .orders_wrap .order_content navigator .iconfont {
+  color: var(--themeColor);
+  font-size: 40rpx;
+}
+
+.user_content .user_main .address_wrap {
+  margin-top: 30rpx;
+  background-color: #fff;
+  padding: 20rpx;
+}
+
+.user_content .user_main .app_info_wrap {
+  margin-top: 30rpx;
+  background-color: #fff;
+}
+
+.user_content .user_main .app_info_wrap .app_info_item {
+  padding: 20rpx;
+  border-bottom: 1rpx solid #ccc;
+}
+
+.user_content .user_main .app_info_wrap .app_info_contact {
+  display: flex;
+  justify-content: space-between;
+}
+
+.user_content .user_main .recommend_wrap {
+  margin-top: 30rpx;
+  background-color: #fff;
+  padding: 20rpx;
 }

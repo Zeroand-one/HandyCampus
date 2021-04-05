@@ -1,7 +1,7 @@
 <template>
   <div class="className">
     <div class="classBut">
-      <el-button type="primary" @click="addRolesTab">添加骑手</el-button>
+      <el-button type="primary" @click="addRolesTab">骑手申请</el-button>
       <el-input
         placeholder="请输入内容"
         prefix-icon="el-icon-search"

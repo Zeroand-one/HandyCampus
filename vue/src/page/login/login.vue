@@ -18,7 +18,7 @@
       </transition>
     </div>
     <div class="loginBox">
-      <h2 class="loginH2"><strong>Vue</strong> 后台管理系统</h2>
+      <h2 class="loginH2">后台管理系统</h2>
       <!-- 登陆 -->
       <div class="loginCon" v-if="Bool" key="login">
         <div class="titleDiv">

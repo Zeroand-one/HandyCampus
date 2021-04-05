@@ -6,7 +6,7 @@
   "setting": {
     "urlCheck": false,
     "es6": true,
-    "enhance": false,
+    "enhance": true,
     "postcss": true,
     "preloadBackgroundData": false,
     "minified": true,
@@ -43,7 +43,7 @@
     "weui": true
   },
   "compileType": "miniprogram",
-  "libVersion": "2.11.1",
+  "libVersion": "2.16.0",
   "appid": "wx1d437aba0edeef5b",
   "projectname": "%E6%A0%A1%E5%9B%AD%E4%BE%BF%E5%88%A9%E9%80%9A",
   "debugOptions": {

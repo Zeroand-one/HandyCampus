@@ -164,7 +164,7 @@ exports.UserUpdate = ( value ) => {
 
 // 前端账号增加
 exports.usersAdd = ( value ) => {
-  let _sql = `INSERT INTO users_a SET user_id="${value.user_id}",user_type="${value.user_type}", user_name="${value.user_name}",password="${value.password}",phone="${value.phone}",address="${value.address}",studenid="${value.studenid}";`
+  let _sql = `INSERT INTO users_a SET user_id="${value.user_id}",user_type="${value.user_type}", user_name="${value.user_name}",phone="${value.phone}",address="${value.address}",studenid="${value.studenid}";`
   return query( _sql, value )
 }
 
@@ -176,7 +176,7 @@ exports.usersFind = ( value ) => {
 
 // 前端账号修改
 exports.usersupdate = ( value ) => {
-  let _sql = `UPDATE users_a SET user_id="${value.user_id}",user_type="${value.user_type}", user_name="${value.user_name}", name="${value.name}",password="${value.password}",address="${value.address}",phone="${value.phone}",sex="${value.sex}",studenid="${value.studenid}" WHERE user_id="${value.user_id}"`;
+  let _sql = `UPDATE users_a SET user_id="${value.user_id}",user_type="${value.user_type}", user_name="${value.user_name}", name="${value.name}",address="${value.address}",phone="${value.phone}",sex="${value.sex}",studenid="${value.studenid}" WHERE user_id="${value.user_id}"`;
   return query( _sql, value )
 }
 // // 前端账号删除

@@ -15,4 +15,6 @@ module.exports = {
     PORT: '3306',
     HOST: 'localhost',
   },
+  appId: 'wx1d437aba0edeef5b',
+  AppSecret: '2a02a47decad24738fd119f078c79707'
 };

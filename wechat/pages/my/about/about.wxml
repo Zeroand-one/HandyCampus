@@ -1,8 +1,8 @@
-<!--pages/my/about/about.wxml-->
-<mp-cells ext-class="my-cells">
-  <mp-cell value="邮箱" footer="{{details.email}}"></mp-cell>
-  <mp-cell value="QQ" footer="{{details.QQ}}"></mp-cell>
-  <mp-cell value="微信" footer="{{details.wechat}}"></mp-cell>
-</mp-cells>
-
-  
+<view>
+  <text>邮箱</text>
+  <text>{{details.email}}</text>
+  <text>QQ</text>
+  <text>{{details.QQ}}</text>
+  <text>微信</text>
+  <text>{{details.wechat}}</text>
+</view>
