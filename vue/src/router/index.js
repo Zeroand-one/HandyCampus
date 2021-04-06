@@ -131,6 +131,22 @@ export const asyncRoutes =[
     }
     ]
   },
+  {
+    path: '/oftenAddres',
+    name: 'oftenAddres',
+    hidden: true,
+    component: Layout,
+    redirect: "/oftenAddres/index",
+    meta: { title: "地址", icon: "el-icon-location" },
+    children: [
+    {
+      path: "index",
+      name: "oftenAddres_index",
+      component: () => import("@p/oftenAddres"),
+      meta: { title: "地址簿", icon: "el-icon-location" },
+    }
+    ]
+  },
   // {
   //   path: '/messageInfo',
   //   name: 'messageInfo',

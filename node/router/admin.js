@@ -613,6 +613,88 @@ router.get('/v1/api/admin/messagesFindSearch',async (ctx, next) => {
 })
 
 
+
+// *****************************常用地址簿****************************//
+
+// 查询全部常用地址簿
+router.get('/v1/api/admin/adminOftenAddresFind',async (ctx, next) => {
+  await apiModel
+    .adminOftenAddresFind()
+    .then(res => {
+      ctx.body = {
+        data:res,
+        code: 200,
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        data:res,
+        message: '服务器失联',
+      };
+    });
+})
+
+// 根据nid修改常用地址簿
+router.post('/v1/api/admin/adminOftenAddresUpdate',koaBody(),async (ctx, next) => {
+  await apiModel
+    .adminOftenAddresUpdate(ctx.request.body)
+    .then(res => {
+      ctx.body = {
+        code: 200,
+        data: res,
+        message: '修改查看状态成功',
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        data:res,
+        message: '修改查看状态失败',
+      };
+    });
+})
+
+// 删除常用地址簿
+router.post('/v1/api/admin/adminOftenAddresDelete',koaBody(),async (ctx, next) => {
+  await apiModel
+    .adminOftenAddresDelete(ctx.request.body)
+    .then(res => {
+      ctx.body = {
+        code: 200,
+        data: res,
+        message: '删除成功',
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        data:res,
+        message: '删除失败',
+      };
+    });
+})
+
+// 常用地址簿搜索
+router.get('/v1/api/admin/adminOftenAddresKeySearch',async (ctx, next) => {
+  await apiModel
+    .adminOftenAddresKeySearch(ctx.query.key)
+    .then(res => {
+      ctx.body = {
+        data:res,
+        code: 200,
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        data:res,
+        message: '服务器失联',
+      };
+    });
+})
+
+
 // 模块查询
 router.get('/v1/api/admin/ClassFind',async (ctx, next) => {
   await apiModel

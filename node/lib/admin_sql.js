@@ -329,6 +329,35 @@ exports.orderKeySearch = ( value ) => {
 } 
 
 
+// **********************************常用地址簿*********************************//
+
+// 常用地址簿查询
+exports.adminOftenAddresFind = ( value ) => {
+  let _sql = `SELECT * FROM oftenAddres`;
+  return query( _sql, value )
+} 
+
+
+// 后台修改常用地址簿
+exports.adminOftenAddresUpdate = ( value ) => {
+  let _sql = `UPDATE oftenAddres SET address_username="${value.address_username}",address_iphone="${value.address_iphone}",address_name="${value.address_name}",address_det="${value.address_det}",user_id="${value.user_id}" WHERE nid="${value.nid}"`;
+  return query( _sql, value )
+}
+
+// 后台删除常用地址簿
+exports.adminOftenAddresDelete = ( value ) => {
+  let _sql = `DELETE FROM oftenAddres WHERE nid="${value.nid}"`;
+  return query( _sql, value )
+}
+
+// 常用地址簿关键字搜索
+exports.adminOftenAddresKeySearch = ( value ) => {
+  let _sql = `SELECT * FROM oftenAddres where user_id like '%${value}%' or address_username like '%${value}%' or address_iphone like '%${value}%' or address_name like '%${value}%' or address_det  `;
+  return query( _sql, value )
+} 
+
+
+
 
 
 // 模块列表查询

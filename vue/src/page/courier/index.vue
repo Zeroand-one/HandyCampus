@@ -35,11 +35,6 @@
           label="昵称"
         ></el-table-column>
         <el-table-column
-          align="center"
-          prop="password"
-          label="密码"
-        ></el-table-column>
-        <el-table-column
           prop="address"
           align="center"
           label="地址"
@@ -111,9 +106,6 @@
             <el-radio :label="1" border>骑手</el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item label="密码" prop="password">
-          <el-input type="password" v-model="ruleForm.password"></el-input>
-        </el-form-item>
         <el-form-item label="地址" prop="address" v-if="distype">
           <el-input type="text" v-model="ruleForm.address"></el-input>
         </el-form-item>
@@ -172,7 +164,6 @@ export default {
         //弹窗内容
         name: null,
         user_name: null,
-        password: "",
         phone: "",
         address: "",
         studenid: "",
@@ -181,7 +172,6 @@ export default {
       },
       rules: {
         user_name: [{ required: true, message: "请输入昵称", trigger: "blur" }],
-        password: [{ required: true, message: "请输入密码", trigger: "blur" }],
         phone: [{ required: true, message: "请输入手机号", trigger: "blur" }],
         // studenid: [{ required: true, message: "请输入学号", trigger: "blur" }],
       },
@@ -237,7 +227,6 @@ export default {
                 if (res.data.code == 200) {
                   this.ruleForm = {
                     user_name: null,
-                    password: "",
                     phone: "",
                     user_id: "",
                     user_type: "0",
@@ -263,7 +252,6 @@ export default {
                   this.ruleForm = {
                     name: null,
                     user_name: null,
-                    password: "",
                     address: "",
                     phone: "",
                     user_id: "",
@@ -292,7 +280,6 @@ export default {
     handleClose() {
       this.ruleForm = {
         name: null,
-        password: "",
         phone: "",
         address: "",
         user_id: "",
@@ -310,7 +297,6 @@ export default {
       this.id = e.id;
       this.ruleForm.name = e.name;
       this.ruleForm.user_name = e.user_name;
-      this.ruleForm.password = e.password;
       this.ruleForm.phone = e.phone;
       this.ruleForm.user_id = e.user_id;
       this.ruleForm.sex = e.sex;

@@ -1,6 +1,7 @@
 <template>
   <div class="className">
     <div class="classBut">
+      <div class="c"></div>
       <el-input
         placeholder="请输入内容"
         prefix-icon="el-icon-search"
@@ -198,6 +199,11 @@ export default {
 <style lang="scss"  scoped>
 .classBut {
   margin: 20px;
+  display: flex;
+  justify-content: space-between;
+  .el-input--prefix {
+    width: 50%;
+  }
 }
 .classpage {
   margin: 20px;
