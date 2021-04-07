@@ -695,6 +695,46 @@ router.get('/v1/api/admin/adminOftenAddresKeySearch',async (ctx, next) => {
 })
 
 
+// *****************************主页推荐****************************//
+
+// 主页推荐查询
+router.get('/v1/api/admin/indexBannerFind',async (ctx, next) => {
+  await apiModel
+    .indexBannerFind()
+    .then(res => {
+      ctx.body = {
+        data:res,
+        code: 200,
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        message: '服务器失联',
+      };
+    });
+})
+// 主页推荐传图
+router.post('/v1/api/admin/indexBannerImg',koaBody(),async (ctx, next) => {
+  let data = ctx.request.body
+  await apiModel
+    .indexBannerImg(data)
+    .then(res => {
+      ctx.body = {
+        data:res,
+        code: 200,
+        message: '上传成功!'
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        message: '服务器失联',
+      };
+    });
+})
+
+
 // 模块查询
 router.get('/v1/api/admin/ClassFind',async (ctx, next) => {
   await apiModel

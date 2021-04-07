@@ -357,6 +357,18 @@ exports.adminOftenAddresKeySearch = ( value ) => {
 } 
 
 
+// **********************************主页推荐*********************************//
+// 查看主页推荐图片
+exports.indexBannerFind = ( value ) => {
+  let _sql = `select * FROM index_banner ;`
+  return query( _sql, value )
+}
+
+// 修改主页推荐图片
+exports.indexBannerImg = ( value ) => {
+  let _sql = `UPDATE index_banner SET img="${value.img}" WHERE id="1";`
+  return query( _sql, value )
+}
 
 
 

@@ -147,6 +147,22 @@ export const asyncRoutes =[
     }
     ]
   },
+  {
+    path: '/Banner',
+    name: 'Banner',
+    hidden: true,
+    component: Layout,
+    redirect: "/Banner/index",
+    meta: { title: "主页推荐", icon: "el-icon-suitcase" },
+    children: [
+    {
+      path: "index",
+      name: "Banner_index",
+      component: () => import("@p/Banner"),
+      meta: { title: "Banner", icon: "el-icon-suitcase" },
+    }
+    ]
+  },
   // {
   //   path: '/messageInfo',
   //   name: 'messageInfo',
