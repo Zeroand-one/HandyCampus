@@ -32,6 +32,7 @@ router.post('/v1/api/wechat/user/userAuth',koaBody(),async (ctx, next) => {
   await apiModel
     .userAuth(ctx.request.body)
     .then(res => {
+      console.log(res)
       ctx.body = {
         code: 200,
         data: "注册成功",

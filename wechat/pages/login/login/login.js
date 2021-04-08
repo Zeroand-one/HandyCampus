@@ -6,7 +6,7 @@ Page({
   data: {
     formData:{
       phone_number: '',
-      code: ''
+      // code: ''
     },
     second: 60,
     notbind: false,
@@ -89,7 +89,7 @@ Page({
         // 将用户信息传给后台数据库
         "/user/userAuth",params,
         res => {
-          if(res.data.code==200){
+          if(res.code==200){
             wx.showToast({
               title: '登录成功',
               duration:1000,
