@@ -1,4 +1,8 @@
 {
   "usingComponents": {
+    "i-icon": "../../../miniprogram_npm/iview-weapp/icon/index",
+    "i-button": "../../../miniprogram_npm/iview-weapp/button/index",
+    "i-action-sheet": "../../../miniprogram_npm/iview-weapp/action-sheet/index",
+    "UpImg":"../../../components/UpImg/UpImg"
   }
 }

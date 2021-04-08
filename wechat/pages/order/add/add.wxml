@@ -14,8 +14,43 @@
       </navigator>
       <view class="oft">常用</view>
     </view>
+    <view class="goodsinfo">
+      <i-icon type="createtask" size="28" color="#333" />
+      <text>快递信息</text>
+      <i-button plain="true" type="ghost" data-type="goodsInfo" bind:click="handleOpen1">
+        {{goodsType?goodsType:'请选择物品信息 >'}}
+      </i-button>
+      <i-button plain="true" type="ghost" data-type="goodsWeight" bind:click="handleOpen1">
+        {{goodsWeight?goodsWeight:'请选择物品重量 >'}}
+      </i-button>
+    </view>
+    <i-action-sheet visible="{{ visible1 }}" actions="{{ actions1 }}" show-cancel bind:cancel="handleCancel1" bind:click="handleClickItem1" />
+    <view class="tui-picker-content" wx:if="{{order_type==1}}">
+      <view class="tui-picker-name">预计时间</view>
+      <picker mode="multiSelector" value="{{dateTime}}" bindchange="changeDateTime" range="{{dateTimeArray}}">
+        <view class="tui-picker-detail">
+          选择日期时间: {{dateTimeArray[0][dateTime[0]]}}-{{dateTimeArray[1][dateTime[1]]}}-{{dateTimeArray[2][dateTime[2]]}} {{dateTimeArray[3][dateTime[3]]}}:{{dateTimeArray[4][dateTime[4]]}}
+        </view>
+      </picker>
+    </view>
   </view>
   <view class='list-guide' wx:elif="{{order_type==1}}">取快递1</view>
   <view class='list-guide' wx:else>取快递2</view>
+  <view class="remark">
+    <text class="rkinfo">备注信息</text>
+    <textarea value="{{textVal}}" bindinput="handleTextInput" placeholder="请描述一下您的备注"></textarea>
+    <view class="rk_tool">
+      <button bindtap="handleChooseImg">+</button>
+      <view class="up_img_item" wx:for="{{chooseImgs}}" wx:key="*this" bindtap="handleRemoveImg" data-index="{{index}}">
+        <UpImg src="{{item}}"></UpImg>
+      </view>
+    </view>
+  </view>
+  <view class="form_btn_wrap">
+    <button bindtap="handleFormSubmit" type="warn">
+      <icon type="success_no_circle" size="23" color="white"></icon>
+      提交
+    </button>
+  </view>
 </view>
 <view class=""></view>
