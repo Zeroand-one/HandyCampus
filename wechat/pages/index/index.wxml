@@ -1,15 +1,14 @@
 <!-- index.wxml -->
 <swiper class="banner" autoplay="true" interval="3000" circular="true">
   <swiper-item wx:for="{{background}}" wx:key="index">
-    <navigator url="/pages/news/details/details?id={{item.id}}" class="banner_link">
-      <image src="{{item.img}}" class="banner_pic"></image>
+    <navigator url="" class="banner_link">
+      <image src="{{item.url}}" class="banner_pic"></image>
       <text class="banner_title">{{item.title}}</text>
     </navigator>
   </swiper-item>
 </swiper>
 <view class="msg">
-  <!-- <mp-icon icon="info" color="black" size="{{15}}"></mp-icon> -->
-  <!-- <view class="iconfont icon-shoucang "></view> -->
+  <i-icon type="remind_fill" size="18" color="#ff3f3f" />
   <text class="info">信息提示:</text>
   <text>{{message}}</text>
 </view>

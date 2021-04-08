@@ -127,3 +127,11 @@ exports.UserUpdate = ( value ) => {
   let _sql = `UPDATE oftenAddres SET name="${value.name}", pass="${value.password}", email="${value.email}", avator="${value.avator}" WHERE id="${value.id}" `;
   return query( _sql, value )
 }
+
+
+// **********************************主页推荐*********************************//
+// 查看主页推荐图片
+exports.indexBannerFind = ( value ) => {
+  let _sql = `select * FROM index_banner ;`
+  return query( _sql, value )
+}

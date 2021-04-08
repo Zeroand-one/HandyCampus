@@ -106,6 +106,26 @@ router.post('/wx/user/info',koaBody(),async (ctx, next) => {
 })
 
 
+// *****************************主页推荐****************************//
+
+// 主页推荐查询
+router.get('/v1/api/wechat/index/indexBannerFind',async (ctx, next) => {
+  await apiModel
+    .indexBannerFind()
+    .then(res => {
+      ctx.body = {
+        data:res,
+        code: 200,
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        message: '服务器失联',
+      };
+    });
+})
+
 // 前端数据处理
 // 轮播图
 router.get('/wechat/Banner',async (ctx, next) => {

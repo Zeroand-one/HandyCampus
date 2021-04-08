@@ -714,6 +714,7 @@ router.get('/v1/api/admin/indexBannerFind',async (ctx, next) => {
       };
     });
 })
+
 // 主页推荐传图
 router.post('/v1/api/admin/indexBannerImg',koaBody(),async (ctx, next) => {
   let data = ctx.request.body

@@ -1,6 +1,6 @@
 
 const app = getApp()
-let call = require('../../utils/util.js')
+let requireUrl = require('../../utils/util.js')
 import moment from "moment";
 // pages/news/details/details.js
 Page({
@@ -9,6 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    API_ROOT: app.globalData.API_ROOT,
     background:[], //轮播图
     list:[
       {
@@ -52,9 +53,38 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad:async function (options) {
-
+    this.getList()
   },
-  
+  getList() {
+    let _this = this
+    requireUrl.Get('/index/indexBannerFind', 
+    res=> {
+      if(res.code==200) {
+        console.log(res.data)
+        let imglist = res.data[0].img;
+        let file_list = [];
+        let backgroundList=[]
+        if (imglist) {
+          file_list = imglist.substring(1).split(",");
+          let item = {};
+          file_list.forEach((i) => {
+            item = {};
+            if (i != "") {
+              item.id = i;
+              item.title='1'
+              item.url = _this.data.API_ROOT + "/banner/" + i;
+            }
+            backgroundList.push(item);
+          });
+          _this.setData({
+            background:backgroundList
+          })
+        } else {
+          this.fileList = [];
+        }
+      }
+    })
+  },
   NavClass(e){
     app.globalData.ClassId = e.target.dataset.id
     wx.switchTab({

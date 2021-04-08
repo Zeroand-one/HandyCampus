@@ -57,7 +57,8 @@ App({
       AppSecret: '', //secret秘钥
       token: '',
       ClassId: null,
-      session_key: ''
+      session_key: '',
+      API_ROOT: 'http://127.0.0.1:3030', // 图片根地址
     },
     onHide: function () { //小程序退出时触发的事件
       console.log("小程序完全退出了")
