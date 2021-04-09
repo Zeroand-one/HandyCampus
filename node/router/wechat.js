@@ -108,7 +108,7 @@ router.post('/wx/user/info',koaBody(),async (ctx, next) => {
 
 // *****************************主页推荐****************************//
 
-// 主页推荐查询
+// 主页推荐轮播图查询
 router.get('/v1/api/wechat/index/indexBannerFind',async (ctx, next) => {
   await apiModel
     .indexBannerFind()
@@ -125,6 +125,16 @@ router.get('/v1/api/wechat/index/indexBannerFind',async (ctx, next) => {
       };
     });
 })
+
+
+// *****************************订单表****************************//
+
+
+
+
+
+
+// *******************************************************主页推荐******************************************************//
 
 // 前端数据处理
 // 轮播图

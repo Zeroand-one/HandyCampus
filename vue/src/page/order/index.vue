@@ -85,6 +85,18 @@
           </template>
         </el-table-column>
         <el-table-column
+          label="订单起始地址"
+          width="200"
+          align="center"
+          height="10"
+        >
+          <template slot-scope="scope">
+            <el-button type="info" @click="openOrderAddress(scope.row)"
+              >查看订单地址薄</el-button
+            >
+          </template>
+        </el-table-column>
+        <el-table-column
           prop="money"
           label="金额"
           align="center"
@@ -317,10 +329,32 @@
       :before-close="bodyHandleClose"
       width="50%"
     >
-      <p>{{ bodyDialog }}</p>
+      <p>orderAddres</p>
       <span slot="footer" class="dialog-footer">
         <el-button @click="bodyDialogVisible = false">取 消</el-button>
         <el-button type="primary" @click="bodyDialogVisible = false"
+          >确 定</el-button
+        >
+      </span>
+    </el-dialog>
+    <!-- 查看地址弹框 -->
+    <el-dialog
+      title="查看订单地址薄弹框"
+      :visible.sync="adrDialogVisible"
+      :before-close="AddressHandleClose"
+      width="50%"
+    >
+      <p>起始详细地址: {{ orderAddres.get_address_det }}</p>
+      <p>起始地址名称: {{ orderAddres.get_address_name }}</p>
+      <p>起始姓名: {{ orderAddres.get_address_username }}</p>
+      <p>起始电话: {{ orderAddres.get_address_iphone }}</p>
+      <p>终点详细地址: {{ orderAddres.set_address_det }}</p>
+      <p>终点地址名称: {{ orderAddres.set_address_name }}</p>
+      <p>终点姓名: {{ orderAddres.set_address_username }}</p>
+      <p>终点电话: {{ orderAddres.set_address_iphone }}</p>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="adrDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="adrDialogVisible = false"
           >确 定</el-button
         >
       </span>
@@ -388,6 +422,8 @@ export default {
       body_title: "查看订单内容", //弹出框文字提示
       dialogVisible: false, //添加弹出框
       bodyDialogVisible: false, // 查看内容
+      adrDialogVisible: false, // 查看地址
+      orderAddres: {}, // 查看地址数据
       bodyDialog: null, // 弹框内容
       dialogImageUrl: "",
       imgDialogVisible: false,
@@ -671,6 +707,28 @@ export default {
     // 查看框关闭
     bodyHandleClose() {
       this.bodyDialogVisible = false;
+      this.bodyDialog = null;
+    },
+    // 查看订单地址框打开
+    openOrderAddress(e) {
+      this.adrDialogVisible = true;
+      this.body_title = "查看订单地址";
+      // (this.ruleForm.order_body = e.order_body);
+      this.bodyDialog = e.order_body;
+      this.orderAddres = {
+        get_address_det: e.get_address_det,
+        get_address_name: e.get_address_name,
+        get_address_username: e.get_address_username,
+        get_address_iphone: e.get_address_iphone,
+        set_address_det: e.set_address_det,
+        set_address_name: e.set_address_name,
+        set_address_username: e.set_address_username,
+        set_address_iphone: e.set_address_iphone,
+      };
+    },
+    // 查看订单地址框关闭
+    AddressHandleClose() {
+      this.adrDialogVisible = false;
       this.bodyDialog = null;
     },
     // 查看用户反馈框打开

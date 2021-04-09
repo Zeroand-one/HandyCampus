@@ -64,11 +64,24 @@ let orders = `create table if not exists orders(
 // 常用地址表
 let oftenAddres = `create table if not exists oftenAddres(
   user_id varchar(30) NOT NULL COMMENT '用户id', 
-  address_det VARCHAR(30) NOT NULL COMMENT '详细地址',
+  address_det VARCHAR(300) NOT NULL COMMENT '详细地址',
   address_name VARCHAR(30) NOT NULL COMMENT '地址名称',
   address_username VARCHAR(30) NOT NULL COMMENT '姓名',
   address_iphone VARCHAR(30) NOT NULL COMMENT '电话',
   PRIMARY KEY ( user_id )
+);`;
+// 订单地址表
+let orderAddres = `create table if not exists orderAddres(
+  order_adr_id varchar(30) NOT NULL COMMENT '订单id', 
+  get_address_det VARCHAR(300) NOT NULL COMMENT '起始详细地址',
+  get_address_name VARCHAR(30) NOT NULL COMMENT '起始地址名称',
+  get_address_username VARCHAR(30) NOT NULL COMMENT '起始姓名',
+  get_address_iphone VARCHAR(30) NOT NULL COMMENT '起始电话', 
+  set_address_det VARCHAR(300) NOT NULL COMMENT '终详细地址',
+  set_address_name VARCHAR(30) NOT NULL COMMENT '终地址名称',
+  set_address_username VARCHAR(30) NOT NULL COMMENT '终姓名',
+  set_address_iphone VARCHAR(30) NOT NULL COMMENT '终电话',
+  PRIMARY KEY ( order_adr_id )
 );`;
 // INSERT INTO oftenAddres SET address_username="twre",address_iphone="43512341",address_name="还不如特别",address_det="法国人务必确认",user_id="234123412351324";
 
@@ -80,6 +93,7 @@ let createTable = sql => {
 
 createTable(orders);
 createTable(oftenAddres);
+createTable(orderAddres);
 
 // 获取表单总数量
 exports.Table = ( value ) => {
@@ -135,3 +149,6 @@ exports.indexBannerFind = ( value ) => {
   let _sql = `select * FROM index_banner ;`
   return query( _sql, value )
 }
+
+
+// **********************************订单地址表*********************************//

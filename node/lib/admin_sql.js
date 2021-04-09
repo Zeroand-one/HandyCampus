@@ -275,9 +275,10 @@ exports.messagesFindSearch = ( value ) => {
 
 // 订单查询
 exports.orderFind = ( value ) => {
-  let _sql = `SELECT * FROM orders`;
+  let _sql = `SELECT * FROM orders,orderAddres where orders.order_id=orderAddres.order_adr_id`;
   return query( _sql, value )
-} 
+}
+
 
 // 新增订单
 exports.orderAdd = ( value ) => {
