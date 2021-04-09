@@ -152,3 +152,29 @@ exports.indexBannerFind = ( value ) => {
 
 
 // **********************************订单地址表*********************************//
+// 查看订单地址表
+exports.orderAddresFind = ( value ) => {
+  let _sql = `select * FROM orderAddres  WHERE order_adr_id="${value}" ;`
+  return query( _sql, value )
+}
+
+// 新增订单
+exports.orderAdd = ( value ) => {
+  let _sql = `INSERT INTO orders SET user_id="${value.user_id}",user_name="${value.user_name}",order_id="${value.order_id}",order_state="${value.order_state}",order_body="${value.order_body}",order_weight="${value.order_weight}",goods_type="${value.goods_type}",order_type="${value.order_type}",money="${value.money}",start_date="${value.start_date}";`
+  return query( _sql, value )
+}
+
+
+// 新增订单地址
+exports.orderAddAddres = ( value ) => {
+  let _sql = `INSERT INTO orderAddres SET get_address_det="${value.get_address_det}",get_address_name="${value.get_address_name}",get_address_username="${value.get_address_username}",get_address_iphone="${value.get_address_iphone}",set_address_det="${value.set_address_det}",set_address_name="${value.set_address_name}",set_address_username="${value.set_address_username}",set_address_iphone="${value.set_address_iphone}",order_adr_id="${value.order_adr_id}";`
+  return query( _sql, value )
+}
+
+
+// 订单图片
+exports.orderImg = ( value ) => {
+  let _sql = `UPDATE orders SET order_img="${value.order_img}" WHERE order_id="${value.order_id}";`
+  return query( _sql, value )
+}
+

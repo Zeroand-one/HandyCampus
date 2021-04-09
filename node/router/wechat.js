@@ -130,6 +130,85 @@ router.get('/v1/api/wechat/index/indexBannerFind',async (ctx, next) => {
 // *****************************订单表****************************//
 
 
+// 新增订单
+router.post('/v1/api/wechat/order/orderAdd',koaBody(),async (ctx, next) => {
+  let data = ctx.request.body
+  await apiModel
+    .orderAdd(data)
+    .then(res => {
+      ctx.body = {
+        data:res,
+        code: 200,
+        message: '新建订单成功!'
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        message: '服务器失联',
+      };
+    });
+})
+
+// 新增订单地址
+router.post('/v1/api/wechat/order/orderAddAddres',koaBody(),async (ctx, next) => {
+  let data = ctx.request.body
+  await apiModel
+    .orderAddAddres(data)
+    .then(res => {
+      ctx.body = {
+        data:res,
+        code: 200,
+        message: '新建订单地址成功!'
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        message: '服务器失联',
+      };
+    });
+})
+
+// 订单传图
+router.post('/v1/api/wechat/order/orderImg',koaBody(),async (ctx, next) => {
+  let data = ctx.request.body
+  await apiModel
+    .orderImg(data)
+    .then(res => {
+      ctx.body = {
+        data:res,
+        code: 200,
+        message: '上传成功!'
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        message: '服务器失联',
+      };
+    });
+})
+
+// 订单地址表查询
+router.get('/v1/api/wechat/order/orderAddresFind',async (ctx, next) => {
+  await apiModel
+    .orderAddresFind(ctx.query.id)
+    .then(res => {
+      ctx.body = {
+        data:res,
+        code: 200,
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        message: '服务器失联',
+      };
+    });
+})
+
+
 
 
 

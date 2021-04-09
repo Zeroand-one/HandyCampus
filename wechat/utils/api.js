@@ -1,43 +1,50 @@
-const GET = 'GET';
-const POST = 'POST';
-const PUT = 'PUT';
-const FORM = 'FORM';
-const DELETE = 'DELETE';
-
-const baseURL = 'http://127.0.0.1:3030/v1/api/wechat';
-
-function request(method, url, data) {
-    return new Promise(function(resolve, reject) {
-        let header = {
-            'content-type': 'application/json',
-        };
-        wx.request({
-            url: baseURL + url,
-            method: method,
-            data: method === POST ? JSON.stringify(data) : data,
-            header: header,
-            success(res) {
-                //请求成功
-                //判断状态码---errCode状态根据后端定义来判断
-                if (res.data.errCode == 0) {
-                    resolve(res);
-                } else {
-                    //其他异常
-                    reject('运行时错误,请稍后再试');
-                }
-            },
-            fail(err) {
-                //请求失败
-                reject(err)
-            }
-        })
-    })
-}
-
-
-const API = {
-  getOpenid: (data) => request(GET, `jsapi/mini?jsCode=${data}`),
-};
+const baseURL = 'http://127.0.0.1:3030/v1/api';
+//在这里添加我们的专业域名
+const subDomain = 'wechat';
+/*
+ *二次封装wx.request
+ *
+ */
 module.exports = {
-  API: API
+  /**
+   * 二次封装wx.request
+   * {String }url:请求的接口地址
+   * {String} method:请求方式 GET,POST....
+   * {Object} data:要传递的参数
+   * { boolean }isSubDomain:表示是否添加二级子域名 true代表添加, false代表不添加
+   */
+  request: (url, method, data, isSubDomain) => {
+    //这里使用ES6的写法拼接的字符串
+    let _url = `${baseURL}/${isSubDomain ? subDomain: '' }${url}`;
+    return new Promise((resolve, reject) => {
+      wx.showLoading({
+        title: '正在加载',
+      });
+      wx.request({
+        url: _url,
+        data: data,
+        method: method,
+        header: {
+          'content-type': 'application/x-www-form-urlencoded',
+        },
+        success: (res) => {
+            console.log('从接口获取到的数据', res);
+            let {
+              code
+            } = res.data;
+            if (code === 200) {
+              resolve(res.data);
+              wx.hideLoading();
+            } else {
+              wx.showToast({
+                title: '数据请求错误',
+              })
+            }
+          },
+          fail() {
+            reject('接口有误，请检查')
+          }
+      });
+    });
+  },
 }

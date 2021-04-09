@@ -17,7 +17,7 @@
     <view class="goodsinfo">
       <i-icon type="createtask" size="28" color="#333" />
       <text>快递信息</text>
-      <i-button plain="true" type="ghost" data-type="goodsInfo" bind:click="handleOpen1">
+      <i-button plain="true" type="ghost" data-type="goodsType" bind:click="handleOpen1">
         {{goodsType?goodsType:'请选择物品信息 >'}}
       </i-button>
       <i-button plain="true" type="ghost" data-type="goodsWeight" bind:click="handleOpen1">
@@ -47,6 +47,7 @@
     </view>
   </view>
   <view class="form_btn_wrap">
+    <view class="money">合计：{{money}}元</view>
     <button bindtap="handleFormSubmit" type="warn">
       <icon type="success_no_circle" size="23" color="white"></icon>
       提交

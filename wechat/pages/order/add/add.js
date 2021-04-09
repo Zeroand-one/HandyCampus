@@ -1,12 +1,15 @@
-var dateTimePicker = require('../../../utils/dateTimePicker.js');
+const dateTimePicker = require('../../../utils/dateTimePicker.js');
+const { formatTimeString, formatTime  } = require('../../../utils/util.js');
+const { orderAddresFind,orderAdd, orderAddAddres, orderImg  } = require('../../../request/orderapi.js');
 const app = getApp()
+
 Page({
   data: {
     key: "4OUBZ-4ZWC3-BSX37-3M5TK-YXCDV-ZTB45",
     referer: "腾讯位置服务地图选点",
     address: "",
     locationName: "",
-    order_type: 0,
+    order_type: 10,
     getAddressName: "",
     getAddressInfo: {
       // getAddressName:"",
@@ -25,6 +28,7 @@ Page({
     goodsWeight: "",
     selectType: "",
     visible1: false,
+    money: 0,
     actions1: [
       {
         id:1,
@@ -73,6 +77,10 @@ Page({
     _this.setData({
       order_type: e.id,
     })
+    if( e.id!=10) {
+      wx.setStorageSync("order_type", e.id)
+    }
+    
     let StoragegetAddressInfo = wx.getStorageSync("getAddressInfo")
     let StoragesetAddressInfo = wx.getStorageSync("setAddressInfo")
     _this.setData({
@@ -96,7 +104,7 @@ Page({
       selectType: e.currentTarget.dataset.type,
     });
     // 判断选择的类型给选择的值
-    if(e.currentTarget.dataset.type=="goodsInfo") {
+    if(this.data.selectType=="goodsType") {
       this.setData({
         actions1: [
           {
@@ -113,7 +121,7 @@ Page({
           }
         ],
       });
-    } else if(e.currentTarget.dataset.type=="goodsWeight") {
+    } else if(this.data.selectType=="goodsWeight") {
       this.setData({
         actions1: [
           {
@@ -131,7 +139,6 @@ Page({
         ],
       });
     }
-    console.log(e.currentTarget.dataset.type,'e')
   },
   
   handleCancel1 () {
@@ -142,12 +149,26 @@ Page({
   handleClickItem1 (e) {
     var _this=this
     let selectgoods=this.data.actions1[e.detail.index].name
-    if(_this.data.selectType=="goodsInfo"){
+    if(_this.data.selectType=="goodsType"){
       _this.setData({
         goodsType: selectgoods,
         visible1: false
       })
     }else if(_this.data.selectType=="goodsWeight"){
+      // 计算价格
+      if (e.detail.index==0) {
+        _this.setData({
+          money: 2
+        })
+      }else if (e.detail.index==1) {
+        _this.setData({
+          money: 3
+        })
+      }else if (e.detail.index==2) {
+        _this.setData({
+          money: 4
+        })
+      }
       _this.setData({
         goodsWeight: selectgoods,
         visible1: false
@@ -207,10 +228,41 @@ Page({
   // 提交按钮的点击
   handleFormSubmit() {
     const { textVal, chooseImgs } = this.data;
+    // 验证输入
     if (!textVal.trim()) {
-      // 不合法
       wx.showToast({
         title: '输入不合法',
+        icon: 'none',
+        mask: true
+      });
+      return;
+    }
+    let openId = wx.getStorageSync("openId")
+    let order_type = wx.getStorageSync("order_type")
+    let userInfo = wx.getStorageSync("userInfo") //改姓名
+    let newDate =new Date()
+    let DateStr = formatTimeString(new Date());
+    let getAddressInfo = this.data.getAddressInfo
+    let setAddressInfo = this.data.setAddressInfo
+    if (!userInfo) {
+      wx.showToast({
+        title: '请先登录',
+        icon: 'none',
+        mask: true
+      });
+      return;
+    }
+    if (!getAddressInfo || !setAddressInfo) {
+      wx.showToast({
+        title: '请选择地址',
+        icon: 'none',
+        mask: true
+      });
+      return;
+    }
+    if (!this.data.goodsWeight || !this.data.goodsType) {
+      wx.showToast({
+        title: '请选择快递信息',
         icon: 'none',
         mask: true
       });
@@ -235,12 +287,11 @@ Page({
           formData: {},
           success: (result) => {
             console.log(result);
-            let url = JSON.parse(result.data).url;
+            let url = JSON.parse(result.data).imgUrl;
             this.UpLoadImgs.push(url);
             // 所有的图片都上传完毕了才触发  
             if (i === chooseImgs.length - 1) {
               wx.hideLoading();
-              console.log("把文本的内容和外网的图片数组 提交到后台中");
               this.setData({
                 textVal: "",
                 chooseImgs: []
@@ -253,5 +304,55 @@ Page({
       wx.hideLoading();
       console.log("只是提交了文本");
     }
+    // 提交
+    let params={
+      order_body: textVal,
+      user_id: openId,
+      user_name: userInfo.nickName,
+      order_id: DateStr+openId,
+      order_state: 2,
+      order_weight: this.data.goodsWeight,
+      goods_type: this.data.goodsType,
+      start_date: formatTime(newDate),
+      money: this.data.money,
+      order_type: order_type
+    }
+    orderAdd(params).then(res => {
+      console.log(res.message)
+      // 订单添加成功后才添加地址
+      let params2={
+        order_adr_id:  DateStr+openId,
+        get_address_det: getAddressInfo.address_iphone,
+        get_address_name: getAddressInfo.address_username,
+        get_address_username: getAddressInfo.getAddressName,
+        get_address_iphone: getAddressInfo.getDetAddress,
+        set_address_det: setAddressInfo.address_iphone,
+        set_address_name: setAddressInfo.address_username,
+        set_address_username: setAddressInfo.setAddressName,
+        set_address_iphone: setAddressInfo.setDetAddress,
+      }
+      orderAddAddres(params2).then( res => {
+        console.log(res.message)
+        // 订单地址添加成功后添加图片
+        let fileListStr = "";
+        this.UpLoadImgs.forEach((item) => {
+          fileListStr += "," + item;
+        });
+        console.log(this.UpLoadImgs)
+        let params3 = {
+          order_id: DateStr+openId,
+          order_img: fileListStr
+        }
+        console.log(params3,'3')
+        orderImg(params3).then(res => {
+          console.log(res.message)
+        })
+      })
+    })
+    setTimeout(function(){
+      wx.switchTab({
+        url: '/pages/index/index'
+      });
+    },1000)
   }
 })
