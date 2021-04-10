@@ -1,6 +1,8 @@
 
 const app = getApp()
-let requireUrl = require('../../utils/util.js')
+// let requireUrl = require('../../utils/util.js')
+const { formatTimeString, formatTime  } = require('../../utils/util.js');
+const { indexBannerFind  } = require('../../request/indexapi.js');
 import moment from "moment";
 // pages/news/details/details.js
 Page({
@@ -53,12 +55,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad:async function (options) {
-    // this.getList()
+    this.getList()
   },
   getList() {
     let _this = this
-    requireUrl.Get('/index/indexBannerFind', 
-    res=> {
+    indexBannerFind().then(res => {
       if(res.code==200) {
         console.log(res.data)
         let imglist = res.data[0].img;

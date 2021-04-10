@@ -24,6 +24,11 @@
           "pathName": "pages/my/info/info",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/my/about/about",
+          "pathName": "pages/my/about/about",
+          "scene": null
         }
       ]
     }

@@ -63,7 +63,6 @@
       </view>
       <navigator url="/pages/feedback/feedback" class="app_info_item">意见反馈</navigator>
       <navigator url="/pages/my/about/about" class="app_info_item">联系我们</navigator>
-      <view class="app_info_item">关于我们</view>
     </view>
     <!-- 推荐 -->
     <view class="recommend_wrap">把应用推荐给其他人</view>

@@ -1,4 +1,8 @@
-let call = require('../../../utils/util.js')
+
+const { formatTimeString, formatTime  } = require('../../../utils/util.js');
+const { AboutFind } = require('../../../request/myapi.js');
+const app = getApp()
+
 // pages/my/about/about.js
 Page({
 
@@ -13,17 +17,17 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.about()
+    this.getlist()
   },
   // 信息获取
-  about(){
-    call.Get('/wechat/About',
-    res => {
+  getlist(){
+    AboutFind().then(res => {
       console.log(res)
       if(res.code == 200){
         this.setData({details:res.data})
       }
     })
+
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

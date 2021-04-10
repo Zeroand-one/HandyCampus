@@ -1,5 +1,20 @@
 /* pages/my/about/about.wxss */
-page{background:#f9f9fa}
-.weui-cell{
-  font-size: 30rpx;
+page {
+  background: #f9f9fa
+}
+
+.box {
+  background-color: #f9f9fa;
+  margin: 0 auto;
+  width: 92%;
+}
+
+.cell {
+  margin-top: 10rpx;
+  font-size: 32rpx;
+  padding: 10rpx 0rpx;
+}
+
+.cell :first-child {
+  font-size: 36rpx;
 }

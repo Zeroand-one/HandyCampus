@@ -88,6 +88,24 @@ router.post('/v1/api/wechat/user/userAuthUpdata',koaBody(),async (ctx, next) => 
     });
 })
 
+// 关于我们查询
+router.get('/v1/api/wechat/user/AboutFind',async (ctx, next) => {
+  await apiModel
+    .AboutFind()
+    .then(res => {
+      ctx.body = {
+        data:res[0],
+        code: 200,
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        message: '服务器失联',
+      };
+    });
+})
+
 // ******************************常用地址表***************************//
 
 // 常用地址表查询

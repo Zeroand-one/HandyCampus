@@ -121,6 +121,11 @@ exports.userAuthUpdata = ( value ) => {
   return query( _sql, value )
 }
 
+// 关于我们查询
+exports.AboutFind = ( value ) => {
+  let _sql = `SELECT * FROM about_info`;
+  return query( _sql, value )
+}
 
 // ******************************常用地址表***************************//
 
