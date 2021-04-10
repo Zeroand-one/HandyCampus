@@ -51,6 +51,10 @@
     </view>
     <!-- 收货地址管理 -->
     <view class="address_wrap">收货地址管理</view>
+    <!-- 个人信息相关 -->
+    <view class="app_info_wrap">
+      <navigator url="/pages/my/info/info" class="app_info_item">个人信息</navigator>
+    </view>
     <!-- 应用信息相关 -->
     <view class="app_info_wrap">
       <view class="app_info_item app_info_contact">

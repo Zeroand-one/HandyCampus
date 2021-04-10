@@ -1,0 +1,22 @@
+<form catchsubmit="formSubmit">
+  <i-panel title="基本信息">
+    <row-input name="user_name" value="{{user_name}}" title="昵称" maxLength="10" placeholder="请输入昵称" />
+    <row-input name="name" value="{{name}}" title="姓名" autofocus placeholder="请输入姓名" />
+    <row-input name="phone" value="{{phone}}" type="number" title="联系电话" placeholder="请输入手机号" />
+    <row-input name="user_type" value="{{user_type}}" wx:if="{{user_type==1}}" data-type="user_type" title="用户类型" disabled />
+  </i-panel>
+  <i-panel title="补充信息">
+    <view class="section">
+      <picker mode="date" value="birthday" start="1980-01-01" end="2021-09-01" bindchange="bindDateChange">
+        <row-input value="{{birthday?birthday:'选择时间'}}" title="生日" disabled />
+      </picker>
+    </view>
+    <i-radio-group current="{{sex}}" bindchange="handleSexChange">
+      <i-radio position="genders" value="男"></i-radio>
+      <i-radio position="genders" value="女"></i-radio>
+    </i-radio-group>
+    <row-input name="studenid" value="{{studenid}}" type="number" title="学号" placeholder="请输入学号" />
+    <row-input name="address" value="{{address}}" type="textarea" title="详细地址" placeholder="请输入详细地址(最多50字)" maxlength="100" />
+  </i-panel>
+  <button type="primary" formType="submit">保存</button>
+</form>

@@ -1,0 +1,47 @@
+/* components/rowInput/rowInput.wxss */
+/*引入字体图标*/
+@import "../../styles/iconfont.wxss";
+
+.row,
+.input-row {
+  background-color: white;
+  height: 44px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* justify-content: space-between; */
+  padding-left: 15px;
+  padding-right: 15px;
+  color: #333;
+}
+
+.input-row .text {
+  margin-right: 8px;
+  font-size: 30rpx;
+  color: #333;
+}
+
+.input-row .input {
+  flex: 1;
+  font-size: #bbb;
+  color: #333;
+}
+
+.input-placeholde {
+  color: #bbb;
+  font-size: 16px;
+}
+
+.line {
+  border-bottom: 2rpx solid #ddd;
+}
+
+.row .right {
+  width: 45rpx;
+}
+
+.row .iconfont {
+  width: 50rpx;
+  font-size: 20px;
+  color: #333;
+}

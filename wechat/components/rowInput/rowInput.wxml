@@ -1,0 +1,9 @@
+<!-- components/rowInput/rowInput.wxml -->
+<view class="row input-row">
+  <text class="{{must == true ? 'must' : ''}}" class="text">{{must?'*':''}}{{title}}</text>
+  <input class="input" type="{{type}}" password="{{password}}" placeholder="{{placeholder}}" name="{{name}}" value="{{value}}" bindinput="_textInput" maxlength="{{maxlength}}" disabled="{{disabled}}" placeholder-class="input-placeholde" cursor-spacing='140' />
+  <text class="right text">
+    <text class="text">{{unit}}</text>
+    <text class="text" class="{{jiantou == true ? 'iconfont iconyoujiantou' : ''}}"></text>
+  </text>
+</view>

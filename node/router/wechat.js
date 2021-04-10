@@ -51,14 +51,38 @@ router.get('/v1/api/wechat/user/userAuthFind',async (ctx, next) => {
   await apiModel
     .userAuthFind(ctx.query.id)
     .then(res => {
+      res[0].birthday=moment(res[0].birthday).format('YYYY-MM-DD')
       ctx.body = {
         code: 200,
         data: res,
+        message: "查询成功",
       };
     })
     .catch(res => {
       ctx.body = {
         code: 500,
+        message: '服务器失联',
+      };
+    });
+})
+
+// 修改用户信息
+router.post('/v1/api/wechat/user/userAuthUpdata',koaBody(),async (ctx, next) => {
+  let data = ctx.request.body
+  await apiModel
+    .userAuthUpdata(data)
+    .then(res => {
+      console.log(res)
+      ctx.body = {
+        code: 200,
+        data: res,
+        message: "修改成功",
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        data: res.data,
         message: '服务器失联',
       };
     });

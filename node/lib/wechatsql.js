@@ -111,13 +111,13 @@ exports.userAuth = ( value ) => {
 
 // 用户查询
 exports.userAuthFind = ( value ) => {
-  let _sql = `SELECT * FROM users_a where user_id=${value}`;
+  let _sql = `SELECT * FROM users_a where user_id="${value}"`;
   return query( _sql, value )
 } 
 
 // // 用户修改
 exports.userAuthUpdata = ( value ) => {
-  let _sql = `UPDATE users_a SET user_id="${value.user_id}",user_type="${value.user_type}", user_name="${value.user_name}", name="${value.name}",address="${value.address}",phone="${value.phone}",sex="${value.sex}",studenid="${value.studenid}" WHERE user_id="${value.user_id}"`;
+  let _sql = `UPDATE users_a SET user_name="${value.user_name}",birthday="${value.birthday}", name="${value.name}",address="${value.address}",phone="${value.phone}",sex="${value.sex}",studenid="${value.studenid}" WHERE user_id="${value.user_id}"`;
   return query( _sql, value )
 }
 

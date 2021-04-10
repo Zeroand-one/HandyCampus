@@ -14,6 +14,7 @@ module.exports = {
     PASSWORD: '123',
     PORT: '3306',
     HOST: 'localhost',
+    timezone: "08:00" // 时区
   },
   appId: 'wx1d437aba0edeef5b',
   AppSecret: '2a02a47decad24738fd119f078c79707'
