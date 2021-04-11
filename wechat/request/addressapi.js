@@ -8,4 +8,10 @@ module.exports={
 	oftenAddresFindId: (value)=>{
 		return request('/address/oftenAddresFindId', 'GET', { id: value},true);
 	},
+
+	// addlist
+  // 常用地址表添加
+	oftenAddresAdd: (params)=>{
+		return request('/address/oftenAddresAdd', 'POST', params ,true);
+	},
 }

@@ -127,6 +127,27 @@ router.get('/v1/api/wechat/address/oftenAddresFindId',async (ctx, next) => {
     });
 })
 
+// 获取个人信息
+router.post('/v1/api/wechat/address/oftenAddresAdd',koaBody(),async (ctx, next) => {
+  let data = ctx.request.body
+  await apiModel
+    .oftenAddresAdd(data)
+    .then(res => {
+      ctx.body = {
+        data:res,
+        code: 200,
+        message: '添加成功!'
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        data:res,
+        message: '服务器失联',
+      };
+    });
+})
+
 // 常用地址表查询
 router.get('/v1/api/wechat/oftenAddresFind',async (ctx, next) => {
   await apiModel

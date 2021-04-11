@@ -34,6 +34,12 @@
         {
           "name": "pages/address/list/list",
           "pathName": "pages/address/list/list",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/address/addlist/addlist",
+          "pathName": "pages/address/addlist/addlist",
           "scene": null
         }
       ]

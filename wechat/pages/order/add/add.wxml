@@ -35,7 +35,7 @@
     </view>
   </view>
   <view class='list-guide' wx:elif="{{order_type==1}}">取快递1</view>
-  <view class='list-guide' wx:else>取快递2</view>
+  <!-- <view class='list-guide' wx:else>取快递2</view> -->
   <view class="remark">
     <text class="rkinfo">备注信息</text>
     <textarea value="{{textVal}}" bindinput="handleTextInput" placeholder="请描述一下您的备注"></textarea>

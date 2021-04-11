@@ -74,13 +74,23 @@ Page({
   },
   sendData(e){
     var _this=this
-    _this.setData({
-      order_type: e.id,
-    })
-    if( e.id!=10) {
+    let orderType=wx.getStorageSync("order_type")
+    // 优化逻辑，先判断是否主页进去，在判断缓存数据
+    console.log(orderType,e.id , _this.data.order_type,'er')
+    if( e.id  ) {
+      _this.setData({
+        order_type: e.id,
+      })
       wx.setStorageSync("order_type", e.id)
+    }else{
+      if( orderType ){
+        _this.setData({
+          order_type: orderType,
+        })
+      }
     }
-    
+    console.log(orderType,e.id , _this.data.order_type,'er1')
+
     let StoragegetAddressInfo = wx.getStorageSync("getAddressInfo")
     let StoragesetAddressInfo = wx.getStorageSync("setAddressInfo")
     _this.setData({
@@ -349,6 +359,11 @@ Page({
         })
       })
     })
+    // 清除缓存
+    wx.setStorageSync('getAddressInfo', '')
+    wx.setStorageSync('setAddressInfo','')
+    wx.setStorageSync('orderRequestType', '')
+    wx.setStorageSync('order_type', '')
     setTimeout(function(){
       wx.switchTab({
         url: '/pages/index/index'

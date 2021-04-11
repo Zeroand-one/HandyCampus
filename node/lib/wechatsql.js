@@ -137,7 +137,7 @@ exports.oftenAddresFindId = ( value ) => {
 
 // 常用地址表添加
 exports.oftenAddresAdd = ( value ) => {
-  let _sql = `INSERT INTO oftenAddres SET address_username="${value.address_username}",address_iphone="${value.address_det}",address_name="${value.address_det}",address_det="${value.address_det}",user_id="${value.user_id}";`
+  let _sql = `INSERT INTO oftenAddres SET address_username="${value.address_username}",address_iphone="${value.address_iphone}",address_name="${value.address_name}",address_det="${value.address_det}",user_id="${value.user_id}";`
   return query( _sql, value )
 }
 

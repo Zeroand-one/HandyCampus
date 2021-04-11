@@ -16,6 +16,7 @@
 
     "pages/address/info/info",
     "pages/address/add/add",
+    "pages/address/addlist/addlist",
     "pages/address/list/list",
 
     "pages/login/login/login",
