@@ -129,13 +129,19 @@ exports.AboutFind = ( value ) => {
 
 // ******************************常用地址表***************************//
 
+// 常用地址表加用户查询
+exports.oftenAddresFindId = ( value ) => {
+  let _sql = `SELECT * FROM oftenAddres WHERE user_id ="${value}";`;
+  return query( _sql, value )
+}
+
 // 常用地址表添加
 exports.oftenAddresAdd = ( value ) => {
   let _sql = `INSERT INTO oftenAddres SET address_username="${value.address_username}",address_iphone="${value.address_det}",address_name="${value.address_det}",address_det="${value.address_det}",user_id="${value.user_id}";`
   return query( _sql, value )
 }
 
-// 常用地址表查询
+// 常用地址表加用户查询
 exports.oftenAddresFind = ( value ) => {
   let _sql = `SELECT * FROM users_a,oftenAddres WHERE users_a.user_id=oftenAddres.user_id AND users_a.user_id="${value}";`;
   return query( _sql, value )

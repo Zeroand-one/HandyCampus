@@ -109,6 +109,25 @@ router.get('/v1/api/wechat/user/AboutFind',async (ctx, next) => {
 // ******************************常用地址表***************************//
 
 // 常用地址表查询
+router.get('/v1/api/wechat/address/oftenAddresFindId',async (ctx, next) => {
+  await apiModel
+    .oftenAddresFindId(ctx.query.id)
+    .then(res => {
+      ctx.body = {
+        code: 200,
+        data: res,
+        message: '查询成功',
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        message: '服务器失联',
+      };
+    });
+})
+
+// 常用地址表查询
 router.get('/v1/api/wechat/oftenAddresFind',async (ctx, next) => {
   await apiModel
     .oftenAddresFind(ctx.query.id)
@@ -125,6 +144,7 @@ router.get('/v1/api/wechat/oftenAddresFind',async (ctx, next) => {
       };
     });
 })
+
 // *****************************我的****************************//
 
 // 获取个人信息

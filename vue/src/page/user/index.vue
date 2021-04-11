@@ -205,9 +205,7 @@ export default {
           if (response.data.code == 200) {
             response.data.data.forEach((item) => {
               if (item.birthday) {
-                item.birthday = moment(item.birthday).format(
-                  "YYYY-MM-DD hh:mm:ss"
-                );
+                item.birthday = moment(item.birthday).format("YYYY-MM-DD");
               }
             });
             this.tableData = response.data.data;

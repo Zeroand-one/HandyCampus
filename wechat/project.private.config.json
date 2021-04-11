@@ -28,6 +28,12 @@
         {
           "name": "pages/my/about/about",
           "pathName": "pages/my/about/about",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/address/list/list",
+          "pathName": "pages/address/list/list",
           "scene": null
         }
       ]

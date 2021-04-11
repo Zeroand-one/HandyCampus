@@ -1,0 +1,21 @@
+<view class="nu" wx:if="{{!formdata}}">
+  <text>无数据</text>
+</view>
+<view class="box" wx:else>
+  <view class="item" wx:for="{{formdata}}" wx:key="nid">
+    <view class="info">
+      <view class="addname">{{item.address_name}}</view>
+      <view class="bot">
+        <view class="uname">{{item.address_username}}</view>
+        <view class="phone">{{item.address_iphone}}</view>
+      </view>
+    </view>
+    <view class="icon">
+      <i-icon type="editor" size="23" />
+    </view>
+  </view>
+</view>
+<view class="bottom" bindtap="toAddAdress">
+  <i-icon type="add" size="23" color="#f90" />
+  <text class="addadr">新建地址</text>
+</view>
