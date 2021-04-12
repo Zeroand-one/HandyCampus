@@ -3,6 +3,8 @@ const { request } = require('../utils/api.js')
 //基于业务封装的接口
 module.exports={
 
+	// add
+	// 订单地址表查询
 	orderAddresFind: (order_id)=>{
 		return request('/order/orderAddresFind', 'GET', { id: order_id},true);
 	},
@@ -17,5 +19,10 @@ module.exports={
 	// 订单传图 
 	orderImg: (params)=>{
 		return request('/order/orderImg', 'POST', params ,true);
+	},
+
+	// list
+	orderListFind: (params)=>{
+		return request('/order/orderListFind', 'GET', params ,true);
 	},
 }

@@ -169,6 +169,9 @@ exports.orderAddresFind = ( value ) => {
   return query( _sql, value )
 }
 
+
+// **********************************订单表*********************************//
+
 // 新增订单
 exports.orderAdd = ( value ) => {
   let _sql = `INSERT INTO orders SET user_id="${value.user_id}",user_name="${value.user_name}",order_id="${value.order_id}",order_state="${value.order_state}",order_body="${value.order_body}",order_weight="${value.order_weight}",goods_type="${value.goods_type}",order_type="${value.order_type}",money="${value.money}",start_date="${value.start_date}";`
@@ -189,3 +192,8 @@ exports.orderImg = ( value ) => {
   return query( _sql, value )
 }
 
+// 查看用户订单列表
+exports.orderListFind = ( value ) => {
+  let _sql = `select * FROM orders  WHERE user_id="${value}" ;`
+  return query( _sql, value )
+}

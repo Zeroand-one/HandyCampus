@@ -41,8 +41,8 @@
         "selectedIconPath": "images/nav1_on.png"
       },
       {
-        "pagePath": "pages/news/list/list",
-        "text": "资讯",
+        "pagePath": "pages/order/list/list",
+        "text": "订单",
         "iconPath": "images/nav2.png",
         "selectedIconPath": "images/nav2_on.png"
       },

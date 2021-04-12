@@ -1,2 +1,15 @@
-<!--pages/order/list/list.wxml-->
-<text>pages/order/list/list.wxml</text>
+<view class="nu" wx:if="{{!formdata}}">
+  <text>无数据</text>
+</view>
+<view class="box" wx:else>
+  <view class="item" wx:for="{{formdata}}" wx:key="order_id">
+    <view class="top">
+      <view class="left">收件人：{{item.name}}</view>
+      <view class="rig">{{item.money}} 元</view>
+    </view>
+    <view class="bottom">
+      <view class="left">{{item.order_address}}</view>
+      <view class="rig">{{item.start_date}}</view>
+    </view>
+  </view>
+</view>

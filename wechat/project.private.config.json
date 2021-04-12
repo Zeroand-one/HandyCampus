@@ -38,8 +38,9 @@
           "scene": null
         },
         {
-          "name": "pages/address/addlist/addlist",
-          "pathName": "pages/address/addlist/addlist",
+          "name": "pages/order/list/list",
+          "pathName": "pages/order/list/list",
+          "query": "",
           "scene": null
         }
       ]
