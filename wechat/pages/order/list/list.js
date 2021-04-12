@@ -25,4 +25,10 @@ Page({
       console.log(res.data)
     })
   },
+  clickGoto(e){
+    let id = e.currentTarget.dataset.type
+    wx.navigateTo({
+      url: '/pages/order/info/info?id='+id
+    })
+  }
 })

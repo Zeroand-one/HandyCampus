@@ -1,0 +1,45 @@
+<view class="conent">
+  <view class="order">
+    <view class="te">
+      订单编号：
+      <text>{{fordata.order_id}}</text>
+    </view>
+    <view class="info pan">
+      <view class="item">姓名: {{fordata.name}}</view>
+      <view class="item">订单物品类型: {{fordata.goods_type}}</view>
+      <view class="item">订单重量: {{fordata.order_weight}}</view>
+      <view class="item">订单状态: {{fordata.order_state}}</view>
+      <view class="item">订单类型: {{fordata.order_type}}</view>
+      <view class="item">支付：{{fordata.money}} 元</view>
+    </view>
+    <view class="date pan">
+      <view class="item">创建时间: {{fordata.start_date}}</view>
+      <view class="item">发布时间: {{fordata.open_date}}</view>
+      <view class="item">接收时间: {{fordata.receive_date}}</view>
+      <view class="item">转让时间: {{fordata.transfer_date}}</view>
+      <view class="item">结束时间: {{fordata.end_date}}</view>
+    </view>
+  </view>
+  <view class="address pan">
+    <view class="item">始姓名: {{fordata.get_address_username}}</view>
+    <view class="item">始电话: {{fordata.get_address_iphone}}</view>
+    <view class="item">始地址名称: {{fordata.get_address_name}}</view>
+    <view class="item">始地址: {{fordata.get_address_det}}</view>
+    <view class="item">终姓名: {{fordata.set_address_username}}</view>
+    <view class="item">终电话: {{fordata.set_address_iphone}}</view>
+    <view class="item">终地址名称: {{fordata.set_address_name}}</view>
+    <view class="item">终地址: {{fordata.set_address_det}}</view>
+  </view>
+  <view class="courier pan">
+    <view class="item">骑手姓名: {{fordata.courier_name}}</view>
+    <view class="item">骑手电话: {{fordata.courier_id}}</view>
+  </view>
+  <view class="back pan">
+    <i-cell-group>
+      <i-cell title="评价">
+        <i-rate bind:change="onStarChange" value="{{starIndex}}">{{starIndex}}星</i-rate>
+      </i-cell>
+    </i-cell-group>
+    <textarea rows="4" cols=""></textarea>
+  </view>
+</view>

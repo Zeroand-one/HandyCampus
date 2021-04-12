@@ -252,6 +252,7 @@ Page({
     let userInfo = wx.getStorageSync("userInfo") //改姓名
     let newDate =new Date()
     let DateStr = formatTimeString(new Date());
+    let orderId =  DateStr +'' + Math.floor(Math.random()*1000)
     let getAddressInfo = this.data.getAddressInfo
     let setAddressInfo = this.data.setAddressInfo
     if (!userInfo) {
@@ -318,8 +319,9 @@ Page({
     let params={
       order_body: textVal,
       user_id: openId,
-      user_name: userInfo.nickName,
-      order_id: DateStr+openId,
+      name: setAddressInfo.address_username,
+      order_address: setAddressInfo.setAddressName,
+      order_id: orderId,
       order_state: 2,
       order_weight: this.data.goodsWeight,
       goods_type: this.data.goodsType,
@@ -331,15 +333,15 @@ Page({
       console.log(res.message)
       // 订单添加成功后才添加地址
       let params2={
-        order_adr_id:  DateStr+openId,
-        get_address_det: getAddressInfo.address_iphone,
-        get_address_name: getAddressInfo.address_username,
-        get_address_username: getAddressInfo.getAddressName,
-        get_address_iphone: getAddressInfo.getDetAddress,
-        set_address_det: setAddressInfo.address_iphone,
-        set_address_name: setAddressInfo.address_username,
-        set_address_username: setAddressInfo.setAddressName,
-        set_address_iphone: setAddressInfo.setDetAddress,
+        order_adr_id:  orderId,
+        get_address_det: getAddressInfo.getDetAddress,
+        get_address_name: getAddressInfo.getAddressName,
+        get_address_username: getAddressInfo.address_username,
+        get_address_iphone: getAddressInfo.address_iphone,
+        set_address_det: setAddressInfo.setDetAddress,
+        set_address_name: setAddressInfo.setAddressName,
+        set_address_username: setAddressInfo.address_username,
+        set_address_iphone: setAddressInfo.address_iphone,
       }
       orderAddAddres(params2).then( res => {
         console.log(res.message)
@@ -350,7 +352,7 @@ Page({
         });
         console.log(this.UpLoadImgs)
         let params3 = {
-          order_id: DateStr+openId,
+          order_id: orderId,
           order_img: fileListStr
         }
         console.log(params3,'3')

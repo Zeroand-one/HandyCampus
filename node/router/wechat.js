@@ -293,6 +293,26 @@ router.get('/v1/api/wechat/order/orderListFind',async (ctx, next) => {
     });
 })
 
+// 查看用户订单详情
+router.get('/v1/api/wechat/order/orderInfoFind',async (ctx, next) => {
+  await apiModel
+    .orderInfoFind(ctx.query.id)
+    .then(res => {
+      ctx.body = {
+        data:res,
+        message: '查询成功',
+        code: 200,
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        data:res,
+        message: '服务器失联',
+      };
+    });
+})
+
 // 订单地址表查询
 router.get('/v1/api/wechat/order/orderAddresFind',async (ctx, next) => {
   await apiModel

@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "i-panel": "../../../miniprogram_npm/iview-weapp/panel/index",
+    "i-cell-group": "../../../miniprogram_npm/iview-weapp/cell-group/index",
+    "i-cell": "../../../miniprogram_npm/iview-weapp/cell/index",
+    "i-rate": "../../../miniprogram_npm/iview-weapp/rate/index"
+  }
+}

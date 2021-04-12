@@ -22,7 +22,15 @@ module.exports={
 	},
 
 	// list
+	// 查看用户订单详情
 	orderListFind: (params)=>{
 		return request('/order/orderListFind', 'GET', params ,true);
 	},
+
+	// info
+	// 查看用户订单详情 
+	orderInfoFind: (params)=>{
+		return request('/order/orderInfoFind', 'GET', params ,true);
+	},
+	
 }

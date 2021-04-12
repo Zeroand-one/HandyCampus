@@ -1,0 +1,30 @@
+.conent {
+  background-color: #fff;
+}
+
+.conent .pan {
+  padding: 10rpx !important;
+  margin: 30rpx !important;
+  border-radius: 20rpx;
+  background-color: #eee;
+}
+
+.conent .pan .item {
+  height: 64rpx;
+  line-height: 64rpx;
+  padding-left: 10rpx;
+  font-size: 30rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #333;
+}
+
+.conent .order .te {
+  font-size: 36rpx;
+  padding-left: 50rpx;
+}
+
+.conent .order .te text {
+  color: #ff7300;
+}

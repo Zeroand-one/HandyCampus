@@ -42,6 +42,12 @@
           "pathName": "pages/order/list/list",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/order/info/info",
+          "pathName": "pages/order/info/info",
+          "query": "id=20210412170109898",
+          "scene": null
         }
       ]
     }
