@@ -45,7 +45,6 @@ Page({
         url: 'plugin://chooseLocation/index?key=' + key + '&referer=' + referer
       });
     }
-
   },
   switchSchoolChange(e){
     const detail = e.detail;
@@ -82,8 +81,11 @@ Page({
           icon: 'success',
           duration: 2000
         })
-        wx.redirectTo({
-          url: '/pages/address/list/list'
+        // wx.redirectTo({
+        //   url: '/pages/address/list/list'
+        // })
+        wx.navigateBack({
+          delta: 1
         })
       })
     }else if(data.address_username && data.address_iphone &&data.address && this.data.locationName){
@@ -96,8 +98,11 @@ Page({
           icon: 'success',
           duration: 2000
         })
-        wx.redirectTo({
-          url: '/pages/address/list/list'
+        // wx.redirectTo({
+        //   url: '/pages/address/list/list'
+        // })
+        wx.navigateBack({
+          delta: 1
         })
       })
     }else {

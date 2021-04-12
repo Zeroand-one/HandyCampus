@@ -30,5 +30,25 @@ Page({
     wx.navigateTo({
       url: '/pages/order/info/info?id='+id
     })
-  }
+  },
+  
+  onPullDownRefresh: function () {
+    // 标题栏显示刷新图标，转圈圈
+    wx.showNavigationBarLoading()
+    // 请求最新数据
+    this.getList(true);
+    setTimeout(() => {
+      // 标题栏隐藏刷新转圈圈图标
+      wx.hideNavigationBarLoading()
+    }, 1000);
+  },
+
+/**
+ * 页面上拉触底事件的处理函数
+ */
+  onReachBottom: function () {
+    setTimeout(() => {
+      this.getList();
+    }, 300);
+  },
 })

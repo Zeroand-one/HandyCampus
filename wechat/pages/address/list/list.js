@@ -8,10 +8,10 @@ Page({
     formdata: null,
   },
   onLoad: function (options) {
-    this.getList()
+    
   },
   onShow: function () {
-
+    this.getList()
   },
   getList() {
     var _this=this
@@ -41,5 +41,5 @@ Page({
         res.eventChannel.emit('acceptDataFromOpenerPage', { data: 'test' })
       }
     })
-  }
+  },
 })

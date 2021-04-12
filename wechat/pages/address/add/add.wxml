@@ -1,11 +1,47 @@
-<view class="map_container">
-  <view class="container">
-    <button bindtap="showMap">选择位置</button>
-    <view style="margin-top:10px">地址：{{address?address:"暂无"}}</view>
-    <view style="margin-top:10px">名称：{{locationName?locationName:"暂无"}}</view>
+<!-- <i-cell-group>
+  <i-cell title="{{!getAddressName?title:getAddressName}}" is-link url="/pages/address/add/add">
+    <i-icon slot="icon" type="coordinates_fill" size="28" color="#80848f" />
+  </i-cell>
+</i-cell-group>
+<view class="card">
+  <view class="item">
+    <i-icon type="homepage" size="28" />
+    <i-input value="{{ getDetAddress }}" bind:blur="bindgetDetAddress" placeholder="请输入详细地址(最多50字)" maxlength="50" />
   </view>
-  <view class="btn">
-    <button bindtap="handleClickConfirm">确定</button>
+  <view class="item">
+    <i-icon type="mobilephone" size="28" />
+    <i-input value="{{ address_iphone }}" bind:blur="bindAddressIphone" placeholder="请输入电话" maxlength="13" />
   </view>
-  <view class="oft">常用地址</view>
+  <view class="item">
+    <i-icon type="mine" size="28" />
+    <i-input value="{{ address_username }}" bind:blur="bindAddressUsername" placeholder="请输入姓名" maxlength="13" />
+  </view>
 </view>
+<view class="btn">
+  <button bindtap="handleClickConfirm">确定</button>
+</view> -->
+<form catchsubmit="formSubmit">
+  <i-cell-group>
+    <i-cell title="{{!getAddressName?'定位':getAddressName}}" bindtap="showMap">
+      <i-icon slot="icon" type="coordinates_fill" size="28" color="#80848f" />
+    </i-cell>
+  </i-cell-group>
+  <view class="card">
+    <view class="item">
+      <row-input name="addressSchool" value="{{addressSchool}}" disabled="{{!switchSchool}}" title="校园地址" placeholder="{{!switchSchool?'':'请输入如0栋101'}}" />
+      <text class="added">是否选择校园地址</text>
+      <switch checked="{{switchSchool}}" bindchange="switchSchoolChange" />
+      <text class="msg">选择后定位地址无效</text>
+    </view>
+    <view class="item">
+      <row-input name="getDetAddress" value="{{getDetAddress}}" disabled="{{switchSchool}}" title="地址" maxLength="50" placeholder="{{switchSchool?'':'请输入详细地址'}}" />
+    </view>
+    <view class="item">
+      <row-input name="address_iphone" value="{{address_iphone}}" title="电话" maxLength="12" placeholder="请输入电话" />
+    </view>
+    <view class="item">
+      <row-input name="address_username" value="{{address_username}}" title="姓名" maxLength="12" placeholder="请输入姓名" />
+    </view>
+  </view>
+  <button type="primary" formType="submit">保存</button>
+</form>

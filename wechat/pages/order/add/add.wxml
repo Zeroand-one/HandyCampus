@@ -1,14 +1,14 @@
 <view class="box">
   <view class='type1' wx:if="{{order_type==0}}">
     <view class="get">
-      <navigator class="get_le" url="/pages/address/info/info?type=get">
+      <navigator class="get_le" url="/pages/address/add/add?type=get">
         <view class="cir">取</view>
         <text>{{getAddressInfo.getAddressName?getAddressInfo.getAddressName:"从哪取快递"}}</text>
       </navigator>
       <view class="oft">常用</view>
     </view>
     <view class="get">
-      <navigator class="get_le" url="/pages/address/info/info?type=set">
+      <navigator class="get_le" url="/pages/address/add/add?type=set">
         <view class="cir setcir">收</view>
         <text>{{setAddressInfo.setAddressName?setAddressInfo.setAddressName:"送到哪"}}</text>
       </navigator>

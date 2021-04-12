@@ -1,3 +1,10 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "i-icon": "../../../miniprogram_npm/iview-weapp/icon/index",
+    "i-cell-group": "../../../miniprogram_npm/iview-weapp/cell-group/index",
+    "i-cell": "../../../miniprogram_npm/iview-weapp/cell/index",
+    "i-panel": "../../../miniprogram_npm/iview-weapp/panel/index",
+    "i-input": "../../../miniprogram_npm/iview-weapp/input/index",
+    "row-input": "../../../components/rowInput/rowInput"
+  }
 }

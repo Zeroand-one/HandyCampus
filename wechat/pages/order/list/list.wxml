@@ -5,10 +5,10 @@
   <view class="item" wx:for="{{formdata}}" wx:key="order_id" data-type="{{item.order_id}}" bindtap="clickGoto">
     <view class="top">
       <view class="left">收件人：{{item.name}}</view>
-      <view class="rig">{{item.money}} 元</view>
+      <view class="rig">{{item.order_address}}</view>
     </view>
     <view class="bottom">
-      <view class="left">{{item.order_address}}</view>
+      <view class="left">{{item.money}} 元</view>
       <view class="rig">{{item.start_date}}</view>
     </view>
   </view>
