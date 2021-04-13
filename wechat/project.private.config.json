@@ -36,6 +36,11 @@
           "pathName": "pages/my/index/index",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/courier/add/add",
+          "pathName": "pages/courier/add/add",
+          "scene": null
         }
       ]
     }

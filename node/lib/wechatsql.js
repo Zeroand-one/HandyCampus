@@ -115,7 +115,7 @@ exports.userAuthFind = ( value ) => {
   return query( _sql, value )
 } 
 
-// // 用户修改
+// 用户修改
 exports.userAuthUpdata = ( value ) => {
   let _sql = `UPDATE users_a SET user_name="${value.user_name}",birthday="${value.birthday}", name="${value.name}",address="${value.address}",phone="${value.phone}",sex="${value.sex}",studenid="${value.studenid}" WHERE user_id="${value.user_id}"`;
   return query( _sql, value )
@@ -124,6 +124,12 @@ exports.userAuthUpdata = ( value ) => {
 // 关于我们查询
 exports.AboutFind = ( value ) => {
   let _sql = `SELECT * FROM about_info`;
+  return query( _sql, value )
+}
+
+// 申请成为骑手
+exports.userCourierAdd = ( value ) => {
+  let _sql = `UPDATE users_a SET user_name="${value.user_name}",birthday="${value.birthday}", name="${value.name}",address="${value.address}",phone="${value.phone}",sex="${value.sex}",studenid="${value.studenid}",user_type="${value.user_type}" WHERE user_id="${value.user_id}"`;
   return query( _sql, value )
 }
 
@@ -206,7 +212,6 @@ exports.orderListTypeFind = ( value ) => {
   }else if (value.type==3){
     _sql = `select * FROM orders  WHERE user_id="${value.id}" and (order_state=2 or order_state=3 or order_state=4 );`
   }
-  console.log(_sql)
   return query( _sql, value )
 }
 

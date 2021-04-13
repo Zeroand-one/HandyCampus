@@ -88,6 +88,28 @@ router.post('/v1/api/wechat/user/userAuthUpdata',koaBody(),async (ctx, next) => 
     });
 })
 
+// 申请成为骑手
+router.post('/v1/api/wechat/user/userCourierAdd',koaBody(),async (ctx, next) => {
+  let data = ctx.request.body
+  await apiModel
+    .userCourierAdd(data)
+    .then(res => {
+      console.log(res)
+      ctx.body = {
+        code: 200,
+        data: res,
+        message: "修改成功",
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        data: res.data,
+        message: '服务器失联',
+      };
+    });
+})
+
 // 关于我们查询
 router.get('/v1/api/wechat/user/AboutFind',async (ctx, next) => {
   await apiModel

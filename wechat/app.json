@@ -9,13 +9,14 @@
     "pages/my/about/about",
     "pages/my/info/info",
     
+    "pages/courier/add/add",
+
     "pages/search/search",
 
     "pages/order/add/add",
     "pages/order/list/list",
     "pages/order/mylist/mylist",
     "pages/order/info/info",
-
 
     "pages/address/add/add",
     "pages/address/addlist/addlist",

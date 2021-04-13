@@ -1,5 +1,6 @@
 const { formatTimeString, formatTime  } = require('../../../utils/util.js');
 const { userAuthFind,userAuthUpdata  } = require('../../../request/myapi.js');
+const { userCourierAdd  } = require('../../../request/courierapi.js');
 const app = getApp()
 
 Page({
@@ -27,8 +28,13 @@ Page({
     let id = wx.getStorageSync("openId")
     userAuthFind(id).then(res => {
       let data = res.data[0]
+      if(data.user_type==0){
+        data.user_type='用户'
+      }else{
+        data.user_type=data.user_type==1?'工作员':'申请中'
+      }
       this.setData({
-        user_type: data.user_type==1?'工作员':'用户',
+        user_type: data.user_type,
         phone: data.phone,
         user_name: data.user_name,
         name: data.name,
@@ -56,16 +62,18 @@ Page({
     params.birthday=this.data.birthday
     params.sex=this.data.sex=='男'?0:1
     params.user_id = id
+    params.user_type=2
     console.log(params,'pa')
     
-    userAuthUpdata(params).then( res => {
+    userCourierAdd(params).then( res => {
       console.log(res.message,'e')
       if(res.code==200){
         wx.showToast({
-          title: '保存成功',
+          title: '申请成功',
           icon: 'success',
           duration: 1000
         })
+        this.getlist()
       }
     })
   },

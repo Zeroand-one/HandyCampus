@@ -1,0 +1,5 @@
+/* pages/my/info/info.wxss */
+button {
+  width: 50%;
+  margin: 20rpx auto 0;
+}
