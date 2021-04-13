@@ -23,36 +23,12 @@
 
 <script>
 import { messagesFindRead, messagesFindReadId } from "../api/messages";
+import { courierAddFindList } from "../api/courier";
 import getformat from "../utils/getformat";
 export default {
   data() {
     return {
-      msgList: [
-        {
-          id: "1",
-          content: "大佬上线了",
-          link: "",
-          time: "2020-10-01",
-        },
-        {
-          id: "2",
-          content: "大哥别杀我",
-          link: "/home",
-          time: "2021-01-12",
-        },
-        {
-          id: "3",
-          content: "大哥要练葵花宝典吗？",
-          link: "/user",
-          time: "2021-02-16",
-        },
-        {
-          id: "4",
-          content: "密码修改成功！",
-          link: "",
-          time: "2021-04-26",
-        },
-      ],
+      msgList: [],
     };
   },
   created() {
@@ -67,13 +43,28 @@ export default {
         if ((res.data.code = 200)) {
           let list = res.data.data;
           console.log(list);
-
           list.forEach((e) => {
             let msg = {};
             msg.id = e.id;
             msg.content = e.message_title;
             msg.link = "/messageInfo/index";
-            msg.time = new Date(e.start_date).getformat("yyyy-MM-dd hh:mm:ss");
+            msg.time = new Date(e.start_date).getformat("yyyy-MM-dd HH:mm:ss");
+            this.msgList.push(msg);
+          });
+        }
+      });
+      courierAddFindList().then((res) => {
+        if ((res.data.code = 200)) {
+          let list = res.data.data;
+          console.log(list, "li");
+          list.forEach((e) => {
+            let msg = {};
+            msg.id = e.user_id;
+            msg.content = "申请骑手";
+            msg.link = "/courier/add";
+            msg.time = new Date(e.request_date).getformat(
+              "yyyy-MM-dd HH:mm:ss"
+            );
             this.msgList.push(msg);
           });
         }
@@ -81,15 +72,25 @@ export default {
     },
     messagesReadId(e) {
       console.log(e, "e");
-      messagesFindReadId({ id: e.id }).then((res) => {
-        if (res.data.code == 200) {
-          this.list();
-        }
-      });
-      this.$router.push({
-        path: "/messageInfo/info",
-        query: { id: e.id },
-      });
+      if (e.content == "申请骑手") {
+        this.$router.push({
+          path: "/courier/add",
+          query: { id: e.id },
+        });
+        this.$store.commit("NoticeBar");
+        console.log(this.$store, "$store");
+      } else {
+        messagesFindReadId({ id: e.id }).then((res) => {
+          if (res.data.code == 200) {
+            this.list();
+          }
+        });
+        this.$router.push({
+          path: "/messageInfo/info",
+          query: { id: e.id },
+        });
+        this.$store.commit("NoticeBar");
+      }
     },
   },
 };

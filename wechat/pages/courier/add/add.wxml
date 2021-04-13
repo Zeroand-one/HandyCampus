@@ -4,6 +4,7 @@
     <row-input name="name" value="{{name}}" title="姓名" autofocus placeholder="请输入姓名" />
     <row-input name="phone" value="{{phone}}" type="number" title="联系电话" placeholder="请输入手机号" />
     <row-input name="user_type" value="{{user_type}}" data-type="user_type" title="用户类型" disabled />
+    <view class="date" hidden="{{user_type=='用户'?true:false}}">申请时间 {{request_date}}</view>
   </i-panel>
   <i-panel title="补充信息">
     <view class="section">

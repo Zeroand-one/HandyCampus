@@ -205,6 +205,23 @@ exports.courierFindSearch = ( value ) => {
   return query( _sql, value )
 } 
 
+// 申请成为骑手查询列表
+exports.courierAddFindList = ( value ) => {
+  let _sql = `SELECT * FROM users_a where user_type=2`;
+  return query( _sql, value )
+} 
+
+// 申请成为骑手账号查询
+exports.courierAddFindId = ( value ) => {
+  let _sql = `SELECT * FROM users_a where user_id="${value}"`;
+  return query( _sql, value )
+} 
+
+// 管理成为骑手账号
+exports.courierManageId = ( value ) => {
+  let _sql = `UPDATE users_a SET user_type="${value.user_type}" where user_id="${value.id}"`;
+  return query( _sql, value )
+} 
 
 // *****************************关于我们****************************//
 

@@ -113,7 +113,7 @@ export default {
           }
           this.data = data;
           this.data.start_date = moment(data.start_date).format(
-            "YYYY-MM-DD hh:mm:ss"
+            "YYYY-MM-DD HH:mm:ss"
           );
           console.log(this.data.start_date, "data");
         } else {

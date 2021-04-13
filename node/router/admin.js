@@ -278,6 +278,62 @@ router.get('/v1/api/admin/courierFindSearch',async (ctx, next) => {
     });
 })
 
+// 申请成为骑手查询列表
+router.get('/v1/api/admin/courierAddFindList',async (ctx, next) => {
+  await apiModel
+    .courierAddFindList()
+    .then(res => {
+      ctx.body = {
+        data:res,
+        code: 200,
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        message: '服务器失联',
+      };
+    });
+})
+
+// 申请成为骑手查询
+router.get('/v1/api/admin/courierAddFindId',async (ctx, next) => {
+  await apiModel
+    .courierAddFindId(ctx.query.id)
+    .then(res => {
+      ctx.body = {
+        data:res,
+        code: 200,
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        message: '服务器失联',
+      };
+    });
+})
+
+// 管理成为骑手账号
+router.post('/v1/api/admin/courierManageId',koaBody(),async (ctx, next) => {
+  await apiModel
+    .courierManageId(ctx.request.body)
+    .then(res => {
+      ctx.body = {
+        code: 200,
+        data: res.data,
+        message:'成功',
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        data: res.data,
+        message: '添加失败',
+      };
+    });
+})
+
 // *****************************关于我们****************************//
 
 // 关于我们查询

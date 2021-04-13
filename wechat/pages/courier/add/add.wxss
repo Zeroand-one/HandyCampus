@@ -3,3 +3,10 @@ button {
   width: 50%;
   margin: 20rpx auto 0;
 }
+
+.date {
+  font-size: 32rpx;
+  padding-left: 30rpx;
+  color: #333;
+  padding-bottom: 30rpx;
+}

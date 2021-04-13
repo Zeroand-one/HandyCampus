@@ -129,7 +129,7 @@ exports.AboutFind = ( value ) => {
 
 // 申请成为骑手
 exports.userCourierAdd = ( value ) => {
-  let _sql = `UPDATE users_a SET user_name="${value.user_name}",birthday="${value.birthday}", name="${value.name}",address="${value.address}",phone="${value.phone}",sex="${value.sex}",studenid="${value.studenid}",user_type="${value.user_type}" WHERE user_id="${value.user_id}"`;
+  let _sql = `UPDATE users_a SET user_name="${value.user_name}",birthday="${value.birthday}", name="${value.name}",address="${value.address}",phone="${value.phone}",sex="${value.sex}",studenid="${value.studenid}",user_type="${value.user_type}",request_date="${value.request_date}" WHERE user_id="${value.user_id}"`;
   return query( _sql, value )
 }
 

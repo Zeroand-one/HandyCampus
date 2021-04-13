@@ -85,12 +85,18 @@ export const asyncRoutes =[
     redirect: "/courier/index",
     meta: { title: "骑手", icon: "el-icon-bicycle" },
     children: [
-    {
-      path: "index",
-      name: "courier_index",
-      component: () => import("@p/courier"),
-      meta: { title: "骑手信息", icon: "el-icon-bicycle" },
-    }
+      {
+        path: "index",
+        name: "courier_index",
+        component: () => import("@p/courier"),
+        meta: { title: "骑手列表", icon: "el-icon-bicycle" },
+      },
+      {
+        path: "add",
+        name: "courier_index_id",
+        component: () => import("@p/courier/add.vue"),
+        meta: { title: "申请骑手信息", icon: "el-icon-bicycle" },
+      }
     ]
   },
   {

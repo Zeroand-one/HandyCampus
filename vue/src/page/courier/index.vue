@@ -1,7 +1,8 @@
 <template>
   <div class="className">
     <div class="classBut">
-      <el-button type="primary" @click="addRolesTab">骑手申请</el-button>
+      <!-- <el-button type="primary" @click="addRolesTab">骑手申请</el-button> -->
+      <div class="e"></div>
       <el-input
         placeholder="请输入内容"
         prefix-icon="el-icon-search"
@@ -39,6 +40,12 @@
           align="center"
           label="地址"
           width="150"
+        ></el-table-column>
+        <el-table-column
+          prop="request_date"
+          label="申请时间"
+          width="180"
+          align="center"
         ></el-table-column>
         <el-table-column
           prop="birthday"
@@ -100,12 +107,12 @@
           <!-- <el-input v-model="ruleForm.name" :disabled="distype"></el-input> -->
           <el-input v-model="ruleForm.name"></el-input>
         </el-form-item>
-        <el-form-item label="角色" prop="user_type" v-if="distype">
+        <!-- <el-form-item label="角色" prop="user_type" v-if="distype">
           <el-radio-group v-model="ruleForm.user_type" size="small">
             <el-radio :label="0" border>用户</el-radio>
             <el-radio :label="1" border>骑手</el-radio>
           </el-radio-group>
-        </el-form-item>
+        </el-form-item> -->
         <el-form-item label="地址" prop="address" v-if="distype">
           <el-input type="text" v-model="ruleForm.address"></el-input>
         </el-form-item>
@@ -192,6 +199,11 @@ export default {
             res.data.data.forEach((item) => {
               if (item.birthday) {
                 item.birthday = moment(item.birthday).format("YYYY-MM-DD");
+              }
+              if (item.birthday) {
+                item.request_date = moment(item.request_date).format(
+                  "YYYY-MM-DD HH:mm:ss"
+                );
               }
             });
             this.tableData = res.data.data;

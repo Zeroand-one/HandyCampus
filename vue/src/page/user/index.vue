@@ -108,12 +108,12 @@
           <!-- <el-input v-model="ruleForm.name" :disabled="distype"></el-input> -->
           <el-input v-model="ruleForm.name"></el-input>
         </el-form-item>
-        <el-form-item label="角色" prop="user_type" v-if="distype">
+        <!-- <el-form-item label="角色" prop="user_type" v-if="distype">
           <el-radio-group v-model="ruleForm.user_type" size="small">
             <el-radio :label="0" border>用户</el-radio>
             <el-radio :label="1" border>骑手</el-radio>
           </el-radio-group>
-        </el-form-item>
+        </el-form-item> -->
         <el-form-item label="地址" prop="address" v-if="distype">
           <el-input type="text" v-model="ruleForm.address"></el-input>
         </el-form-item>

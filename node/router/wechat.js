@@ -91,6 +91,7 @@ router.post('/v1/api/wechat/user/userAuthUpdata',koaBody(),async (ctx, next) => 
 // 申请成为骑手
 router.post('/v1/api/wechat/user/userCourierAdd',koaBody(),async (ctx, next) => {
   let data = ctx.request.body
+  data.request_date=moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
   await apiModel
     .userCourierAdd(data)
     .then(res => {

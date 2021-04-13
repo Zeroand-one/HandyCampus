@@ -42,6 +42,7 @@ Page({
         sex: data.sex==0?'男':'女',
         studenid: data.studenid,
         address: data.address,
+        request_date: formatTime(new Date(data.request_date))
       })
       console.log(res.data,'da')
     })
