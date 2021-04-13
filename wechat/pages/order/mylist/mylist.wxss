@@ -1,0 +1,22 @@
+.box {
+  background-color: #fff;
+}
+
+.box .item {
+  margin: 20rpx !important;
+  padding: 10rpx !important;
+  border-radius: 16rpx;
+  background-color: #eee;
+  font-size: 36rpx;
+  color: #333;
+}
+
+.box .top,
+.box .bottom {
+  display: flex;
+  justify-content: space-between;
+}
+
+.box .bottom {
+  padding-top: 10rpx;
+}

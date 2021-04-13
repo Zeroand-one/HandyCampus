@@ -27,6 +27,12 @@ module.exports={
 		return request('/order/orderListFind', 'GET', params ,true);
 	},
 
+	// mylist
+	// 查看用户订单详情
+	orderListTypeFind: (params)=>{
+		return request('/order/orderListTypeFind', 'GET', params ,true);
+	},
+
 	// info
 	// 查看用户订单详情 
 	orderInfoFind: (params)=>{

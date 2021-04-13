@@ -198,6 +198,18 @@ exports.orderListFind = ( value ) => {
   return query( _sql, value )
 }
 
+// 按条件查看用户订单列表
+exports.orderListTypeFind = ( value ) => {
+  let _sql = ''
+  if (value.type==2){
+    _sql = `select * FROM orders  WHERE user_id="${value.id}" and ( order_state=0 or order_state=1);`
+  }else if (value.type==3){
+    _sql = `select * FROM orders  WHERE user_id="${value.id}" and (order_state=2 or order_state=3 or order_state=4 );`
+  }
+  console.log(_sql)
+  return query( _sql, value )
+}
+
 // 查看用户订单详情
 exports.orderInfoFind = ( value ) => {
   let _sql = `SELECT * FROM orders,orderaddres WHERE orders.order_id=orderaddres.order_adr_id and orders.order_id="${value}" ;`
