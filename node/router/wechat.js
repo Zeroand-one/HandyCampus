@@ -66,6 +66,24 @@ router.get('/v1/api/wechat/user/userAuthFind',async (ctx, next) => {
     });
 })
 
+// 关于我们查询
+router.get('/v1/api/wechat/user/AboutFind',async (ctx, next) => {
+  await apiModel
+    .AboutFind()
+    .then(res => {
+      ctx.body = {
+        data:res[0],
+        code: 200,
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        message: '服务器失联',
+      };
+    });
+})
+
 // 修改用户信息
 router.post('/v1/api/wechat/user/userAuthUpdata',koaBody(),async (ctx, next) => {
   let data = ctx.request.body
@@ -88,6 +106,9 @@ router.post('/v1/api/wechat/user/userAuthUpdata',koaBody(),async (ctx, next) => 
     });
 })
 
+
+// ******************************骑手管理***************************//
+
 // 申请成为骑手
 router.post('/v1/api/wechat/user/userCourierAdd',koaBody(),async (ctx, next) => {
   let data = ctx.request.body
@@ -95,7 +116,6 @@ router.post('/v1/api/wechat/user/userCourierAdd',koaBody(),async (ctx, next) => 
   await apiModel
     .userCourierAdd(data)
     .then(res => {
-      console.log(res)
       ctx.body = {
         code: 200,
         data: res,
@@ -111,19 +131,42 @@ router.post('/v1/api/wechat/user/userCourierAdd',koaBody(),async (ctx, next) => 
     });
 })
 
-// 关于我们查询
-router.get('/v1/api/wechat/user/AboutFind',async (ctx, next) => {
+// 查看已发布订单列表
+router.get('/v1/api/wechat/index/courier/orderOpenListFind',async (ctx, next) => {
   await apiModel
-    .AboutFind()
+    .orderOpenListFind()
     .then(res => {
       ctx.body = {
-        data:res[0],
+        data:res,
         code: 200,
+        message: '查询成功',
       };
     })
     .catch(res => {
       ctx.body = {
         code: 500,
+        data:res.data,
+        message: '服务器失联',
+      };
+    });
+})
+
+// 接受订单
+router.post('/v1/api/wechat/courier/courierAddOrder',koaBody(),async (ctx, next) => {
+  let data = ctx.request.body
+  await apiModel
+    .courierAddOrder(data)
+    .then(res => {
+      ctx.body = {
+        code: 200,
+        data: res,
+        message: "接受成功",
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        data: res.data,
         message: '服务器失联',
       };
     });

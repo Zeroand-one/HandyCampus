@@ -2,5 +2,8 @@
   "usingComponents": {
     "i-icon": "../../../miniprogram_npm/iview-weapp/icon/index"
   },
-  "enablePullDownRefresh": true
+  "navigationBarTitleText": "主页",
+  "enablePullDownRefresh": true,
+  "backgroundColor": "#ffffff",
+  "backgroundTextStyle": "dark"
 }

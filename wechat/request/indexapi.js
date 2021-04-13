@@ -7,4 +7,9 @@ module.exports={
 	indexBannerFind: (value)=>{
 		return request('/index/indexBannerFind', 'GET', { },true);
 	},
+
+  // 查看已发布订单列表
+	orderOpenListFind: (value)=>{
+		return request('/index/courier/orderOpenListFind', 'GET', { },true);
+	},
 }

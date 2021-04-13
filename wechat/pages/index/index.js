@@ -2,14 +2,12 @@
 const app = getApp()
 // let requireUrl = require('../../utils/util.js')
 const { formatTimeString, formatTime  } = require('../../utils/util.js');
-const { indexBannerFind  } = require('../../request/indexapi.js');
+const { indexBannerFind, orderOpenListFind  } = require('../../request/indexapi.js');
+const { userAuthFind  } = require('../../request/myapi.js');
 import moment from "moment";
-// pages/news/details/details.js
+
 Page({
 
-  /**
-   * 页面的初始数据
-   */
   data: {
     API_ROOT: app.globalData.API_ROOT,
     background:[], //轮播图
@@ -49,14 +47,34 @@ Page({
     pagesize:5,   //每页数据
     Search:"",    //搜索内容
     footer:true,  //数据为空、有数据（false）
+    userState: 1,
+    formdata: {}
   },
-  
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad:async function (options) {
     this.getList()
+    this.getUserInfoType()
+    let userState = wx.getStorageSync("userState")
+    this.setData({
+      userState
+    })
+    this.getOrderList()
   },
+  getUserInfoType(){
+    // 根据用户来确定是否接单状态 1--接单，0--用户
+    let id = wx.getStorageSync("openId")
+    let userState = this.data.userState
+    userAuthFind(id).then(res => {
+      let data =res.data[0]
+      if(data.user_type=='1' && userState=='1'){
+        wx.setStorageSync("userState", 1)
+        this.setData({
+          userState
+        })
+        this.getOrderList()
+      }
+    })
+  },
+  // 获取banner列表
   getList() {
     let _this = this
     indexBannerFind().then(res => {
@@ -86,11 +104,42 @@ Page({
       }
     })
   },
-  NavClass(e){
-    app.globalData.ClassId = e.target.dataset.id
-    wx.switchTab({
-      url: `/pages/news/list/list`,
+  // 骑手获取列表
+  getOrderList(){
+    orderOpenListFind().then(res => {
+      let formdata=res.data
+      formdata.forEach(e => {
+        e.start_date=formatTime(new Date(e.start_date))
+      })
+      this.setData({
+        formdata
+      })
     })
   },
+  // 骑手查看订单
+  clickGoto(e){
+    let id = e.currentTarget.dataset.type
+    wx.navigateTo({
+      url: '/pages/courier/info/info?id='+id
+    })
+  },
+  onPullDownRefresh: function () {
+    // 标题栏显示刷新图标，转圈圈
+    wx.showNavigationBarLoading()
+    // 请求最新数据
+    this.getOrderList(true);
+    setTimeout(() => {
+      // 标题栏隐藏刷新转圈圈图标
+      wx.hideNavigationBarLoading()
+    }, 1000);
+  },
 
+/**
+ * 页面上拉触底事件的处理函数
+ */
+  onReachBottom: function () {
+    setTimeout(() => {
+      this.getOrderList();
+    }, 300);
+  },
 })

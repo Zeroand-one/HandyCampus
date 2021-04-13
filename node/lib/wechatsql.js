@@ -127,9 +127,23 @@ exports.AboutFind = ( value ) => {
   return query( _sql, value )
 }
 
+// ******************************courier骑手管理***************************//
+
 // 申请成为骑手
 exports.userCourierAdd = ( value ) => {
   let _sql = `UPDATE users_a SET user_name="${value.user_name}",birthday="${value.birthday}", name="${value.name}",address="${value.address}",phone="${value.phone}",sex="${value.sex}",studenid="${value.studenid}",user_type="${value.user_type}",request_date="${value.request_date}" WHERE user_id="${value.user_id}"`;
+  return query( _sql, value )
+}
+
+// 查看已发布订单列表
+exports.orderOpenListFind = ( value ) => {
+  let _sql = `select * FROM orders  WHERE order_state=2 or order_state=4 ;`
+  return query( _sql, value )
+}
+
+// 接受订单
+exports.courierAddOrder = ( value ) => {
+  let _sql = `UPDATE orders SET receive_date="${value.receive_date}",courier_name="${value.courier_name}",courier_id="${value.courier_id}",order_state=3 WHERE order_id="${value.order_id}"`;
   return query( _sql, value )
 }
 

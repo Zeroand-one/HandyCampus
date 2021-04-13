@@ -1,24 +1,43 @@
-<!-- index.wxml -->
-<swiper class="banner" autoplay="true" interval="3000" circular="true">
-  <swiper-item wx:for="{{background}}" wx:key="index">
-    <navigator url="" class="banner_link">
-      <image src="{{item.url}}" class="banner_pic"></image>
-      <text class="banner_title">{{item.title}}</text>
+<view class="utype" wx:if="{{userState==0}}">
+  <swiper class="banner" autoplay="true" interval="3000" circular="true">
+    <swiper-item wx:for="{{background}}" wx:key="index">
+      <navigator url="" class="banner_link">
+        <image src="{{item.url}}" class="banner_pic"></image>
+        <text class="banner_title">{{item.title}}</text>
+      </navigator>
+    </swiper-item>
+  </swiper>
+  <view class="msg">
+    <i-icon type="remind_fill" size="18" color="#ff3f3f" />
+    <text class="info">信息提示:</text>
+    <text>{{message}}</text>
+  </view>
+  <view class="list">
+    <navigator class="item" wx:for="{{list}}" wx:key="index" url="/pages/order/add/add?id={{item.id}}">
+      <image src="{{item.img}}" class="item_pic"></image>
+      <view class="item_but">
+        <view class="item_h">{{item.title}}</view>
+        <view class="item_f">{{item.info}}</view>
+      </view>
     </navigator>
-  </swiper-item>
-</swiper>
-<view class="msg">
-  <i-icon type="remind_fill" size="18" color="#ff3f3f" />
-  <text class="info">信息提示:</text>
-  <text>{{message}}</text>
+    <view class="list_text" wx:if="{{!footer}}">没有更多数据……</view>
+  </view>
 </view>
-<view class="list">
-  <navigator class="item" wx:for="{{list}}" wx:key="index" url="/pages/order/add/add?id={{item.id}}">
-    <image src="{{item.img}}" class="item_pic"></image>
-    <view class="item_but">
-      <view class="item_h">{{item.title}}</view>
-      <view class="item_f">{{item.info}}</view>
+<view class="utype" wx:else>
+  <view class="nu" wx:if="{{!formdata===[]}}">
+    <text>无数据</text>
+  </view>
+  <view class="box" wx:else>
+    <view class="title">可接单列表</view>
+    <view class="item" wx:for="{{formdata}}" wx:key="order_id" data-type="{{item.order_id}}" bindtap="clickGoto">
+      <view class="top">
+        <view class="left">收件人：{{item.name}}</view>
+        <view class="rig">{{item.order_address}}</view>
+      </view>
+      <view class="bottom">
+        <view class="left">{{item.money}} 元</view>
+        <view class="rig">{{item.start_date}}</view>
+      </view>
     </view>
-  </navigator>
-  <view class="list_text" wx:if="{{!footer}}">没有更多数据……</view>
+  </view>
 </view>

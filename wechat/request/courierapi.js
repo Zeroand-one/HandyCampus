@@ -8,4 +8,9 @@ module.exports={
 	userCourierAdd: (params)=>{
 		return request('/user/userCourierAdd', 'POST', params ,true);
 	},
+
+	// 接受订单
+	courierAddOrder: (params)=>{
+		return request('/courier/courierAddOrder', 'POST', params ,true);
+	},
 }
