@@ -131,3 +131,13 @@ page {
   background-color: #fff;
   padding: 20rpx;
 }
+
+.button-row {
+  background-color: transparent;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 30rpx;
+  text-align: start;
+  color: #333;
+  padding: 0;
+}

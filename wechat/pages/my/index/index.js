@@ -44,5 +44,18 @@ Page({
         url: '/pages/index/index'
       })
     }
+  },  
+  // 分享
+  onShareAppMessage: function (res) {
+    if (res.from === 'button') {
+      console.log(res.target)
+    }
+    return {
+      title: "分享",
+      path: '/pages/comprehensivePersonalTax/comprehensivePersonalTax',
+      success: function (res) {
+        console.log('成功', res)
+      }
+    }
   },
 })

@@ -76,6 +76,10 @@
       </view>
     </view>
     <!-- 推荐 -->
-    <view class="recommend_wrap">把应用推荐给其他人</view>
+    <view class="recommend_wrap">
+      <button class="button-row" id="shareBtn" open-type="share">
+        <view>把应用推荐给其他人</view>
+      </button>
+    </view>
   </view>
 </view>
