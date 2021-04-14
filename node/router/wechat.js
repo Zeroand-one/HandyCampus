@@ -214,7 +214,26 @@ router.get('/v1/api/wechat/address/oftenAddresFindId',async (ctx, next) => {
     });
 })
 
-// 获取个人信息
+// 用户常用地址表信息查询
+router.get('/v1/api/wechat/address/oftenAddresFindInfoId',async (ctx, next) => {
+  await apiModel
+    .oftenAddresFindInfoId(ctx.query)
+    .then(res => {
+      ctx.body = {
+        code: 200,
+        data: res,
+        message: '查询成功',
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        message: '服务器失联',
+      };
+    });
+})
+
+// 常用地址表添加
 router.post('/v1/api/wechat/address/oftenAddresAdd',koaBody(),async (ctx, next) => {
   let data = ctx.request.body
   await apiModel
@@ -248,6 +267,27 @@ router.get('/v1/api/wechat/oftenAddresFind',async (ctx, next) => {
     .catch(res => {
       ctx.body = {
         code: 500,
+        message: '服务器失联',
+      };
+    });
+})
+
+// 常用地址表修改
+router.post('/v1/api/wechat/address/oftenAddresUpdate',koaBody(),async (ctx, next) => {
+  let data = ctx.request.body
+  await apiModel
+    .oftenAddresUpdate(data)
+    .then(res => {
+      ctx.body = {
+        data:res,
+        code: 200,
+        message: '修改成功!'
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        data:res,
         message: '服务器失联',
       };
     });

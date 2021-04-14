@@ -2,7 +2,7 @@
   <text>无数据</text>
 </view>
 <view class="box" wx:else>
-  <view class="item" wx:for="{{formdata}}" wx:key="nid">
+  <view class="item" wx:for="{{formdata}}" wx:key="nid" data-nid="{{item.nid}}" bindtap="editAddress">
     <view class="info">
       <view class="addname">{{item.address_name}}</view>
       <view class="bot">

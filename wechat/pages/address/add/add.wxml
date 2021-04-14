@@ -28,13 +28,13 @@
   </i-cell-group>
   <view class="card">
     <view class="item">
-      <row-input name="addressSchool" value="{{addressSchool}}" disabled="{{!switchSchool}}" title="校园地址" placeholder="{{!switchSchool?'':'请输入如0栋101'}}" />
+      <row-input name="getDetAddress" value="{{getDetAddress}}" disabled="{{switchSchool}}" title="地址" maxLength="50" placeholder="{{switchSchool?'':'请输入详细地址'}}" />
+    </view>
+    <view class="item">
       <text class="added">是否选择校园地址</text>
       <switch checked="{{switchSchool}}" bindchange="switchSchoolChange" />
       <text class="msg">选择后定位地址无效</text>
-    </view>
-    <view class="item">
-      <row-input name="getDetAddress" value="{{getDetAddress}}" disabled="{{switchSchool}}" title="地址" maxLength="50" placeholder="{{switchSchool?'':'请输入详细地址'}}" />
+      <row-input name="addressSchool" value="{{addressSchool}}" disabled="{{!switchSchool}}" title="校园地址" placeholder="{{!switchSchool?'':'请输入如0栋101'}}" />
     </view>
     <view class="item">
       <row-input name="address_iphone" value="{{address_iphone}}" title="电话" maxLength="12" placeholder="请输入电话" />

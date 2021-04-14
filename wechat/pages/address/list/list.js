@@ -42,4 +42,12 @@ Page({
       }
     })
   },
+  editAddress(e){
+    
+    let nid=e.currentTarget.dataset.nid
+    console.log(nid,'e')
+    wx.navigateTo({
+      url: '/pages/address/addlist/addlist?nid='+nid
+    })
+  },
 })

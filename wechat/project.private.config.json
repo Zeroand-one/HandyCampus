@@ -30,6 +30,11 @@
           "pathName": "pages/courier/info/info",
           "query": "id=12426456253425",
           "scene": null
+        },
+        {
+          "name": "pages/address/list/list",
+          "pathName": "pages/address/list/list",
+          "scene": null
         }
       ]
     }

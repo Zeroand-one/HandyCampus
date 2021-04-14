@@ -1,6 +1,6 @@
 const chooseLocation = requirePlugin('chooseLocation');
 const { formatTimeString, formatTime  } = require('../../../utils/util.js');
-const { oftenAddresAdd } = require('../../../request/addressapi.js');
+const { oftenAddresAdd, oftenAddresFindInfoId, oftenAddresUpdate } = require('../../../request/addressapi.js');
 const app = getApp()
 
 Page({
@@ -11,10 +11,13 @@ Page({
     addressSchool:"",
     address_iphone:"",
     address_username:"",
-    switchSchool: false
+    switchSchool: false,
+    nid: null,
   },
   onLoad: function (options) {
-
+    if(options.nid){
+      this.sendData(options)
+    }
   },
   onShow: function () {
     // 从地图选点插件返回后，在页面的onShow生命周期函数中能够调用插件接口，取得选点结果对象
@@ -26,6 +29,35 @@ Page({
         locationName: location.name?location.name : ""
       });
     }
+  },
+  sendData(e){
+    console.log(e.nid)
+    this.setData({
+      nid: e.nid
+    })
+    oftenAddresFindInfoId({nid:e.nid}).then(res => {
+      let data=res.data[0]
+      console.log(data)
+      if(data.address_det=="校园内") {
+        this.setData({
+          locationName: "",
+          address: "" ,
+          addressSchool: data.address_name,
+          address_iphone: data.address_iphone,
+          address_username: data.address_username,
+          switchSchool: true,
+        })
+      }else{
+        this.setData({
+          locationName: data.address_name,
+          address: data.address_det,
+          addressSchool: "",
+          address_iphone: data.address_iphone,
+          address_username: data.address_username,
+          switchSchool: false,
+        })
+      }
+    })
   },
   //显示地图
   showMap() {
@@ -64,6 +96,9 @@ Page({
     }
   },
   formSubmit(e){
+    if(this.data.nid){
+      console.log(2)
+    }
     let id = wx.getStorageSync("openId")
     let data = e.detail.value
     let params = {
@@ -74,37 +109,60 @@ Page({
     if(data.address_username && data.address_iphone && data.addressSchool) {
       params.address_det = '校园内',
       params.address_name = data.addressSchool
-      oftenAddresAdd(params).then(res => {
-        console.log(res.message)
-        wx.showToast({
-          title: res.message,
-          icon: 'success',
-          duration: 2000
+      // 如果有nid，则为修改
+      if(this.data.nid){
+        oftenAddresUpdate(params).then(res => {
+          console.log(res.message)
+          wx.showToast({
+            title: res.message,
+            icon: 'success',
+            duration: 2000
+          })
+          wx.navigateBack({
+            delta: 1
+          })
         })
-        // wx.redirectTo({
-        //   url: '/pages/address/list/list'
-        // })
-        wx.navigateBack({
-          delta: 1
+      }else{
+        oftenAddresAdd(params).then(res => {
+          console.log(res.message)
+          wx.showToast({
+            title: res.message,
+            icon: 'success',
+            duration: 2000
+          })
+          wx.navigateBack({
+            delta: 1
+          })
         })
-      })
+      }
     }else if(data.address_username && data.address_iphone &&data.address && this.data.locationName){
       params.address_det = data.address,
       params.address_name = this.data.locationName
-      oftenAddresAdd(params).then(res => {
-        console.log(res.message)
-        wx.showToast({
-          title: res.message,
-          icon: 'success',
-          duration: 2000
+      if(this.data.nid){
+        oftenAddresUpdate(params).then(res => {
+          console.log(res.message)
+          wx.showToast({
+            title: res.message,
+            icon: 'success',
+            duration: 2000
+          })
+          wx.navigateBack({
+            delta: 1
+          })
         })
-        // wx.redirectTo({
-        //   url: '/pages/address/list/list'
-        // })
-        wx.navigateBack({
-          delta: 1
+      }else{
+        oftenAddresAdd(params).then(res => {
+          console.log(res.message)
+          wx.showToast({
+            title: res.message,
+            icon: 'success',
+            duration: 2000
+          })
+          wx.navigateBack({
+            delta: 1
+          })
         })
-      })
+      }
     }else {
       wx.showToast({
         title: '填写必要信息',

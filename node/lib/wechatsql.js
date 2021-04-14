@@ -155,9 +155,16 @@ exports.courierFindAllOrder = ( value ) => {
 
 // ******************************常用地址表***************************//
 
-// 常用地址表加用户查询
+// 用户常用地址表列表查询
 exports.oftenAddresFindId = ( value ) => {
   let _sql = `SELECT * FROM oftenAddres WHERE user_id ="${value}";`;
+  return query( _sql, value )
+}
+
+// 用户常用地址表信息查询
+exports.oftenAddresFindInfoId = ( value ) => {
+  let _sql = `SELECT * FROM oftenAddres WHERE nid ="${value.nid}";`;
+  console.log(_sql)
   return query( _sql, value )
 }
 
@@ -174,8 +181,8 @@ exports.oftenAddresFind = ( value ) => {
 }
 
 // // 常用地址表修改
-exports.UserUpdate = ( value ) => {
-  let _sql = `UPDATE oftenAddres SET name="${value.name}", pass="${value.password}", email="${value.email}", avator="${value.avator}" WHERE id="${value.id}" `;
+exports.oftenAddresUpdate = ( value ) => {
+  let _sql = `UPDATE oftenAddres SET  address_username="${value.address_username}",address_iphone="${value.address_iphone}",address_name="${value.address_name}",address_det="${value.address_det}" WHERE nid="${value.nid}" `;
   return query( _sql, value )
 }
 
