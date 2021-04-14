@@ -13,4 +13,11 @@ module.exports={
 	courierAddOrder: (params)=>{
 		return request('/courier/courierAddOrder', 'POST', params ,true);
 	},
+
+	// list
+	// 骑手查询全部订单
+	courierFindAllOrder: (params)=>{
+		return request('/courier/courierFindAllOrder', 'GET', params ,true);
+	},
+
 }

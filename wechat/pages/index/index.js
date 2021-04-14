@@ -47,7 +47,7 @@ Page({
     pagesize:5,   //每页数据
     Search:"",    //搜索内容
     footer:true,  //数据为空、有数据（false）
-    userState: 1,
+    userState: 1, // 根据用户来确定是否接单状态 1--接单，0--用户
     formdata: {}
   },
   onLoad:async function (options) {

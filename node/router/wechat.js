@@ -172,6 +172,27 @@ router.post('/v1/api/wechat/courier/courierAddOrder',koaBody(),async (ctx, next)
     });
 })
 
+
+// 骑手查询全部订单
+router.get('/v1/api/wechat/courier/courierFindAllOrder',async (ctx, next) => {
+  await apiModel
+    .courierFindAllOrder(ctx.query)
+    .then(res => {
+      ctx.body = {
+        code: 200,
+        data: res,
+        message: "接受成功",
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        data: res.data,
+        message: '服务器失联',
+      };
+    });
+})
+
 // ******************************常用地址表***************************//
 
 // 常用地址表查询

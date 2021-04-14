@@ -147,6 +147,12 @@ exports.courierAddOrder = ( value ) => {
   return query( _sql, value )
 }
 
+// 骑手查询全部订单
+exports.courierFindAllOrder = ( value ) => {
+  let _sql = `select * FROM orders  WHERE courier_id="${value.courier_id}" order by start_date desc`;
+  return query( _sql, value )
+}
+
 // ******************************常用地址表***************************//
 
 // 常用地址表加用户查询

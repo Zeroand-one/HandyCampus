@@ -1,10 +1,12 @@
 const { formatTimeString, formatTime  } = require('../../../utils/util.js');
 const { orderListFind } = require('../../../request/orderapi.js');
+const { courierFindAllOrder } = require('../../../request/courierapi.js');
 const app = getApp()
 Page({
 
   data: {
-    formdata:{}
+    formdata:{},
+    userState: 0
   },
   onLoad: function (options) {
     this.getList()
@@ -13,17 +15,33 @@ Page({
 
   },
   getList() {
+    // 根据用户来确定是否接单状态 1--接单，0--用户
+    let userState = wx.getStorageSync("userState")
     let id = wx.getStorageSync("openId")
-    orderListFind({id:id}).then(res => {
-      let data = res.data
-      data.forEach(e => {
-        e.start_date=formatTime(new Date(e.start_date))
+    if(userState==0){
+      orderListFind({id:id}).then(res => {
+        let data = res.data
+        data.forEach(e => {
+          e.start_date=formatTime(new Date(e.start_date))
+        })
+        this.setData({
+          formdata: data
+        })
+        console.log(res.data)
       })
-      this.setData({
-        formdata: data
+    }else {
+      courierFindAllOrder({courier_id:id}).then(res => {
+        let data = res.data
+        data.forEach(e => {
+          e.start_date=formatTime(new Date(e.start_date))
+        })
+        this.setData({
+          formdata: data
+        })
+        console.log(res.data)
       })
-      console.log(res.data)
-    })
+    }
+
   },
   clickGoto(e){
     let id = e.currentTarget.dataset.type
