@@ -1,4 +1,4 @@
-<view class="utype" wx:if="{{userState==0}}">
+<view class="utype" hidden="{{userState==1}}">
   <swiper class="banner" autoplay="true" interval="3000" circular="true">
     <swiper-item wx:for="{{background}}" wx:key="index">
       <navigator url="" class="banner_link">
@@ -23,7 +23,7 @@
     <view class="list_text" wx:if="{{!footer}}">没有更多数据……</view>
   </view>
 </view>
-<view class="utype" wx:else>
+<view class="utype" hidden="{{userState==0}}">
   <view class="nu" wx:if="{{!formdata===[]}}">
     <text>无数据</text>
   </view>

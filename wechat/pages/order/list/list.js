@@ -9,10 +9,10 @@ Page({
     userState: 0
   },
   onLoad: function (options) {
-    this.getList()
+    
   },
   onShow: function () {
-
+    this.getList()
   },
   getList() {
     // 根据用户来确定是否接单状态 1--接单，0--用户

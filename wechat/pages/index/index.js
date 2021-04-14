@@ -50,14 +50,18 @@ Page({
     userState: 1, // 根据用户来确定是否接单状态 1--接单，0--用户
     formdata: {}
   },
-  onLoad:async function (options) {
+  onShow(){
     this.getList()
-    this.getUserInfoType()
+    this.getOrderList()
     let userState = wx.getStorageSync("userState")
     this.setData({
       userState
     })
-    this.getOrderList()
+  },
+  onLoad:async function (options) {
+    
+    this.getUserInfoType()
+    
   },
   getUserInfoType(){
     // 根据用户来确定是否接单状态 1--接单，0--用户
