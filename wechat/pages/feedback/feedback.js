@@ -22,6 +22,9 @@
   5 清空当前页面
   6 返回上一页 
  */
+  const app = getApp()
+  const { formatTimeString, formatTime  } = require('../../utils/util.js');
+  const { feedbackAdd } = require('../../request/feedbackapi.js');
   Page({
     data: {
       tabs: [
@@ -39,7 +42,10 @@
       // 被选中的图片路径 数组
       chooseImgs: [],
       // 文本域的内容
-      textVal: ""
+      textVal: "",
+      qq: "",
+      title: "",
+      email: ""
   
     },
     // 外网的图片的路径数组
@@ -57,7 +63,6 @@
     },
     // 点击 “+” 选择图片
     handleChooseImg() {
-      // 2 调用小程序内置的选择图片api
       wx.chooseImage({
         // 同时选中的图片的数量
         count: 9,
@@ -66,9 +71,7 @@
         // 图片的来源  相册  照相机
         sourceType: ['album', 'camera'],
         success: (result) => {
-  
           this.setData({
-            // 图片数组 进行拼接 
             chooseImgs: [...this.data.chooseImgs, ...result.tempFilePaths]
           })
         }
@@ -94,12 +97,19 @@
       })
     },
     // 提交按钮的点击
-    handleFormSubmit() {
-      // 1 获取文本域的内容 图片数组
+    handleFormSubmit(e) {
       const { textVal, chooseImgs } = this.data;
-      // 2 合法性的验证
+      let data = e.detail.value
+      let id= wx.getStorageSync("openId");
+      let params={
+        user_id: id,
+        message_body: textVal,
+        start_date: formatTime(new Date()),
+        message_email: data.email,
+        message_qq: data.qq,
+        message_title: data.title
+      }
       if (!textVal.trim()) {
-        // 不合法
         wx.showToast({
           title: '输入不合法',
           icon: 'none',
@@ -114,52 +124,61 @@
         title: "正在上传中",
         mask: true
       });
-  
       // 判断有没有需要上传的图片数组
-  
       if (chooseImgs.length != 0) {
         chooseImgs.forEach((v, i) => {
           wx.uploadFile({
-            // 图片要上传到哪里
-            url: 'https://images.ac.cn/Home/Index/UploadAction/',
-            // 被上传的文件的路径
+            url:  app.globalData.API_ROOT + '/uploadFile/feedback',
             filePath: v,
-            // 上传的文件的名称 后台来获取文件  file
             name: "file",
-            // 顺带的文本信息
             formData: {},
             success: (result) => {
               console.log(result);
-              let url = JSON.parse(result.data).url;
+              let url = JSON.parse(result.data).imgUrl;
               this.UpLoadImgs.push(url);
   
               // 所有的图片都上传完毕了才触发  
               if (i === chooseImgs.length - 1) {
                 wx.hideLoading();
-                console.log("把文本的内容和外网的图片数组 提交到后台中");
-                //  提交都成功了
-                // 重置页面
-                this.setData({
-                  textVal: "",
-                  chooseImgs: []
-                })
-                // 返回上一个页面
-                wx.navigateBack({
-                  delta: 1
+                
+                // 订单地址添加成功后添加图片
+                let fileListStr = "";
+                this.UpLoadImgs.forEach((item) => {
+                  fileListStr += "," + item;
                 });
-  
+                console.log(fileListStr)
+                params.message_img=fileListStr
+                feedbackAdd(params).then(res => {
+                  if(res.code==200){
+                    wx.showToast({
+                      title: res.message,
+                      icon: 'success',
+                      duration: 2000
+                    })
+                    wx.navigateBack({
+                      delta: 1
+                    });
+                  }
+                })
               }
             }
           });
         })
       }else{
         wx.hideLoading();
-          
         console.log("只是提交了文本");
-        wx.navigateBack({
-          delta: 1
-        });
-          
+        feedbackAdd(params).then(res => {
+          if(res.code==200){
+            wx.showToast({
+              title: res.message,
+              icon: 'success',
+              duration: 2000
+            })
+            wx.navigateBack({
+              delta: 1
+            });
+          }
+        })
       }
     }
   })

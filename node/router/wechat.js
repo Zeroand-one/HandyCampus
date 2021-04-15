@@ -503,6 +503,29 @@ router.post('/v1/api/wechat/order/orderPay',koaBody(),async (ctx, next) => {
 
 
 
+// *****************************订单表****************************//
+
+
+// 新增订单
+router.post('/v1/api/wechat/feedback/feedbackAdd',koaBody(),async (ctx, next) => {
+  let data = ctx.request.body
+  await apiModel
+    .feedbackAdd(data)
+    .then(res => {
+      ctx.body = {
+        data:res,
+        code: 200,
+        message: '意见提交成功!'
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        message: '服务器失联',
+      };
+    });
+})
+
 
 
 // *******************************************************主页推荐******************************************************//

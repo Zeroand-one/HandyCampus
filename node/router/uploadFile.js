@@ -14,7 +14,9 @@ var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     if(req.url=='/uploadFile/Banner'){
       cb(null, 'upload/banner/')
-    }else{
+    }else if(req.url=='/uploadFile/feedback'){
+      cb(null, 'upload/feedback/')
+    }{
       cb(null, 'upload/')
     }
   },
@@ -38,6 +40,13 @@ router.post('/uploadFile',upload.single('file'),async(ctx,next)=>{
 
 // banner图接口
 router.post('/uploadFile/Banner',upload.single('file'),async(ctx,next)=>{
+  ctx.body = {
+    imgUrl: ctx.req.file.filename
+  }
+})
+
+// feedback图接口
+router.post('/uploadFile/feedback',upload.single('file'),async(ctx,next)=>{
   ctx.body = {
     imgUrl: ctx.req.file.filename
   }

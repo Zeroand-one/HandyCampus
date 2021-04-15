@@ -253,3 +253,11 @@ exports.orderPay = ( value ) => {
   let _sql = `UPDATE orders SET open_date="${value.open_date}", order_state="${value.order_state}" WHERE order_id="${value.order_id}";`
   return query( _sql, value )
 }
+
+// **********************************意见反馈*********************************//
+
+// 提交意见反馈
+exports.feedbackAdd = ( value ) => {
+  let _sql = `INSERT INTO messages SET user_id="${value.user_id}",message_body="${value.message_body}",start_date="${value.start_date}",message_img="${value.message_img}",message_email="${value.message_email}",message_qq="${value.message_qq}",message_title="${value.message_title}";`
+  return query( _sql, value )
+}
