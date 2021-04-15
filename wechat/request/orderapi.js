@@ -39,4 +39,8 @@ module.exports={
 		return request('/order/orderInfoFind', 'GET', params ,true);
 	},
 	
+	// 用户支付订单 
+	orderPay: (params)=>{
+		return request('/order/orderPay', 'POST', params ,true);
+	},
 }

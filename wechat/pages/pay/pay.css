@@ -1,0 +1,56 @@
+.conent {
+  background-color: #fff;
+}
+.conent .pan {
+  padding: 10rpx !important;
+  margin: 30rpx !important;
+  border-radius: 20rpx;
+  background-color: #eee;
+}
+.conent .pan .item {
+  height: 64rpx;
+  line-height: 64rpx;
+  padding-left: 10rpx;
+  font-size: 30rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #333;
+}
+.conent .order .te {
+  font-size: 36rpx;
+  padding-left: 50rpx;
+}
+.conent .order .te text {
+  color: #ff7300;
+}
+.conent .btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 60%;
+  border-radius: 60rpx !important;
+  height: 60rpx;
+  position: fixed;
+  left: 20%;
+  bottom: 20rpx;
+  color: #eee;
+}
+.conent .btn .money {
+  background-color: green;
+  width: 60%;
+  height: 60rpx;
+  border-radius: 60rpx 0 0rpx 60rpx;
+  text-align: center;
+  line-height: 60rpx;
+  font-size: 32rpx;
+}
+.conent .btn button {
+  background-color: blue !important;
+  width: 40%;
+  padding: 0 !important;
+  line-height: 60rpx !important;
+  height: 60rpx !important;
+  border-radius: 0 60rpx 60rpx 0 !important;
+  font-size: 32rpx;
+}

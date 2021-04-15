@@ -19,6 +19,8 @@
     "pages/order/mylist/mylist",
     "pages/order/info/info",
 
+    "pages/pay/pay",
+
     "pages/address/add/add",
     "pages/address/addlist/addlist",
     "pages/address/list/list",

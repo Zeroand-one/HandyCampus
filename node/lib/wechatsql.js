@@ -247,3 +247,9 @@ exports.orderInfoFind = ( value ) => {
   let _sql = `SELECT * FROM orders,orderaddres WHERE orders.order_id=orderaddres.order_adr_id and orders.order_id="${value}" ;`
   return query( _sql, value )
 }
+
+// 用户支付订单
+exports.orderPay = ( value ) => {
+  let _sql = `UPDATE orders SET open_date="${value.open_date}", order_state="${value.order_state}" WHERE order_id="${value.order_id}";`
+  return query( _sql, value )
+}

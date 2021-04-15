@@ -479,6 +479,28 @@ router.get('/v1/api/wechat/order/orderAddresFind',async (ctx, next) => {
 })
 
 
+// 用户支付订单
+router.post('/v1/api/wechat/order/orderPay',koaBody(),async (ctx, next) => {
+  let data = ctx.request.body
+  data.open_date=moment(new Date(data.open_date)).format('YYYY-MM-DD HH:mm:ss')
+  await apiModel
+    .orderPay(data)
+    .then(res => {
+      ctx.body = {
+        data:res,
+        code: 200,
+        message: '上传成功!'
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        data:res,
+        message: '服务器失联',
+      };
+    });
+})
+
 
 
 

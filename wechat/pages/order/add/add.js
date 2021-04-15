@@ -322,7 +322,7 @@ Page({
       name: setAddressInfo.address_username,
       order_address: setAddressInfo.setAddressName,
       order_id: orderId,
-      order_state: 2,
+      order_state: 0,
       order_weight: this.data.goodsWeight,
       goods_type: this.data.goodsType,
       start_date: formatTime(newDate),
@@ -367,8 +367,8 @@ Page({
     wx.setStorageSync('orderRequestType', '')
     wx.setStorageSync('order_type', '')
     setTimeout(function(){
-      wx.switchTab({
-        url: '/pages/index/index'
+      wx.navigateTo({
+        url: '/pages/pay/pay?id=' + orderId
       });
     },1000)
   }
