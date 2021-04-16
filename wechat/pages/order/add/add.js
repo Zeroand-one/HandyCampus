@@ -89,24 +89,15 @@ Page({
         })
       }
     }
-    console.log(orderType,e.id , _this.data.order_type,'er1')
-
+  },
+  onShow: function (options) {
+    var _this = this
     let StoragegetAddressInfo = wx.getStorageSync("getAddressInfo")
     let StoragesetAddressInfo = wx.getStorageSync("setAddressInfo")
     _this.setData({
       getAddressInfo: StoragegetAddressInfo,
       setAddressInfo: StoragesetAddressInfo
     })
-    
-    const a= _this.data.getAddressInfo
-    const b= _this.data.setAddressInfo
-    console.log(a,b,'o')
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function (options) {
   }, 
   handleOpen1 (e) {
     this.setData({

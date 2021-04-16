@@ -4,7 +4,7 @@ const { request } = require('../utils/api.js')
 module.exports={
 
 	// list
-  // 查询用户信息
+  // 用户常用地址表列表查询
 	oftenAddresFindId: (value)=>{
 		return request('/address/oftenAddresFindId', 'GET', { id: value},true);
 	},

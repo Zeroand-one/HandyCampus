@@ -5,14 +5,22 @@
         <view class="cir">取</view>
         <text>{{getAddressInfo.getAddressName?getAddressInfo.getAddressName:"从哪取快递"}}</text>
       </navigator>
-      <view class="oft">常用</view>
+      <view class="oft">
+        <navigator url="/pages/order/addresslist/addresslist?type=get" hover-class="navigator-hover">
+          常用
+        </navigator>
+      </view>
     </view>
     <view class="get">
       <navigator class="get_le" url="/pages/address/add/add?type=set">
         <view class="cir setcir">收</view>
         <text>{{setAddressInfo.setAddressName?setAddressInfo.setAddressName:"送到哪"}}</text>
       </navigator>
-      <view class="oft">常用</view>
+      <view class="oft">
+        <navigator url="/pages/order/addresslist/addresslist?type=set" hover-class="navigator-hover">
+          常用
+        </navigator>
+      </view>
     </view>
     <view class="goodsinfo">
       <i-icon type="createtask" size="28" color="#333" />
