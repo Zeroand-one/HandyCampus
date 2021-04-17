@@ -36,6 +36,24 @@
           "pathName": "pages/feedback/feedback",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/order/info/info",
+          "pathName": "pages/order/info/info",
+          "query": "id=20210417192301479",
+          "scene": null
+        },
+        {
+          "name": "pages/order/list/list",
+          "pathName": "pages/order/list/list",
+          "query": "id=20210417192301479",
+          "scene": null
+        },
+        {
+          "name": "pages/pay/pay",
+          "pathName": "pages/pay/pay",
+          "query": "id=20210417203311223",
+          "scene": null
         }
       ]
     }

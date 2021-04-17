@@ -7,10 +7,15 @@ Page({
 
   data: {
     fordata: {},
+    imgList: [],
+    API_ROOT: ''
   },
   onLoad: function (options) {
     var _this=this
     _this.sendData(options)
+    _this.setData({
+      API_ROOT: app.globalData.API_ROOT
+    })
   },
   onShow: function () {
 
@@ -64,10 +69,20 @@ Page({
             getData[i]=formatTime(new Date(getData[i]))
           } 
         }
-
+      }
+      let img=[]
+      let list=getData.order_img.split(',')
+      list.splice(0,1)
+      for (const i in list) {
+        let item={
+          id: i,
+          url: this.data.API_ROOT+'/'+list[i]
+        }
+        img.push(item)
       }
       this.setData({
-        fordata: getData
+        fordata: getData,
+        imgList: img
       })
     })
   },
@@ -94,6 +109,22 @@ Page({
         }
       })
     })
-    console.log('1')
   },
+  //预览图片
+  previewImg: function(e){
+    var _this = this;
+    let id = e.currentTarget.dataset.id;
+    let url = e.currentTarget.dataset.url;
+    let previewImgArr = [];
+    //通过循环在数据链里面找到和这个id相同的这一组数据，然后再取出这一组数据当中的图片
+    let data = _this.data.imgList;
+    for (const i in data) {
+      previewImgArr.push(data[i].url);
+    }
+    console.log(previewImgArr)
+    wx.previewImage({
+      current: url, // 当前显示图片的http链接
+      urls: previewImgArr // 需要预览的图片http链接列表
+    })
+  }
 })

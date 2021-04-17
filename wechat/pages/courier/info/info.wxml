@@ -13,11 +13,20 @@
       <view class="item">支付：{{fordata.money}} 元</view>
       <view class="itembody">备注：{{fordata.order_body}}</view>
     </view>
+    <view class="date pan img" hidden="{{fordata.order_img=='暂无'}}">
+      <view class="ti">订单图片</view>
+      <block wx:for='{{imgList}}' wx:key='id'>
+        <image bindtap='previewImg' data-id='{{item.id}}' data-url='{{item.url}}' class='itemImg' src='{{item.url}}'></image>
+      </block>
+    </view>
     <view class="date pan">
       <view class="item">创建时间: {{fordata.start_date}}</view>
       <view class="item">发布时间: {{fordata.open_date}}</view>
       <view class="item">转让时间: {{fordata.transfer_date}}</view>
     </view>
+  </view>
+  <view class="address pan" hidden="{{fordata.order_body=='暂无'}}">
+    <view class="bz">备注: {{fordata.order_body}}</view>
   </view>
   <view class="address pan">
     <view class="item">始姓名: {{fordata.get_address_username}}</view>

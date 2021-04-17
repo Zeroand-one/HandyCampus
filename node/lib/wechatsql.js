@@ -137,7 +137,7 @@ exports.userCourierAdd = ( value ) => {
 
 // 查看已发布订单列表
 exports.orderOpenListFind = ( value ) => {
-  let _sql = `select * FROM orders  WHERE order_state=2 or order_state=4 ;`
+  let _sql = `select * FROM orders  WHERE order_state=2 or order_state=4  order by start_date desc;`
   return query( _sql, value )
 }
 
@@ -227,7 +227,7 @@ exports.orderImg = ( value ) => {
 
 // 查看用户订单列表
 exports.orderListFind = ( value ) => {
-  let _sql = `select * FROM orders  WHERE user_id="${value}" ;`
+  let _sql = `select * FROM orders  WHERE user_id="${value}"  order by start_date desc;`
   return query( _sql, value )
 }
 
