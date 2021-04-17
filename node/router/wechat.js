@@ -489,7 +489,29 @@ router.post('/v1/api/wechat/order/orderPay',koaBody(),async (ctx, next) => {
       ctx.body = {
         data:res,
         code: 200,
-        message: '上传成功!'
+        message: '支付成功!'
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        data:res,
+        message: '服务器失联',
+      };
+    });
+})
+
+
+// 用户评价
+router.post('/v1/api/wechat/order/orderClientEstimate',koaBody(),async (ctx, next) => {
+  let data = ctx.request.body
+  await apiModel
+    .orderClientEstimate(data)
+    .then(res => {
+      ctx.body = {
+        data:res,
+        code: 200,
+        message: '评价成功!'
       };
     })
     .catch(res => {
@@ -503,10 +525,10 @@ router.post('/v1/api/wechat/order/orderPay',koaBody(),async (ctx, next) => {
 
 
 
-// *****************************订单表****************************//
+// *****************************反馈表****************************//
 
 
-// 新增订单
+// 新增反馈
 router.post('/v1/api/wechat/feedback/feedbackAdd',koaBody(),async (ctx, next) => {
   let data = ctx.request.body
   await apiModel

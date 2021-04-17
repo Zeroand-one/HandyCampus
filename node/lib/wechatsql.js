@@ -254,6 +254,12 @@ exports.orderPay = ( value ) => {
   return query( _sql, value )
 }
 
+// 用户评价
+exports.orderClientEstimate = ( value ) => {
+  let _sql = `UPDATE orders SET user_estimate="${value.user_estimate}", estimate_star="${value.estimate_star}" WHERE order_id="${value.order_id}";`
+  return query( _sql, value )
+}
+
 // **********************************意见反馈*********************************//
 
 // 提交意见反馈

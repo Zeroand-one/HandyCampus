@@ -1,5 +1,5 @@
 const { formatTimeString, formatTime  } = require('../../../utils/util.js');
-const { orderInfoFind } = require('../../../request/orderapi.js');
+const { orderInfoFind, orderClientEstimate } = require('../../../request/orderapi.js');
 const app = getApp()
 Page({
 
@@ -7,7 +7,8 @@ Page({
     fordata: {},
     starIndex: 0,
     imgList: [],
-    API_ROOT: ''
+    API_ROOT: '',
+    feedbackValue: ''
   },
   onLoad: function (options) {
     var _this=this
@@ -69,6 +70,13 @@ Page({
           } 
         }
       }
+      if(getData.user_estimate){
+        this.setData({
+          starIndex: getData.estimate_star,
+          feedbackValue: getData.user_estimate
+        })
+      }
+      // 图片处理
       let img=[]
       let list=getData.order_img.split(',')
       list.splice(0,1)
@@ -105,6 +113,33 @@ Page({
     wx.previewImage({
       current: url, // 当前显示图片的http链接
       urls: previewImgArr // 需要预览的图片http链接列表
+    })
+  },
+  feedbackChange(e){
+    const detail = e.detail;
+    this.setData({
+      feedbackValue: detail.value,
+    })
+  },
+  feedback(){
+    let order_id = this.data.fordata.order_id
+    let params={
+      order_id,
+      user_estimate: this.data.feedbackValue,
+      estimate_star: this.data.starIndex
+    }
+    console.log(params)
+    orderClientEstimate(params).then(res => {
+      if(res.code==200){
+        wx.showToast({
+          title: '评论成功',
+          icon: 'success',
+          duration: 2000
+        })
+        wx.switchTab({
+          url: '/pages/index/index'
+        })
+      }
     })
   }
 })

@@ -38,6 +38,10 @@ module.exports={
 	orderInfoFind: (params)=>{
 		return request('/order/orderInfoFind', 'GET', params ,true);
 	},
+	// 用户评价 
+	orderClientEstimate: (params)=>{
+		return request('/order/orderClientEstimate', 'POST', params ,true);
+	},
 	
 	// 用户支付订单 
 	orderPay: (params)=>{

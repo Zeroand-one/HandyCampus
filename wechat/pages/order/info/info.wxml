@@ -43,12 +43,13 @@
     <view class="item">骑手姓名: {{fordata.courier_name}}</view>
     <view class="item">骑手ID: {{fordata.courier_id}}</view>
   </view>
-  <view class="back pan">
+  <view class="back pan" hidden="{{fordata.end_date=='暂无'}}">
     <i-cell-group>
       <i-cell title="评价">
         <i-rate bind:change="onStarChange" value="{{starIndex}}">{{starIndex}}星</i-rate>
       </i-cell>
     </i-cell-group>
-    <textarea rows="4" cols=""></textarea>
+    <textarea rows="4" cols="" data-val="feedbackValue" value="{{feedbackValue}}" bindinput="feedbackChange"></textarea>
+    <button type="primary" bindtap="feedback" hidden="{{fordata.end_date}}">提交意见</button>
   </view>
 </view>
