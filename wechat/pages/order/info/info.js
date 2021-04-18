@@ -141,5 +141,26 @@ Page({
         })
       }
     })
-  }
+  },
+  // 支付
+  submit(){
+    let params={
+      order_id: this.data.fordata.order_id,
+      open_date: formatTime(new Date()),
+      order_state: 2,
+    }
+    orderPay(params).then(res => {
+      if(res.code==200){
+        wx.showToast({
+          title: '支付成功',
+          icon: 'success',
+          duration: 2000
+        })
+        wx.switchTab({
+          url: '/pages/index/index'
+        })
+      }
+    })
+    console.log('1')
+  },
 })

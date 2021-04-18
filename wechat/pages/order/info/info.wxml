@@ -52,4 +52,8 @@
     <textarea rows="4" cols="" data-val="feedbackValue" value="{{feedbackValue}}" bindinput="feedbackChange"></textarea>
     <button type="primary" bindtap="feedback" hidden="{{fordata.end_date}}">提交意见</button>
   </view>
+  <view class="btn" hidden="{{fordata.order_state!=='未发布'}}">
+    <view class="money">支付：{{fordata.money}} 元</view>
+    <button type="primary" bindtap="submit">支付订单</button>
+  </view>
 </view>
