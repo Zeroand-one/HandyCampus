@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "i-icon": "../../../miniprogram_npm/iview-weapp/icon/index"
+    "i-icon": "../../../miniprogram_npm/iview-weapp/icon/index",
+    "i-notice-bar": "../../../miniprogram_npm/iview-weapp/notice-bar/index"
   },
   "navigationBarTitleText": "主页",
   "enablePullDownRefresh": true,

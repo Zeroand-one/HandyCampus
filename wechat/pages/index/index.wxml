@@ -8,9 +8,10 @@
     </swiper-item>
   </swiper>
   <view class="msg">
-    <i-icon type="remind_fill" size="18" color="#ff3f3f" />
+    <i-notice-bar icon="systemprompt" loop>{{message}}</i-notice-bar>
+    <!-- <i-icon type="remind_fill" size="18" color="#ff3f3f" />
     <text class="info">信息提示:</text>
-    <text>{{message}}</text>
+    <text></text> -->
   </view>
   <view class="list">
     <navigator class="item" wx:for="{{list}}" wx:key="index" url="/pages/order/add/add?id={{item.id}}">

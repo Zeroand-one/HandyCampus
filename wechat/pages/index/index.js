@@ -48,7 +48,8 @@ Page({
     Search:"",    //搜索内容
     footer:true,  //数据为空、有数据（false）
     userState: 1, // 根据用户来确定是否接单状态 1--接单，0--用户
-    formdata: {}
+    formdata: {},
+    message: '消息通知栏--大甩卖大甩卖，不要九九八，只要一万八'
   },
   onShow(){
     this.getList()
