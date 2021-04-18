@@ -59,4 +59,9 @@
   <view class="btnFinish" wx:if="{{fordata.order_state=='骑手已接'?true:false}}">
     <button type="primary" bindtap="submitFinish">完成订单</button>
   </view>
+  <view class="btnback" wx:if="{{fordata.order_state=='完成'?true:false}}">
+    <text class="ti">骑手反馈</text>
+    <textarea rows="4" cols="" data-val="feedbackValue" value="{{courierBackValue}}" bindinput="courierBackChange"></textarea>
+    <button type="primary" bindtap="courierBackBtn" wx:if="{{userState==1}}">提交反馈</button>
+  </view>
 </view>

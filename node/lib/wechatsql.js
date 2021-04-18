@@ -265,6 +265,13 @@ exports.orderFinish = ( value ) => {
   let _sql = `UPDATE orders SET end_date="${value.end_date}", order_state="${value.order_state}" WHERE order_id="${value.order_id}";`
   return query( _sql, value )
 }
+
+// 骑手反馈
+exports.orderCourierBack = ( value ) => {
+  let _sql = `UPDATE orders SET courier_back="${value.courier_back}" WHERE order_id="${value.order_id}";`
+  return query( _sql, value )
+}
+
 // **********************************意见反馈*********************************//
 
 // 提交意见反馈

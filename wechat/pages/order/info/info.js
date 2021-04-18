@@ -1,5 +1,5 @@
 const { formatTimeString, formatTime  } = require('../../../utils/util.js');
-const { orderInfoFind, orderClientEstimate, orderFinish } = require('../../../request/orderapi.js');
+const { orderInfoFind, orderClientEstimate, orderFinish, orderCourierBack } = require('../../../request/orderapi.js');
 const app = getApp()
 Page({
 
@@ -8,7 +8,9 @@ Page({
     starIndex: 0,
     imgList: [],
     API_ROOT: '',
-    feedbackValue: ''
+    userState: 1,
+    feedbackValue: '',
+    courierBackValue: ''
   },
   onLoad: function (options) {
     var _this=this
@@ -18,7 +20,10 @@ Page({
     })
   },
   onShow: function () {
-
+    let userState = wx.getStorageSync("userState")
+    this.setData({
+      userState
+    })
   },
   sendData(e){
     console.log(e)
@@ -74,6 +79,11 @@ Page({
         this.setData({
           starIndex: getData.estimate_star,
           feedbackValue: getData.user_estimate
+        })
+      }
+      if(getData.courier_back){
+        this.setData({
+          courierBackValue: getData.courier_back,
         })
       }
       // 图片处理
@@ -170,6 +180,32 @@ Page({
       order_state: 5,
     }
     orderFinish(params).then(res => {
+      if(res.code==200){
+        wx.showToast({
+          title: '成功',
+          icon: 'success',
+          duration: 2000
+        })
+        wx.switchTab({
+          url: '/pages/index/index'
+        })
+      }
+    })
+  },
+  // 提交反馈
+  courierBackChange(e){
+    const detail = e.detail;
+    this.setData({
+      courierBackValue: detail.value,
+    })
+  },
+  // 提交反馈完成
+  courierBackBtn(){
+    let params={
+      order_id: this.data.fordata.order_id,
+      courier_back: this.data.courierBackValue,
+    }
+    orderCourierBack(params).then(res => {
       if(res.code==200){
         wx.showToast({
           title: '成功',

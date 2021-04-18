@@ -50,4 +50,8 @@ module.exports={
 	orderFinish: (params)=>{
 		return request('/order/orderFinish', 'POST', params ,true);
 	},
+	// 骑手反馈 
+	orderCourierBack: (params)=>{
+		return request('/order/orderCourierBack', 'POST', params ,true);
+	},
 }

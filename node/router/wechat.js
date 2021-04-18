@@ -547,6 +547,27 @@ router.post('/v1/api/wechat/order/orderFinish',koaBody(),async (ctx, next) => {
 })
 
 
+// 骑手反馈
+router.post('/v1/api/wechat/order/orderCourierBack',koaBody(),async (ctx, next) => {
+  let data = ctx.request.body
+  await apiModel
+    .orderCourierBack(data)
+    .then(res => {
+      ctx.body = {
+        data:res,
+        code: 200,
+        message: '评价成功!'
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        data:res,
+        message: '服务器失联',
+      };
+    });
+})
+
 
 // *****************************反馈表****************************//
 

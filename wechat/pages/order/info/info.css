@@ -2,12 +2,14 @@
   background-color: #fff;
   margin-bottom: 100rpx;
 }
+
 .conent .pan {
   padding: 10rpx !important;
   margin: 30rpx !important;
   border-radius: 20rpx;
   background-color: #eee;
 }
+
 .conent .pan .item {
   height: 64rpx;
   line-height: 64rpx;
@@ -18,37 +20,45 @@
   white-space: nowrap;
   color: #333;
 }
+
 .conent .pan .bz {
   height: 300rpx;
   color: #333;
   font-size: 30rpx;
   padding-left: 10rpx;
 }
+
 .conent .order .te {
   font-size: 36rpx;
   padding-left: 50rpx;
 }
+
 .conent .order .te text {
   color: #ff7300;
 }
+
 .conent .img {
   font-size: 30rpx;
   color: #333;
 }
+
 .conent .img .itemImg {
   width: 200rpx;
   height: 200rpx;
   margin: 10rpx 10rpx;
 }
+
 .conent .back textarea {
   background-color: #fff;
   margin: 20rpx auto;
   width: 100%;
   border-radius: 10rpx;
 }
+
 .conent .back button {
   width: 60%;
 }
+
 .conent .btn {
   display: flex;
   justify-content: space-between;
@@ -61,6 +71,7 @@
   bottom: 20rpx;
   color: #eee;
 }
+
 .conent .btn .money {
   background-color: green;
   width: 60%;
@@ -70,6 +81,7 @@
   line-height: 60rpx;
   font-size: 32rpx;
 }
+
 .conent .btn button {
   background-color: blue !important;
   width: 40%;
@@ -79,16 +91,35 @@
   border-radius: 0 60rpx 60rpx 0 !important;
   font-size: 32rpx;
 }
+
 .conent .btnFinish {
   width: 60%;
   border-radius: 60rpx !important;
   height: 60rpx;
   margin: 0 auto;
 }
+
 .conent .btnFinish button {
   padding: 0 !important;
   line-height: 60rpx !important;
   height: 60rpx !important;
   border-radius: 30rpx !important;
   font-size: 32rpx;
+}
+
+.conent .btnback button {
+  padding: 0 !important;
+  line-height: 60rpx !important;
+  height: 60rpx !important;
+  border-radius: 30rpx !important;
+  font-size: 32rpx;
+  width: 60%;
+  margin-top: 20rpx;
+}
+
+.conent .btnback textarea {
+  background-color: #eee;
+  width: 96%;
+  border-radius: 10rpx;
+  margin: 0 auto;
 }

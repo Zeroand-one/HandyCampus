@@ -106,3 +106,20 @@
   border-radius: 30rpx !important;
   font-size: 32rpx;
 }
+
+.conent .btnback button {
+  padding: 0 !important;
+  line-height: 60rpx !important;
+  height: 60rpx !important;
+  border-radius: 30rpx !important;
+  font-size: 32rpx;
+  width: 60%;
+  margin-top: 20rpx;
+}
+
+.conent .btnback textarea {
+  background-color: #eee;
+  width: 96%;
+  border-radius: 10rpx;
+  margin: 0 auto;
+}
