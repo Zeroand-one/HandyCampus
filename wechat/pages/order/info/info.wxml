@@ -54,6 +54,9 @@
   </view>
   <view class="btn" wx:if="{{fordata.order_state=='未发布'?true:false}}">
     <view class="money">支付：{{fordata.money}} 元</view>
-    <button type="primary" bindtap="submit">支付订单</button>
+    <button type="primary" bindtap="submitPay">支付订单</button>
+  </view>
+  <view class="btnFinish" wx:if="{{fordata.order_state=='骑手已接'?true:false}}">
+    <button type="primary" bindtap="submitFinish">完成订单</button>
   </view>
 </view>

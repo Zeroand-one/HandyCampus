@@ -1,5 +1,5 @@
 const { formatTimeString, formatTime  } = require('../../../utils/util.js');
-const { orderInfoFind, orderClientEstimate } = require('../../../request/orderapi.js');
+const { orderInfoFind, orderClientEstimate, orderFinish } = require('../../../request/orderapi.js');
 const app = getApp()
 Page({
 
@@ -143,7 +143,7 @@ Page({
     })
   },
   // 支付
-  submit(){
+  submitPay(){
     let params={
       order_id: this.data.fordata.order_id,
       open_date: formatTime(new Date()),
@@ -161,6 +161,25 @@ Page({
         })
       }
     })
-    console.log('1')
+  },
+  // 骑手点击完成
+  submitFinish(){
+    let params={
+      order_id: this.data.fordata.order_id,
+      end_date: formatTime(new Date()),
+      order_state: 5,
+    }
+    orderFinish(params).then(res => {
+      if(res.code==200){
+        wx.showToast({
+          title: '成功',
+          icon: 'success',
+          duration: 2000
+        })
+        wx.switchTab({
+          url: '/pages/index/index'
+        })
+      }
+    })
   },
 })

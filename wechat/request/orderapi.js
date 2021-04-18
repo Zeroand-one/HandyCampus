@@ -42,9 +42,12 @@ module.exports={
 	orderClientEstimate: (params)=>{
 		return request('/order/orderClientEstimate', 'POST', params ,true);
 	},
-	
 	// 用户支付订单 
 	orderPay: (params)=>{
 		return request('/order/orderPay', 'POST', params ,true);
+	},
+	// 骑手点击完成 
+	orderFinish: (params)=>{
+		return request('/order/orderFinish', 'POST', params ,true);
 	},
 }

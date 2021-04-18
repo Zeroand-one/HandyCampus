@@ -524,6 +524,29 @@ router.post('/v1/api/wechat/order/orderClientEstimate',koaBody(),async (ctx, nex
 })
 
 
+// 骑手点击完成
+router.post('/v1/api/wechat/order/orderFinish',koaBody(),async (ctx, next) => {
+  let data = ctx.request.body
+  data.end_date=moment(new Date(data.end_date)).format('YYYY-MM-DD HH:mm:ss')
+  await apiModel
+    .orderFinish(data)
+    .then(res => {
+      ctx.body = {
+        data:res,
+        code: 200,
+        message: '支付成功!'
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        data:res,
+        message: '服务器失联',
+      };
+    });
+})
+
+
 
 // *****************************反馈表****************************//
 
