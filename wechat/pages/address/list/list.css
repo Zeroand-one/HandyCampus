@@ -9,20 +9,23 @@
   padding: 4rpx 15rpx;
 }
 .box .item {
-  padding: 10rpx auto;
+  padding: 20rpx !important;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-top: 1rpx solid #aaa;
+  background-color: #fff;
+  border-radius: 4rpx;
+  margin: 14rpx auto;
 }
 .box .item .info {
   font-size: 36rpx;
+  width: 90%;
 }
 .box .item .info .addname {
   color: #111;
 }
 .box .item .info .bot {
-  font-size: 28rpx;
+  font-size: 30rpx;
   color: #999;
   padding-top: 10rpx;
   display: flex;

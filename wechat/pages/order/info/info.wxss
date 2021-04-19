@@ -1,13 +1,12 @@
 .conent {
-  background-color: #fff;
   margin-bottom: 100rpx;
 }
 
 .conent .pan {
   padding: 10rpx !important;
   margin: 30rpx !important;
-  border-radius: 20rpx;
-  background-color: #eee;
+  border-radius: 16rpx;
+  background-color: #fff;
 }
 
 .conent .pan .item {
@@ -26,6 +25,10 @@
   color: #333;
   font-size: 30rpx;
   padding-left: 10rpx;
+}
+
+.conent .order {
+  padding-top: 30rpx;
 }
 
 .conent .order .te {
@@ -49,10 +52,11 @@
 }
 
 .conent .back textarea {
-  background-color: #fff;
+  background-color: #dee;
   margin: 20rpx auto;
-  width: 100%;
+  width: 96%;
   border-radius: 10rpx;
+  padding: 16rpx;
 }
 
 .conent .back button {
@@ -107,6 +111,10 @@
   font-size: 32rpx;
 }
 
+.conent .btnback .ti {
+  padding-left: 24rpx;
+}
+
 .conent .btnback button {
   padding: 0 !important;
   line-height: 60rpx !important;
@@ -118,8 +126,9 @@
 }
 
 .conent .btnback textarea {
-  background-color: #eee;
+  background-color: #dee;
   width: 96%;
   border-radius: 10rpx;
-  margin: 0 auto;
+  margin: 20rpx auto;
+  padding: 16rpx;
 }

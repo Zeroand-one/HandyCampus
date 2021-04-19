@@ -13,13 +13,6 @@
     "miniprogram": {
       "list": [
         {
-          "id": -1,
-          "name": "pages/order/add/add",
-          "pathName": "pages/order/add/add",
-          "query": "",
-          "scene": null
-        },
-        {
           "name": "pages/order/info/info",
           "pathName": "pages/order/info/info",
           "query": "id=20210412170109898",
@@ -53,6 +46,12 @@
           "name": "pages/pay/pay",
           "pathName": "pages/pay/pay",
           "query": "id=20210417203035730",
+          "scene": null
+        },
+        {
+          "name": "pages/address/addlist/addlist",
+          "pathName": "pages/address/addlist/addlist",
+          "query": "",
           "scene": null
         }
       ]

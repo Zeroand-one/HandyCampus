@@ -13,6 +13,9 @@
   flex-wrap: wrap;
   align-items: center;
   font-size: 35rpx;
+  background-color: #fff;
+  border-radius: 16rpx;
+  margin: 20rpx auto;
 }
 
 .card .item .i-icon {
@@ -21,4 +24,19 @@
 
 .card .item i-input {
   width: 80%;
+}
+
+.card .item .added {
+  font-size: 26rpx;
+  padding: 0 30rpx;
+}
+
+.card .item .msg {
+  font-size: 26rpx;
+  color: red;
+  padding-left: 20rpx;
+}
+
+button {
+  width: 60%;
 }

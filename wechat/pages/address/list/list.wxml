@@ -16,6 +16,6 @@
   </view>
 </view>
 <view class="bottom" bindtap="toAddAdress">
-  <i-icon type="add" size="23" color="#f90" />
+  <i-icon type="add" size="26" color="#f90" />
   <text class="addadr">新建地址</text>
 </view>

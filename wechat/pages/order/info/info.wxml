@@ -46,10 +46,12 @@
   <view class="back pan" hidden="{{fordata.end_date=='暂无'}}">
     <i-cell-group>
       <i-cell title="评价">
-        <i-rate bind:change="onStarChange" value="{{starIndex}}">{{starIndex}}星</i-rate>
+        <i-rate bind:change="onStarChange" disabled="{{fordata.user_estimate?true:false}}" value="{{starIndex}}">
+          {{starIndex}}星
+        </i-rate>
       </i-cell>
     </i-cell-group>
-    <textarea rows="4" cols="" data-val="feedbackValue" value="{{feedbackValue}}" bindinput="feedbackChange"></textarea>
+    <textarea rows="4" cols="" disabled="{{fordata.user_estimate?true:false}}" data-val="feedbackValue" value="{{feedbackValue}}" bindinput="feedbackChange"></textarea>
     <button type="primary" bindtap="feedback" hidden="{{fordata.end_date}}">提交意见</button>
   </view>
   <view class="btn" wx:if="{{fordata.order_state=='未发布'?true:false}}">
@@ -57,11 +59,11 @@
     <button type="primary" bindtap="submitPay">支付订单</button>
   </view>
   <view class="btnFinish" wx:if="{{fordata.order_state=='骑手已接'?true:false}}">
-    <button type="primary" bindtap="submitFinish">完成订单</button>
+    <button type="primary" wx:if="{{userState==1}}" bindtap="submitFinish">完成订单</button>
   </view>
-  <view class="btnback" wx:if="{{fordata.order_state=='完成'?true:false}}">
+  <view class="btnback pan" wx:if="{{fordata.order_state=='完成'?true:false}}">
     <text class="ti">骑手反馈</text>
-    <textarea rows="4" cols="" data-val="feedbackValue" value="{{courierBackValue}}" bindinput="courierBackChange"></textarea>
+    <textarea rows="4" cols="" disabled="{{fordata.courier_back?true:false}}" data-val="feedbackValue" value="{{courierBackValue}}" bindinput="courierBackChange"></textarea>
     <button type="primary" bindtap="courierBackBtn" wx:if="{{userState==1}}">提交反馈</button>
   </view>
 </view>

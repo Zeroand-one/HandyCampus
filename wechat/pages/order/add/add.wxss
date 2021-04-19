@@ -1,6 +1,17 @@
+page {
+  background-color: #edece8;
+}
+
 .box {
-  background-color: #fff;
   padding: 5rpx;
+}
+
+.box .col {
+  width: 96%;
+  margin: 16rpx auto;
+  background-color: #fff;
+  border-radius: 14rpx;
+  padding: 0 10rpx;
 }
 
 .box .get {
@@ -27,16 +38,15 @@
 
 .box .get .get_le .cir {
   background-color: #666;
-  width: 40rpx;
-  min-width: 40rpx;
-  height: 40rpx;
+  width: 50rpx;
+  min-width: 50rpx;
+  height: 50rpx;
   border-radius: 50%;
   color: #fff;
   font-size: 30rpx;
   text-align: center;
-  line-height: 40rpx;
-  margin-top: 10rpx;
-  margin-right: 20rpx;
+  line-height: 50rpx;
+  margin: 10rpx 10rpx 0;
 }
 
 .box .get .get_le .setcir {
@@ -46,32 +56,53 @@
 .box .get .oft {
   width: 130rpx;
   height: 60rpx;
-  background: #ddd;
+  background: #60b301;
   border-radius: 40rpx;
   text-align: center;
   line-height: 60rpx;
   font-size: 30rpx;
+  color: #fff;
 }
 
 .box .type1 {
-  border-radius: 5%;
   padding: 10rpx;
+}
+
+.box .type1 .goodsinfo {
+  padding-left: 10rpx;
+}
+
+.box .type1 .goodsinfo .i-icon {
+  padding-bottom: 10rpx;
+}
+
+.box .type1 .goodsinfo text {
+  font-size: 36rpx;
+}
+
+.box .type1 .goodsinfo .switch {
+  display: flex;
+  justify-content: space-between;
+}
+
+.box .type1 .goodsinfo .switch i-button {
+  border-radius: 10rpx;
+  width: 45%;
 }
 
 .box .picker-content {
   font-size: 30rpx;
   color: #333;
-  background-color: #ffe;
-  border-radius: 10rpx;
-  padding-left: 10rpx;
+  padding-left: 26rpx;
 }
 
 .box .picker-content .picker-name {
-  margin: 10rpx 0;
+  padding-top: 10rpx;
+  font-size: 36rpx;
 }
 
 .box .picker-content .picker-detail {
-  background-color: #bea;
+  padding: 10rpx 0;
 }
 
 .box .remark {
@@ -80,6 +111,13 @@
 
 .box .remark .rkinfo {
   color: #333;
+  font-size: 36rpx;
+  padding: 10rpx;
+}
+
+.box .remark textarea {
+  width: 100%;
+  padding: 10rpx;
 }
 
 .box .remark .rk_tool {
@@ -109,4 +147,10 @@
 
 .box .form_btn_wrap .money {
   font-size: 30rpx;
+  padding-left: 20rpx;
+  padding-bottom: 20rpx;
+}
+
+.box .form_btn_wrap button {
+  width: 60%;
 }

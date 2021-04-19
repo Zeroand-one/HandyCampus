@@ -16,6 +16,7 @@ navigator {
 page {
   --themeColor: #eb4450;
   font-size: 28rpx;
+  background-color: #edece8;
 }
 
 image {
