@@ -2,60 +2,79 @@
   background-color: #fff;
   padding: 5rpx;
 
+
+  .get {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    height: 100rpx;
+
+    .get_le {
+      width: 80%;
+      display: flex;
+      align-items: center;
+      height: 100rpx;
+      font-size: 44rpx;
+
+      text {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .cir {
+        background-color: #666;
+        width: 40rpx;
+        min-width: 40rpx;
+        height: 40rpx;
+        border-radius: 50%;
+        color: #fff;
+        font-size: 30rpx;
+        text-align: center;
+        line-height: 40rpx;
+        margin-top: 10rpx;
+        margin-right: 20rpx;
+      }
+
+      .setcir {
+        background-color: #fac655;
+      }
+    }
+
+    .oft {
+      width: 130rpx;
+      height: 60rpx;
+      background: #ddd;
+      border-radius: 40rpx;
+      text-align: center;
+      line-height: 60rpx;
+      font-size: 30rpx;
+
+    }
+
+
+  }
+
   .type1 {
     border-radius: 5%;
     padding: 10rpx;
 
-    .get {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      height: 100rpx;
+  }
 
-      .get_le {
-        width: 80%;
-        display: flex;
-        align-items: center;
-        height: 100rpx;
-        font-size: 44rpx;
+  .picker-content {
+    font-size: 30rpx;
+    color: #333;
+    background-color: #ffe;
+    border-radius: 10rpx;
+    padding-left: 10rpx;
 
-        text {
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-        }
+    .picker-name {
+      margin: 10rpx 0;
+    }
 
-        .cir {
-          background-color: #666;
-          width: 40rpx;
-          min-width: 40rpx;
-          height: 40rpx;
-          border-radius: 50%;
-          color: #fff;
-          font-size: 30rpx;
-          text-align: center;
-          line-height: 40rpx;
-          margin-top: 10rpx;
-          margin-right: 20rpx;
-        }
-
-        .setcir {
-          background-color: #fac655;
-        }
-      }
-
-      .oft {
-        width: 130rpx;
-        height: 60rpx;
-        background: #ddd;
-        border-radius: 40rpx;
-        text-align: center;
-        line-height: 60rpx;
-        font-size: 30rpx;
-
-      }
-
+    .picker-detail {
+      background-color: #bea;
     }
   }
 

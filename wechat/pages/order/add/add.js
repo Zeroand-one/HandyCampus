@@ -62,14 +62,14 @@ Page({
   onLoad: function (options) {
     var _this=this
     _this.sendData(options)
-    var obj1 = dateTimePicker.dateTimePicker(this.data.startYear, this.data.endYear);
+    let dateTimeObjet = dateTimePicker.dateTimePicker(this.data.startYear, this.data.endYear);
     // 精确到分的处理，将数组的秒去掉
-    var lastArray = obj1.dateTimeArray.pop();
-    var lastTime = obj1.dateTime.pop();
+    let lastArray = dateTimeObjet.dateTimeArray.pop();
+    let lastTime = dateTimeObjet.dateTime.pop();
 
     this.setData({
-      dateTimeArray: obj1.dateTimeArray,
-      dateTime: obj1.dateTime
+      dateTimeArray: dateTimeObjet.dateTimeArray,
+      dateTime: dateTimeObjet.dateTime
     });
   },
   sendData(e){
@@ -229,15 +229,7 @@ Page({
   // 提交按钮的点击
   handleFormSubmit() {
     const { textVal, chooseImgs } = this.data;
-    // 验证输入
-    if (!textVal.trim()) {
-      wx.showToast({
-        title: '输入不合法',
-        icon: 'none',
-        mask: true
-      });
-      return;
-    }
+    
     let openId = wx.getStorageSync("openId")
     let order_type = wx.getStorageSync("order_type")
     let userInfo = wx.getStorageSync("userInfo") //改姓名
@@ -246,6 +238,12 @@ Page({
     let orderId =  DateStr +'' + Math.floor(Math.random()*1000)
     let getAddressInfo = this.data.getAddressInfo
     let setAddressInfo = this.data.setAddressInfo
+    if (order_type==1) {
+      this.setData({
+        money: 1
+      })
+    }
+    // 验证输入
     if (!userInfo) {
       wx.showToast({
         title: '请先登录',
@@ -262,7 +260,7 @@ Page({
       });
       return;
     }
-    if (!this.data.goodsWeight || !this.data.goodsType) {
+    if (order_type==0 && (!this.data.goodsWeight || !this.data.goodsType)) {
       wx.showToast({
         title: '请选择快递信息',
         icon: 'none',

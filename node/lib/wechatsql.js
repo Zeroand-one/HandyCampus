@@ -207,7 +207,22 @@ exports.orderAddresFind = ( value ) => {
 
 // 新增订单
 exports.orderAdd = ( value ) => {
-  let _sql = `INSERT INTO orders SET user_id="${value.user_id}",name="${value.name}",order_id="${value.order_id}",order_state="${value.order_state}",order_body="${value.order_body}",order_address="${value.order_address}",order_weight="${value.order_weight}",goods_type="${value.goods_type}",order_type="${value.order_type}",money="${value.money}",start_date="${value.start_date}";`
+  let _sql = 'INSERT INTO orders SET '
+  Object.keys(value).forEach(function (key) {
+    if (typeof value[key] == "number") {
+      _sql = " " + _sql + key + "=" + value[key] + ", ";
+    } else {
+      if (value[key]) {
+        _sql = " " + _sql + key + "='" + value[key] + "', ";
+      } else {
+        _sql =  _sql;
+      }
+    }
+  });
+  _sql = _sql.substring(0, _sql.length - 2);
+  console.log(_sql)
+  // _sql=_sql+" WHERE order_id='"+value.order_id+"'"
+  // let _sql = `INSERT INTO orders SET user_id="${value.user_id}",name="${value.name}",order_id="${value.order_id}",order_state="${value.order_state}",order_body="${value.order_body}",order_address="${value.order_address}",order_weight="${value.order_weight}",goods_type="${value.goods_type}",order_type="${value.order_type}",money="${value.money}",start_date="${value.start_date}";`
   return query( _sql, value )
 }
 

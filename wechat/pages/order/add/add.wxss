@@ -3,12 +3,7 @@
   padding: 5rpx;
 }
 
-.box .type1 {
-  border-radius: 5%;
-  padding: 10rpx;
-}
-
-.box .type1 .get {
+.box .get {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -16,7 +11,7 @@
   height: 100rpx;
 }
 
-.box .type1 .get .get_le {
+.box .get .get_le {
   width: 80%;
   display: flex;
   align-items: center;
@@ -24,13 +19,13 @@
   font-size: 44rpx;
 }
 
-.box .type1 .get .get_le text {
+.box .get .get_le text {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.box .type1 .get .get_le .cir {
+.box .get .get_le .cir {
   background-color: #666;
   width: 40rpx;
   min-width: 40rpx;
@@ -44,11 +39,11 @@
   margin-right: 20rpx;
 }
 
-.box .type1 .get .get_le .setcir {
+.box .get .get_le .setcir {
   background-color: #fac655;
 }
 
-.box .type1 .get .oft {
+.box .get .oft {
   width: 130rpx;
   height: 60rpx;
   background: #ddd;
@@ -56,6 +51,27 @@
   text-align: center;
   line-height: 60rpx;
   font-size: 30rpx;
+}
+
+.box .type1 {
+  border-radius: 5%;
+  padding: 10rpx;
+}
+
+.box .picker-content {
+  font-size: 30rpx;
+  color: #333;
+  background-color: #ffe;
+  border-radius: 10rpx;
+  padding-left: 10rpx;
+}
+
+.box .picker-content .picker-name {
+  margin: 10rpx 0;
+}
+
+.box .picker-content .picker-detail {
+  background-color: #bea;
 }
 
 .box .remark {

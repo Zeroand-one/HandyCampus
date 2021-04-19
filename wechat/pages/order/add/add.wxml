@@ -1,27 +1,28 @@
 <view class="box">
+  <!-- 取快递 -->
+  <view class="get">
+    <navigator class="get_le" url="/pages/address/add/add?type=get">
+      <view class="cir">取</view>
+      <text>{{getAddressInfo.getAddressName?getAddressInfo.getAddressName:"从哪取快递"}}</text>
+    </navigator>
+    <view class="oft">
+      <navigator url="/pages/order/addresslist/addresslist?type=get" hover-class="navigator-hover">
+        常用
+      </navigator>
+    </view>
+  </view>
+  <view class="get">
+    <navigator class="get_le" url="/pages/address/add/add?type=set">
+      <view class="cir setcir">收</view>
+      <text>{{setAddressInfo.setAddressName?setAddressInfo.setAddressName:"送到哪"}}</text>
+    </navigator>
+    <view class="oft">
+      <navigator url="/pages/order/addresslist/addresslist?type=set" hover-class="navigator-hover">
+        常用
+      </navigator>
+    </view>
+  </view>
   <view class='type1' wx:if="{{order_type==0}}">
-    <view class="get">
-      <navigator class="get_le" url="/pages/address/add/add?type=get">
-        <view class="cir">取</view>
-        <text>{{getAddressInfo.getAddressName?getAddressInfo.getAddressName:"从哪取快递"}}</text>
-      </navigator>
-      <view class="oft">
-        <navigator url="/pages/order/addresslist/addresslist?type=get" hover-class="navigator-hover">
-          常用
-        </navigator>
-      </view>
-    </view>
-    <view class="get">
-      <navigator class="get_le" url="/pages/address/add/add?type=set">
-        <view class="cir setcir">收</view>
-        <text>{{setAddressInfo.setAddressName?setAddressInfo.setAddressName:"送到哪"}}</text>
-      </navigator>
-      <view class="oft">
-        <navigator url="/pages/order/addresslist/addresslist?type=set" hover-class="navigator-hover">
-          常用
-        </navigator>
-      </view>
-    </view>
     <view class="goodsinfo">
       <i-icon type="createtask" size="28" color="#333" />
       <text>快递信息</text>
@@ -33,16 +34,16 @@
       </i-button>
     </view>
     <i-action-sheet visible="{{ visible1 }}" actions="{{ actions1 }}" show-cancel bind:cancel="handleCancel1" bind:click="handleClickItem1" />
-    <view class="tui-picker-content" wx:if="{{order_type==1}}">
-      <view class="tui-picker-name">预计时间</view>
-      <picker mode="multiSelector" value="{{dateTime}}" bindchange="changeDateTime" range="{{dateTimeArray}}">
-        <view class="tui-picker-detail">
-          选择日期时间: {{dateTimeArray[0][dateTime[0]]}}-{{dateTimeArray[1][dateTime[1]]}}-{{dateTimeArray[2][dateTime[2]]}} {{dateTimeArray[3][dateTime[3]]}}:{{dateTimeArray[4][dateTime[4]]}}
-        </view>
-      </picker>
-    </view>
   </view>
-  <view class='list-guide' wx:elif="{{order_type==1}}">取快递1</view>
+  <view class="picker-content" wx:if="{{order_type==1}}">
+    <view class="picker-name">预计送达时间</view>
+    <picker mode="multiSelector" value="{{dateTime}}" bindchange="changeDateTime" range="{{dateTimeArray}}">
+      <view class="picker-detail">
+        选择日期时间: {{dateTimeArray[0][dateTime[0]]}}-{{dateTimeArray[1][dateTime[1]]}}-{{dateTimeArray[2][dateTime[2]]}} {{dateTimeArray[3][dateTime[3]]}}:{{dateTimeArray[4][dateTime[4]]}}
+      </view>
+    </picker>
+  </view>
+  <view class='list-guide' wx:elif="{{order_type==4}}">取快递1</view>
   <!-- <view class='list-guide' wx:else>取快递2</view> -->
   <view class="remark">
     <text class="rkinfo">备注信息</text>
