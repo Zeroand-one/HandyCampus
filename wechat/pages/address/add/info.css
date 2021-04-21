@@ -18,8 +18,8 @@
 .card .item .i-icon {
   margin-left: 10rpx;
 }
-.card .item i-input {
-  width: 80%;
+.card .item row-input {
+  width: 100%;
 }
 .card .item .added {
   font-size: 26rpx;

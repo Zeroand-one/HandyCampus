@@ -25,12 +25,6 @@
           "scene": null
         },
         {
-          "name": "pages/feedback/feedback",
-          "pathName": "pages/feedback/feedback",
-          "query": "",
-          "scene": null
-        },
-        {
           "name": "pages/order/info/info",
           "pathName": "pages/order/info/info",
           "query": "id=20210417192301479",
@@ -49,8 +43,8 @@
           "scene": null
         },
         {
-          "name": "pages/address/addlist/addlist",
-          "pathName": "pages/address/addlist/addlist",
+          "name": "pages/login/login/login",
+          "pathName": "pages/login/login/login",
           "query": "",
           "scene": null
         }

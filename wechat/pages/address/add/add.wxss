@@ -22,8 +22,8 @@
   margin-left: 10rpx;
 }
 
-.card .item i-input {
-  width: 80%;
+.card .item row-input {
+  width: 100%;
 }
 
 .card .item .added {

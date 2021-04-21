@@ -53,31 +53,37 @@ Page({
   },
   onShow(){
     this.getList()
-    this.getOrderList()
+    let userInfo = wx.getStorageSync("userInfo")
+    if(userInfo){
+      this.getOrderList()
+    }
     let userState = wx.getStorageSync("userState")
     this.setData({
       userState
     })
   },
   onLoad:async function (options) {
-    
     this.getUserInfoType()
-    
   },
   getUserInfoType(){
     // 根据用户来确定是否接单状态 1--接单，0--用户
     let id = wx.getStorageSync("openId")
     let userState = this.data.userState
-    userAuthFind(id).then(res => {
-      let data =res.data[0]
-      if(data.user_type=='1' && userState=='1'){
-        wx.setStorageSync("userState", 1)
-        this.setData({
-          userState
-        })
-        this.getOrderList()
-      }
-    })
+    if(id){
+      userAuthFind(id).then(res => {
+        let data =res.data[0]
+        if(data.user_type=='1' && userState=='1'){
+          wx.setStorageSync("userState", 1)
+          this.setData({
+            userState
+          })
+          this.getOrderList()
+        }
+      })
+    }else{
+      console.log("未登陆")
+    }
+
   },
   // 获取banner列表
   getList() {

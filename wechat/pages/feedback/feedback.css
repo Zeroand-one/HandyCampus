@@ -1,6 +1,3 @@
-page {
-  background-color: #eeeeee;
-}
 .fb_main {
   padding: 20rpx;
   color: #666;
@@ -15,6 +12,7 @@ page {
   text-align: center;
   background-color: #fff;
   margin: 20rpx 10rpx;
+  border-radius: 6rpx;
 }
 .fb_main .fb_content {
   background-color: #fff;
@@ -24,7 +22,8 @@ page {
   margin: 10rpx auto;
 }
 .fb_main .fb_content textarea {
-  padding: 10rpx;
+  width: 96%;
+  padding-left: 30rpx;
 }
 .fb_main .fb_tool {
   display: flex;

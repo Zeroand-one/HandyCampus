@@ -11,4 +11,4 @@
     <canvas canvas-id="canvas"></canvas>
   </view>
 </view>
-<button class="btn" lang="zh_CN" bindtap="submit">登录 / 注册</button>
+<button class="btn" lang="zh_CN" bindtap="submit" type="primary">登录 / 注册</button>
