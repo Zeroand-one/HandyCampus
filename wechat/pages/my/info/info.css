@@ -1,16 +1,9 @@
-/* pages/my/info/info.wxss */
-button {
-  width: 30%;
-  margin: 20rpx auto 0;
-}
-
 .i-panel {
   border-radius: 10rpx;
   margin: 10rpx auto;
   width: 96%;
 }
-
-.i-radio-group .i-cell-group {
+.i-cell-group {
   display: flex;
   justify-content: space-between;
 }

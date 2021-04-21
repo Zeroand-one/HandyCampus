@@ -7,7 +7,7 @@
   </i-panel>
   <i-panel title="补充信息">
     <view class="section">
-      <picker mode="date" value="birthday" start="1980-01-01" end="2021-09-01" bindchange="bindDateChange">
+      <picker mode="date" value="birthday" start="1960-01-01" end="2021-09-01" bindchange="bindDateChange">
         <row-input value="{{birthday?birthday:'选择时间'}}" title="生日" disabled />
       </picker>
     </view>

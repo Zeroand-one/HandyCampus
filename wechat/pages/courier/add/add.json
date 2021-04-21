@@ -4,5 +4,6 @@
     "i-radio-group": "../../../../miniprogram_npm/iview-weapp/radio-group/index",
     "i-radio": "../../../../miniprogram_npm/iview-weapp/radio/index",
     "row-input": "../../../components/rowInput/rowInput"
-  }
+  },
+  "navigationBarTitleText": "申请"
 }

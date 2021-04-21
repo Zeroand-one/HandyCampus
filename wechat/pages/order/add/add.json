@@ -4,5 +4,6 @@
     "i-button": "../../../miniprogram_npm/iview-weapp/button/index",
     "i-action-sheet": "../../../miniprogram_npm/iview-weapp/action-sheet/index",
     "UpImg":"../../../components/UpImg/UpImg"
-  }
+  },
+  "navigationBarTitleText": "添加订单"
 }

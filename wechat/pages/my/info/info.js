@@ -27,6 +27,9 @@ Page({
     let id = wx.getStorageSync("openId")
     userAuthFind(id).then(res => {
       let data = res.data[0]
+      if(data.birthday="Invalid date"){
+        data.birthday=null
+      }
       this.setData({
         user_type: data.user_type==1?'工作员':'用户',
         phone: data.phone,

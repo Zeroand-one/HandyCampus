@@ -6,5 +6,6 @@
     "i-panel": "../../../miniprogram_npm/iview-weapp/panel/index",
     "i-input": "../../../miniprogram_npm/iview-weapp/input/index",
     "row-input": "../../../components/rowInput/rowInput"
-  }
+  },
+  "navigationBarTitleText": "添加地址"
 }
