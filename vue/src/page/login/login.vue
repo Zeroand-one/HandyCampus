@@ -22,7 +22,8 @@
       <!-- 登陆 -->
       <div class="loginCon" v-if="Bool" key="login">
         <div class="titleDiv">
-          <h3 @click="Bool = false">立即注册</h3>
+          <h3 @click="Bool = false"></h3>
+          <!-- <h3 @click="Bool = false">立即注册</h3> -->
           <p>输入您的用户名和密码登录：</p>
           <i class="el-icon-key"></i>
         </div>

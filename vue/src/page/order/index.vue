@@ -41,7 +41,7 @@
         ></el-table-column>
         <el-table-column
           align="center"
-          prop="user_name"
+          prop="name"
           width="100"
           label="用户名"
         ></el-table-column>
@@ -200,8 +200,8 @@
         <el-form-item label="用户id" prop="user_id">
           <el-input v-model="ruleForm.user_id" :disabled="display"></el-input>
         </el-form-item>
-        <el-form-item label="用户名" prop="user_name">
-          <el-input v-model="ruleForm.user_name" :disabled="display"></el-input>
+        <el-form-item label="用户名" prop="name">
+          <el-input v-model="ruleForm.name" :disabled="display"></el-input>
         </el-form-item>
         <el-form-item label="姓名" v-if="distype" prop="name">
           <el-input v-model="ruleForm.name"></el-input>
@@ -329,7 +329,7 @@
       :before-close="bodyHandleClose"
       width="50%"
     >
-      <p>orderAddres</p>
+      <p>{{ bodyDialog }}</p>
       <span slot="footer" class="dialog-footer">
         <el-button @click="bodyDialogVisible = false">取 消</el-button>
         <el-button type="primary" @click="bodyDialogVisible = false"

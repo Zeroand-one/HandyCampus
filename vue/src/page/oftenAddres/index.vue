@@ -79,7 +79,7 @@
         label-width="80px"
         style="width: 400px"
       >
-        <el-form-item label="昵称" prop="address_username">
+        <el-form-item label="用户名" prop="address_username">
           <el-input
             v-model="ruleForm.address_username"
             :disabled="disname"
