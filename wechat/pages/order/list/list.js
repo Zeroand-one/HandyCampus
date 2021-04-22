@@ -5,14 +5,17 @@ const app = getApp()
 Page({
 
   data: {
-    formdata:{},
+    formdata: {},
     userState: 0
   },
   onLoad: function (options) {
     
   },
   onShow: function () {
-    this.getList()
+    let id = wx.getStorageSync("openId")
+    if(id){
+      this.getList()
+    }
   },
   getList() {
     // 根据用户来确定是否接单状态 1--接单，0--用户
@@ -20,14 +23,21 @@ Page({
     let id = wx.getStorageSync("openId")
     if(userState==0){
       orderListFind({id:id}).then(res => {
-        let data = res.data
-        data.forEach(e => {
-          e.start_date=formatTime(new Date(e.start_date))
-        })
-        this.setData({
-          formdata: data
-        })
-        console.log(res.data)
+        if(res.data){
+          let data = res.data
+          data.forEach(e => {
+            e.start_date=formatTime(new Date(e.start_date))
+          })
+          this.setData({
+            formdata: data
+          })
+          console.log(res.data)          
+        }else{
+          this.setData({
+            formdata: '空'
+          })
+        }
+
       })
     }else {
       courierFindAllOrder({courier_id:id}).then(res => {

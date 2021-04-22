@@ -1,6 +1,13 @@
 page {
   background-color: #edece8;
 }
+.nu {
+  font-size: 46rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 900rpx;
+}
 .box .item {
   margin: 20rpx !important;
   padding: 10rpx !important;

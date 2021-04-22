@@ -68,8 +68,9 @@ Page({
   getUserInfoType(){
     // 根据用户来确定是否接单状态 1--接单，0--用户
     let id = wx.getStorageSync("openId")
+    let userInfo = wx.getStorageSync("userInfo")
     let userState = this.data.userState
-    if(id){
+    if(userInfo){
       userAuthFind(id).then(res => {
         let data =res.data[0]
         if(data.user_type=='1' && userState=='1'){

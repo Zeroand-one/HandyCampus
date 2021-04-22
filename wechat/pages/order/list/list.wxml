@@ -1,5 +1,5 @@
-<view class="nu" wx:if="{{!formdata}}">
-  <text>无数据</text>
+<view class="nu" wx:if="{{formdata=='空'}}">
+  <view>无数据</view>
 </view>
 <view class="box" wx:else>
   <view class="item" wx:for="{{formdata}}" wx:key="order_id" data-type="{{item.order_id}}" bindtap="clickGoto">

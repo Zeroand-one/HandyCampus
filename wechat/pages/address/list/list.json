@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "i-icon": "../../../miniprogram_npm/iview-weapp/icon/index"
+    "i-icon": "../../../miniprogram_npm/iview-weapp/icon/index",
+    "i-swipeout": "../../../miniprogram_npm/iview-weapp/swipeout/index"
   },
   "navigationBarTitleText": "地址列表"
 }
