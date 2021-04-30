@@ -143,6 +143,7 @@ exports.userAdd = ( value ) => {
 
 // 后台账号登录
 exports.userName = ( value ) => {
+  value = mysql.format(value)
   let _sql = `SELECT * FROM user_b WHERE name="${value}"`;
   return query( _sql, value )
 }
@@ -187,6 +188,7 @@ exports.usersDelete = ( id ) => {
 
 // 前端用户账号搜索
 exports.usersFindSearch = ( value ) => {
+  value = mysql.format(value)
   let _sql = `SELECT * FROM users_a where  user_type=0 and ( user_id like '%${value}%' or name like '%${value}%'  or phone like '%${value}%'  or user_name like '%${value}%'   or address like '%${value}%'   or studenid like '%${value}%' ) `;
   return query( _sql, value )
 } 
@@ -201,6 +203,7 @@ exports.courierFind = ( value ) => {
 
 // 骑手账号搜索
 exports.courierFindSearch = ( value ) => {
+  value = mysql.format(value)
   let _sql = `SELECT * FROM users_a where  user_type=1 and ( user_id like '%${value}%' or name like '%${value}%'  or phone like '%${value}%'  or user_name like '%${value}%'   or address like '%${value}%'   or studenid like '%${value}%' ) `;
   return query( _sql, value )
 } 
@@ -213,6 +216,7 @@ exports.courierAddFindList = ( value ) => {
 
 // 申请成为骑手账号查询
 exports.courierAddFindId = ( value ) => {
+  value = mysql.format(value)
   let _sql = `SELECT * FROM users_a where user_id="${value}"`;
   return query( _sql, value )
 } 
@@ -283,6 +287,7 @@ exports.messagesDelete = ( value ) => {
 
 // 反馈关键字搜索
 exports.messagesFindSearch = ( value ) => {
+  value = mysql.format(value)
   let _sql = `SELECT * FROM messages where  user_id like '%${value}%' or message_email like '%${value}%'  or message_qq like '%${value}%'  or message_title like '%${value}%'   or write_back like '%${value}%'   `;
   return query( _sql, value )
 } 
@@ -342,6 +347,7 @@ exports.orderStartTimeSearch = ( value ) => {
 
 // 订单关键字搜索
 exports.orderKeySearch = ( value ) => {
+  value = mysql.format(value)
   let _sql = `SELECT * FROM orders where user_id like '%${value}%' or name like '%${value}%' or order_title like '%${value}%' or order_id like '%${value}%' or user_name like '%${value}%' or order_body like '%${value}%' or order_address like '%${value}%' or courier_id like '%${value}%' or courier_name like '%${value}%' or user_estimate like '%${value}%' or courier_back like '%${value}%' `;
   return query( _sql, value )
 } 
@@ -370,6 +376,7 @@ exports.adminOftenAddresDelete = ( value ) => {
 
 // 常用地址簿关键字搜索
 exports.adminOftenAddresKeySearch = ( value ) => {
+  value = mysql.format(value)
   let _sql = `SELECT * FROM oftenAddres where user_id like '%${value}%' or address_username like '%${value}%' or address_iphone like '%${value}%' or address_name like '%${value}%' or address_det  `;
   return query( _sql, value )
 } 
