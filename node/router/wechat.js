@@ -592,7 +592,43 @@ router.post('/v1/api/wechat/feedback/feedbackAdd',koaBody(),async (ctx, next) =>
     });
 })
 
+// 提交意见反馈图片
+router.post('/v1/api/wechat/feedback/feedbackAddImg',koaBody(),async (ctx, next) => {
+  let data = ctx.request.body
+  await apiModel
+    .feedbackAddImg(data)
+    .then(res => {
+      ctx.body = {
+        data:res,
+        code: 200,
+        message: '意见提交成功!'
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        message: '服务器失联',
+      };
+    });
+})
 
+// 查看提交意见反馈详情
+router.post('/wechat/feedbackInfoFind',koaBody(),async (ctx, next) => {
+  await apiModel
+    .feedbackInfoFind(ctx.request.body.id)
+    .then(res => {
+      ctx.body = {
+        code: 200,
+        data: res,
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        message: '添加失败',
+      };
+    });
+})
 
 // *******************************************************主页推荐******************************************************//
 

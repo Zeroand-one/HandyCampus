@@ -24,7 +24,7 @@
  */
   const app = getApp()
   const { formatTimeString, formatTime  } = require('../../utils/util.js');
-  const { feedbackAdd } = require('../../request/feedbackapi.js');
+  const { feedbackAdd,feedbackAddImg } = require('../../request/feedbackapi.js');
   Page({
     data: {
       tabs: [
@@ -107,7 +107,8 @@
         start_date: formatTime(new Date()),
         message_email: data.email,
         message_qq: data.qq,
-        message_title: data.title
+        message_title: data.title,
+        read_state: 0
       }
       if (!textVal.trim()) {
         wx.showToast({
@@ -167,6 +168,7 @@
       }else{
         wx.hideLoading();
         console.log("只是提交了文本");
+        params.message_img=''
         feedbackAdd(params).then(res => {
           if(res.code==200){
             wx.showToast({

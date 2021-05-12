@@ -1,4 +1,5 @@
 var mysql = require('mysql');
+// mysql.format 防止注入攻击
 var config = require('../config/default.js');
 
 var pool = mysql.createPool({

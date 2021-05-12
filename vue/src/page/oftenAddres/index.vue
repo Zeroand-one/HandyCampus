@@ -20,22 +20,22 @@
           align="center"
           width="60"
         ></el-table-column>
-        <el-table-column
+        <!-- <el-table-column
           label="nid值"
           prop="nid"
           align="center"
           width="60"
-        ></el-table-column>
+        ></el-table-column> -->
         <el-table-column
           prop="user_id"
           label="user_id"
-          width="150"
+          width="260"
           align="center"
         ></el-table-column>
         <el-table-column
           prop="address_username"
           align="center"
-          width="100"
+          width="70"
           label="用户名"
         ></el-table-column>
         <el-table-column
@@ -47,12 +47,13 @@
         <el-table-column
           prop="address_name"
           align="center"
-          width="100"
+          width="200"
           label="地名"
         ></el-table-column>
         <el-table-column
           prop="address_det"
           align="center"
+          width="200"
           label="详细地址"
         ></el-table-column>
         <el-table-column align="center" label="操作" width="200">

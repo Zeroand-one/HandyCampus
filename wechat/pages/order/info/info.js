@@ -50,7 +50,7 @@ Page({
         }else if(i=='order_state'){
           switch (getData[i]) {
             case 0 :
-            getData[i]='未发布'
+            getData[i]='未支付'
               break;
             case 1 :
               getData[i]='草稿箱'

@@ -291,6 +291,18 @@ exports.orderCourierBack = ( value ) => {
 
 // 提交意见反馈
 exports.feedbackAdd = ( value ) => {
-  let _sql = `INSERT INTO messages SET user_id="${value.user_id}",message_body="${value.message_body}",start_date="${value.start_date}",message_img="${value.message_img}",message_email="${value.message_email}",message_qq="${value.message_qq}",message_title="${value.message_title}";`
+  let _sql = `INSERT INTO messages SET user_id="${value.user_id}",message_body="${value.message_body}",start_date="${value.start_date}",message_email="${value.message_email}",read_state="${value.read_state}",message_qq="${value.message_qq}",message_title="${value.message_title}";`
+  return query( _sql, value )
+}
+
+// 提交意见反馈图片
+exports.feedbackAddImg = ( value ) => {
+  let _sql = `UPDATE messages SET user_img="${value.user_img}" where id="${value.id}";`
+  return query( _sql, value )
+}
+
+// 查看提交意见反馈详情
+exports.feedbackInfoFind = ( value ) => {
+  let _sql = `SELECT * FROM messages WHERE id="${value}" ;`
   return query( _sql, value )
 }

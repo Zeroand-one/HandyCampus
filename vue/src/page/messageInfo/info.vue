@@ -96,7 +96,9 @@ export default {
           let data = res.data.data[0];
 
           let file_list = [];
-          if (data.message_img) {
+          if (data.message_img == "undefined") {
+            this.fileList = [];
+          } else if (data.message_img) {
             file_list = data.message_img.substring(1).split(",");
             let item = {};
             file_list.forEach((i) => {

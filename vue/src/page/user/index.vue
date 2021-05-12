@@ -24,7 +24,7 @@
         <el-table-column
           prop="user_id"
           label="id"
-          width="200"
+          width="260"
           align="center"
         ></el-table-column>
         <el-table-column

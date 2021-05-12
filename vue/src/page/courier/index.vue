@@ -22,7 +22,7 @@
         <el-table-column
           prop="user_id"
           label="id"
-          width="150"
+          width="260"
           align="center"
         ></el-table-column>
         <el-table-column

@@ -1,7 +1,7 @@
 <template>
   <div class="className">
     <div class="classBut">
-      <el-button type="primary" @click="addRolesTab">新建订单</el-button>
+      <!-- <el-button type="primary" @click="addRolesTab">新建订单</el-button> -->
 
       <el-date-picker
         v-model="datetimerange"
@@ -36,7 +36,7 @@
         <el-table-column
           align="center"
           prop="user_id"
-          width="150"
+          width="260"
           label="用户id"
         ></el-table-column>
         <el-table-column
@@ -55,6 +55,9 @@
           align="center"
           prop="order_state"
           label="订单状态"
+          width="100"
+          :filters="orderStateFilters"
+          :filter-method="orderStateFilterTag"
         ></el-table-column>
         <el-table-column
           prop="order_title"
@@ -474,7 +477,7 @@ export default {
       statusList: [
         {
           id: 0,
-          text: "未发布",
+          text: "未支付",
         },
         {
           id: 1,
@@ -526,6 +529,15 @@ export default {
       },
       // 图片列表
       fileList: [],
+      // 订单状态筛选
+      orderStateFilters: [
+        { text: "未支付", value: "未支付" },
+        { text: "草稿箱", value: "草稿箱" },
+        { text: "已发布", value: "已发布" },
+        { text: "骑手已接收", value: "骑手已接收" },
+        { text: "转让", value: "转让" },
+        { text: "完成", value: "完成" },
+      ],
     };
   },
   mounted() {
@@ -598,6 +610,11 @@ export default {
         .catch((err) => {
           this.$message.error("获取失败");
         });
+    },
+    // 订单状态筛选
+    orderStateFilterTag(value, row, column) {
+      const property = column["property"];
+      return row[property] === value;
     },
     // 创建
     addRolesTab() {
