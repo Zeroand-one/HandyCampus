@@ -15,15 +15,15 @@ Page({
   onShow(){
     const userinfo=wx.getStorageSync("userInfo");
     this.setData({userinfo});
-  },
-  onLoad: function () {
-    // app.getSettings()
     let userState = wx.getStorageSync("userState")
     let user_type = wx.getStorageSync("user_type")
     this.setData({
       userState,
       user_type
     })
+  },
+  onLoad: function () {
+    // app.getSettings()
   },
   switchUserState(){
     let State = this.data.userState

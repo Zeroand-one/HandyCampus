@@ -67,12 +67,14 @@ Page({
             default :
               getData[i]='完成'
           }
+        }else if(i=='user_estimate' || i=='courier_back' ){
+          getData[i]=''
         }else if(!getData[i]){
           getData[i]='暂无'
         }else{
           if(i=='start_date' || i=='open_date' || i=='receive_date' || i=='transfer_date' || i=='end_date' ){
             getData[i]=formatTime(new Date(getData[i]))
-          } 
+          }
         }
       }
       if(getData.user_estimate){

@@ -43,7 +43,7 @@ page {
   transform: translateX(-50%);
   top: 40%;
   border: 2rpx solid greenyellow;
-  color: greenyellow;
+  color: #12c8ff;
   font-size: 48rpx;
   padding: 30rpx;
   border-radius: 30rpx;

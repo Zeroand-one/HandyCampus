@@ -75,6 +75,7 @@ Page({
         let data =res.data[0]
         if(data.user_type=='1' && userState=='1'){
           wx.setStorageSync("userState", 1)
+          wx.setStorageSync("user_type", 1)
           this.setData({
             userState
           })
