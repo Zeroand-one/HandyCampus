@@ -1,12 +1,12 @@
 .conent {
-  background-color: #fff;
+  background-color: #eee;
 }
 
 .conent .pan {
   padding: 10rpx !important;
   margin: 30rpx !important;
   border-radius: 20rpx;
-  background-color: #eee;
+  background-color: #fff;
 }
 
 .conent .pan .item {
@@ -53,5 +53,9 @@
 }
 
 .conent .btn button {
-  border-radius: 40rpx;
+  padding: 0 !important;
+  line-height: 60rpx !important;
+  height: 60rpx !important;
+  border-radius: 30rpx !important;
+  font-size: 32rpx;
 }
