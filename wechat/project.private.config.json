@@ -47,6 +47,11 @@
           "pathName": "pages/login/login/login",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/address/list/list",
+          "pathName": "pages/address/list/list",
+          "scene": null
         }
       ]
     }

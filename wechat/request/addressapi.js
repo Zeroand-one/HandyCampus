@@ -25,4 +25,9 @@ module.exports={
 		return request('/address/oftenAddresUpdate', 'POST', params ,true);
 	},
 
+  // 常用地址表删除
+	oftenAddresDelete: (params)=>{
+		return request('/address/oftenAddresDelete', 'POST', params ,true);
+	},
+
 }

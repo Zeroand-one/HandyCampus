@@ -22,4 +22,5 @@
     </view>
   </view>
   <button type="primary" formType="submit">保存</button>
+  <button type="warn" bindtap="deleteAddress" hidden="{{!nid}}">删除</button>
 </form>

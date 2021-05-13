@@ -1,6 +1,6 @@
 const chooseLocation = requirePlugin('chooseLocation');
 const { formatTimeString, formatTime  } = require('../../../utils/util.js');
-const { oftenAddresAdd, oftenAddresFindInfoId, oftenAddresUpdate } = require('../../../request/addressapi.js');
+const { oftenAddresAdd, oftenAddresFindInfoId, oftenAddresUpdate, oftenAddresDelete } = require('../../../request/addressapi.js');
 const app = getApp()
 
 Page({
@@ -111,6 +111,7 @@ Page({
       params.address_name = data.addressSchool
       // 如果有nid，则为修改
       if(this.data.nid){
+        params.nid=this.data.nid
         oftenAddresUpdate(params).then(res => {
           console.log(res.message)
           wx.showToast({
@@ -170,6 +171,23 @@ Page({
         duration: 2000
       })
     }
+  },
+  deleteAddress(){
+    console.log(this.data.nid)
+    let params={
+      nid: this.data.nid
+    }
+    oftenAddresDelete(params).then(res => {
+      console.log(res.message)
+      wx.showToast({
+        title: res.message,
+        icon: 'success',
+        duration: 2000
+      })
+      wx.navigateBack({
+        delta: 1
+      })
+    })
   },
   onUnload () {
     // 页面卸载时设置插件选点数据为null，防止再次进入页面，geLocation返回的是上次选点结果

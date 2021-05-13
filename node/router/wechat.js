@@ -293,6 +293,27 @@ router.post('/v1/api/wechat/address/oftenAddresUpdate',koaBody(),async (ctx, nex
     });
 })
 
+// 常用地址表删除
+router.post('/v1/api/wechat/address/oftenAddresDelete',koaBody(),async (ctx, next) => {
+  let data = ctx.request.body
+  await apiModel
+    .oftenAddresDelete(data)
+    .then(res => {
+      ctx.body = {
+        data:res,
+        code: 200,
+        message: '删除成功!'
+      };
+    })
+    .catch(res => {
+      ctx.body = {
+        code: 500,
+        data:res,
+        message: '服务器失联',
+      };
+    });
+})
+
 // *****************************我的****************************//
 
 // 获取个人信息
