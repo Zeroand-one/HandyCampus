@@ -183,7 +183,6 @@ exports.oftenAddresFind = ( value ) => {
 // // 常用地址表修改
 exports.oftenAddresUpdate = ( value ) => {
   let _sql = `UPDATE oftenAddres SET  address_username="${value.address_username}",address_iphone="${value.address_iphone}",address_name="${value.address_name}",address_det="${value.address_det}" WHERE nid="${value.nid}" `;
-  console.log(_sql)
   return query( _sql, value )
 }
 

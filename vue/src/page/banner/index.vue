@@ -138,3 +138,11 @@ export default {
   },
 };
 </script>
+<style lang="scss"  scoped>
+/deep/
+  .el-upload-list--picture-card
+  .el-upload-list__item
+  .el-upload-list__item-thumbnail {
+  width: 185%;
+}
+</style>

@@ -54,7 +54,7 @@
     <textarea rows="4" cols="" disabled="{{fordata.user_estimate?true:false}}" data-val="feedbackValue" value="{{feedbackValue}}" bindinput="feedbackChange"></textarea>
     <button type="primary" bindtap="feedback" hidden="{{userState==1}}">提交意见</button>
   </view>
-  <view class="btn" wx:if="{{fordata.order_state=='未发布'?true:false}}">
+  <view class="btn" wx:if="{{fordata.order_state=='未支付'?true:false}}">
     <view class="money">支付：{{fordata.money}} 元</view>
     <button type="primary" bindtap="submitPay">支付订单</button>
   </view>
