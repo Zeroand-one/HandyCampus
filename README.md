@@ -1,6 +1,6 @@
 ### 介绍
 本项目是关于跑腿的“便利校园通”的小程序的毕业设计，使用JavaScript语言，使用vue做后台管理，node做后端，MySQL做数据库。
-原项目地址：https://gitee.com/zero-andone/handy-campus
+原项目地址：
 ### 启动
 
 ```bash
